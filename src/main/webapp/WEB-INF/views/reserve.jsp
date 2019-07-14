@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    	<script src="/resources/js/jquery-3.2.1.min.js"></script>
+ <script src="/resources/js/jquery-3.2.1.min.js"></script>
 <div class="section bg-light" data-aos="fade-up" id="section-reservation">
           <div class="container">
             <div class="row section-heading justify-content-center site-meun-top">
@@ -211,7 +211,7 @@ function sendForm() {
 						data:  JSON.stringify(data),
 						success :function(data){
 							if(data == 1){
-							alert( data+"Thank you for your booking!"
+							alert( "Thank you for your booking!"
 									+ "\n\n We send you the confirmation email. " 
 									+ "\n\n To cancel or change your schedule, check the email.");
 							location.reload();

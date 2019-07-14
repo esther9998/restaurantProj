@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="reservationMapper">
+    <select id="selectAll" resultType="ReservationVO">
+        SELECT * FROM reservation01
+    </select>
+    
+    <insert id="insertReserv" parameterType="ReservationVO">
+		insert into reservation01(
+			reserv_name, reserv_phone, reserv_email, reserv_persons,reserv_date, reserv_time, reserv_register, reserv_etc, reserv_status) 
+		values (
+			#{reserv_name},#{reserv_phone}, #{reserv_email},#{reserv_persons},#{reserv_date}, #{reserv_time}, now(), null,0)
+		</insert>
+<update  id="updateOne" parameterType="ReservationVO">
+	UPDATE reservation01 SET reserv_status = #{reserv_status} WHERE reserv_idx = #{reserv_idx}
+</update>
+
+</mapper>

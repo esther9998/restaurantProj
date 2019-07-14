@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="adminMapper">
+    <select id="selectAdmin" resultType="AdminVO" parameterType="AdminVO">
+        SELECT * FROM adminAccount 
+        WHERE
+		admin_email= #{admin_email} and admin_pw = #{admin_pw}
+    </select>
+    <insert id="insertAdmin" parameterType="AdminVo" > 
+    INSERT into adminAccount(admin_name, admin_pw, admin_lebel, admin_email, admin_register)
+    values(
+    #{admin_name}, #{admin_pw}, 0, #{admin_email}, now()    )
+    </insert>
+</mapper>

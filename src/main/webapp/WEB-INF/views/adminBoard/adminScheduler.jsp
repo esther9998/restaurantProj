@@ -4,102 +4,77 @@
 <!DOCTYPE html>
 <head>
 <meta charset='utf-8' />
+<style>
+.form-field-icon-wrap .icon {
+    color: gray;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    font-size: 18px;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+</style>
 
 <script>
 	var data = ${reserveList};
-	console.log(data);
-	var events =  new Array() ;
-	
-	console.log(events);
+	var dataArray = new Array();
+	var modalData = new Array(data);
+	console.log(modalData);
+	function resetData() {
+		for (var i = 0; i < data.length; i++) {
+			var resetData = new Object();
+			
+			resetData.description = data[i].reserv_phone+ "//"+data[i].reserv_email ;
+			resetData.title = data[i].reserv_name;
+			resetData.start = moment(new Date(data[i].reserv_date)).format('YYYY-MM-DD')+'T'+ data[i].reserv_time;
+			resetData.id = data[i].reserv_status;
+			dataArray.push(resetData);
+		}
+		console.log(dataArray);
+	}
+	resetData();
 	
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar;
     
-    var today = new Date();
-    var date = today.getDate();
-    var year = today.getFullYear();
-    var month = today.getMonth()+1;
-    var defaultToday = year + '-' +month + '-' +date;
-
     initThemeChooser({
 
       init: function(themeSystem) {
         calendar = new FullCalendar.Calendar(calendarEl, {
           plugins: [ 'bootstrap', 'interaction', 'dayGrid', 'timeGrid', 'list' ],
           themeSystem: themeSystem,
+          customButtons: { 
+        	  addEvent: { 
+                  text: 'Add Event', 
+                  click: function(event) { 
+                	  $('#addEvent').modal();
+                  } 
+              } 
+      }, 
           header: {
-            left: 'prev,next today',
+            left: 'prev,next today,addEvent',
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
           },
-          defaultDate: '2019-06-01',
+          defaultDate: new Date(),
           weekNumbers: true,
           navLinks: true, // can click day/week names to navigate views
           editable: true,
           eventLimit: true, // allow "more" link when too many events
-          events: [
-        	  for (var i = 0; i < data.length; i++) {
-        		  title: data[i].reserv_name,
-                  start: data[i].reserv_date
-			}
-        	  ]
-       /*    [
-            {
-              title: 'All Day Event',
-              start: '2019-06-01'
-            },
-            {
-              title: 'Long Event',
-              start: '2019-06-07',
-              end: '2019-06-10'
-            },
-            {
-              groupId: 999,
-              title: 'Repeating Event',
-              start: '2019-06-09T16:00:00'
-            },
-            {
-              groupId: 999,
-              title: 'Repeating Event',
-              start: '2019-06-16T16:00:00'
-            },
-            {
-              title: 'Conference',
-              start: '2019-06-11',
-              end: '2019-06-13'
-            },
-            {
-              title: 'Meeting',
-              start: '2019-06-12T10:30:00',
-              end: '2019-06-12T12:30:00'
-            },
-            {
-              title: 'Lunch',
-              start: '2019-06-12T12:00:00'
-            },
-            {
-              title: 'Meeting',
-              start: '2019-06-12T14:30:00'
-            },
-            {
-              title: 'Happy Hour',
-              start: '2019-06-12T17:30:00'
-            },
-            {
-              title: 'Dinner',
-              start: '2019-06-12T20:00:00'
-            },
-            {
-              title: 'Birthday Party',
-              start: '2019-06-13T07:00:00'
-            },
-            {
-              title: 'Click for Google',
-              url: 'http://google.com/',
-              start: '2019-06-28'
+          resources: [
+        	    { id: 0, title: 'Booking' },
+        	    { id: 1, title: 'Attend' },
+        	    { id: 2, title: 'Cancel' },
+        	    { id: 3, title: 'Miss' }
+        	  ],
+          events: dataArray,
+           eventClick:function(info) {
+        	   console.log(info.event.title);
+        	   $('#eventDetails').modal(event);
             }
-          ] */
+
         });
         calendar.render();
       },
@@ -216,4 +191,7 @@
   </div>
 
   <div id='calendar'></div>
+  <jsp:include page="./adminModal/updateModal.jsp"></jsp:include>
+  <jsp:include page="./adminModal/addEventModal.jsp"></jsp:include>
+  
 

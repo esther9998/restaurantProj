@@ -14,7 +14,7 @@
   <meta name="author" content="">
 
   <title>SB Admin - Dashboard</title>
-
+  <script src="/resources/js/adminBoard/vendor/jquery/jquery.min.js"></script>
   <!-- Custom fonts for this template-->
   <link href="/resources/js/adminBoard/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
@@ -23,14 +23,15 @@
 
   <!-- Custom styles for this template-->
   <link href="/resources/css/adminBoard/sb-admin.css" rel="stylesheet">
-  <!-- Bootstrap core JavaScript-->
-  <script src="/resources/js/adminBoard/vendor/jquery/jquery.min.js"></script>
-  <script src="/resources/js/adminBoard/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+<!-- Bootstrap core JavaScript-->
 
+  <script src='/resources/themesResources/js/moment.js'></script>
+  <script src="/resources/js/adminBoard/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!--  calendar 관련 소-->
 <link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'>
 <link href='/resources/themesResources/core/main.css' rel='stylesheet' />
-<!-- <link href='/resources/themesResources/bootstrap/main.css' rel='stylesheet' /> -->
+<link href='/resources/themesResources/bootstrap/main.css' rel='stylesheet' /> 
 <link href='/resources/themesResources/timegrid/main.css' rel='stylesheet' />
 <link href='/resources/themesResources/daygrid/main.css' rel='stylesheet' />
 <link href='/resources/themesResources/list/main.css' rel='stylesheet' />
@@ -41,6 +42,7 @@
 <script src='/resources/themesResources/timegrid/main.js'></script>
 <script src='/resources/themesResources/list/main.js'></script>
 <script src='/resources/themesResources/js/theme-chooser.js'></script>
+
 </head>
 
 <body id="page-top">
@@ -193,7 +195,8 @@ function logout() {
 	location.href ="/adminBoard/main";
 }
 </script>
-
+	<script src="/resources/js/bootstrap-datepicker.js"></script>
+		<script src="/resources/js/jquery.timepicker.min.js"></script>
   <!-- Core plugin JavaScript-->
   <script src="/resources/js/adminBoard/vendor/jquery-easing/jquery.easing.min.js"></script>
 
@@ -202,6 +205,7 @@ function logout() {
   <script src="/resources/js/adminBoard/vendor/datatables/jquery.dataTables.js"></script>
   <script src="/resources/js/adminBoard/vendor/datatables/dataTables.bootstrap4.js"></script>
 
+
   <!-- Custom scripts for all pages-->
   <script src="/resources/js/adminBoard/sb-admin.min.js"></script>
 
@@ -209,6 +213,7 @@ function logout() {
   <script src="/resources/js/adminBoard/datatables-demo.js"></script>
   <script src="/resources/js/adminBoard/chart-area-demo.js"></script>
 
+	
 </body>
 
 </html>
