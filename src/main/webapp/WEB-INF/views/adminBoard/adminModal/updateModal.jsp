@@ -20,7 +20,7 @@
                       <label for="name" class="label">Name</label>
                       <div class="form-field-icon-wrap">
                         <span class="icon ion-android-person"></span>
-                        <input type="text" class="form-control" id="name">
+                        <input type="text" class="form-control" id="name" >
                       </div>
                     </div>
                     <div class="form-group col-md-4">
@@ -97,7 +97,16 @@
 					    dropdown: true,
 					    scrollbar: true
 					});
+				
+				$('#name').val(event);
+				$("#phone").val();
+				$("#email").val();
+				$("#persons").val();
+				$("#date").val();
+				$("#time").val();
+				 console.log(event);
 				 
+			
 			});
 			
 			/* ********************************************************* */
@@ -236,7 +245,7 @@ function sendForm() {
 					
 					});
 					}else{
-						console.log("form is not complated");
+						console.log("Please fill out the form.");
 					};
 				};
 					

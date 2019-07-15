@@ -72,7 +72,11 @@
           events: dataArray,
            eventClick:function(info) {
         	   console.log(info.event.title);
-        	   $('#eventDetails').modal(event);
+        	   console.log(info.event.start);
+        	   
+          	   $('#eventDetails').modal(info);
+      			$('#name').val(info.event.title);
+          	   
             }
 
         });
