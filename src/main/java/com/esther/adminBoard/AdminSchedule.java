@@ -1,17 +1,22 @@
 package com.esther.adminBoard;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,13 +34,29 @@ public class AdminSchedule {
 	@RequestMapping(value="/adminBoard/scheduler")
 	public ModelAndView adminScheduler(ReservationVO  vo, HttpSession session) throws JsonProcessingException{
 		ModelAndView mav = new ModelAndView();
+//		List<ReservationVO> rstVo = new ArrayList<>();
+//		rstVo = sqlSession.selectList("reservationMapper.selectAll", vo);
+//
+//		String jsonRst = new ObjectMapper().writeValueAsString(rstVo);
+//		mav.addObject("reserveList", jsonRst);
+//		System.out.println(jsonRst);
+		mav.setViewName("/adminBoard/adminScheduler");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/getSchedule", method = RequestMethod.GET)
+	@ResponseBody
+	public void getSchedule(ReservationVO  vo, HttpSession session, HttpServletResponse resp) throws JsonProcessingException{
 		List<ReservationVO> rstVo = new ArrayList<>();
 		rstVo = sqlSession.selectList("reservationMapper.selectAll", vo);
 
 		String jsonRst = new ObjectMapper().writeValueAsString(rstVo);
-		mav.addObject("reserveList", jsonRst);
 		System.out.println(jsonRst);
-		mav.setViewName("/adminBoard/adminScheduler");
-		return mav;
+		try {
+			resp.getWriter().printf(jsonRst);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

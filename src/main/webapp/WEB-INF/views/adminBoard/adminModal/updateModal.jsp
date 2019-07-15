@@ -98,15 +98,6 @@
 					    scrollbar: true
 					});
 				
-				$('#name').val(event);
-				$("#phone").val();
-				$("#email").val();
-				$("#persons").val();
-				$("#date").val();
-				$("#time").val();
-				 console.log(event);
-				 
-			
 			});
 			
 			/* ********************************************************* */

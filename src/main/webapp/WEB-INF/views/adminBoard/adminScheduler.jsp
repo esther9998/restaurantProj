@@ -17,23 +17,36 @@
 </style>
 
 <script>
-	var data = ${reserveList};
+/*
+데이터 : controller에서 예약 스케줄 가져온뒤, 캘린더 데이터 양식으로 변환, 화면에 뿌려줌. 
+*/
+	/*  var data = ${reserveList};
 	var dataArray = new Array();
-	var modalData = new Array(data);
-	console.log(modalData);
-	function resetData() {
+	function
+	resetData() {
 		for (var i = 0; i < data.length; i++) {
-			var resetData = new Object();
-			
-			resetData.description = data[i].reserv_phone+ "//"+data[i].reserv_email ;
+			var resetData = new Object();  */
+			/*  해당 변수에 데이터 저장 (풀캘린더 속성에 맞춰서!!)
 			resetData.title = data[i].reserv_name;
-			resetData.start = moment(new Date(data[i].reserv_date)).format('YYYY-MM-DD')+'T'+ data[i].reserv_time;
+			resetData.start = data[i].reserv_date
+			resetData.description[0] =  data[i].reserv_idx 
+			resetData.description[1] =  data[i].reserv_phone 
+			resetData.description[2] =  data[i].reserv_email
+			resetData.description[3] =  data[i].reserv_persons
+			resetData.description[4] =  data[i].reserv_time
+			resetData.description[5] =  data[i].reserv_register
+			resetData.description[6] =  data[i].reserv_etc
+			resetData.id = data[i].reserv_status;
+			*/
+			/* resetData.title = data[i].reserv_name;
+			resetData.start = moment(new Date(data[i].reserv_date)).format('YYYY-MM-DD');
+			resetData.description= [ data[i].reserv_idx,data[i].reserv_phone,data[i].reserv_email,data[i].reserv_persons,data[i].reserv_time,data[i].reserv_register,data[i].reserv_etc];
 			resetData.id = data[i].reserv_status;
 			dataArray.push(resetData);
-		}
+		} 
 		console.log(dataArray);
 	}
-	resetData();
+	resetData();*/
 	
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
@@ -63,19 +76,43 @@
           navLinks: true, // can click day/week names to navigate views
           editable: true,
           eventLimit: true, // allow "more" link when too many events
-          resources: [
+     resources: [
+        	  // 예약 상태를 id로 알
         	    { id: 0, title: 'Booking' },
         	    { id: 1, title: 'Attend' },
         	    { id: 2, title: 'Cancel' },
         	    { id: 3, title: 'Miss' }
-        	  ],
-          events: dataArray,
+        	  ], 
+          events: function () {
+        	  $.ajax({ 
+        		     url: '/getSchedule', 
+        		     dataType: 'json', 
+        		     type: "GET",
+        		     success: function(rst ,callback) { 
+        		      var events = []; 
+        		      $.each(rst, function(index, oneData) { 
+        		       events.push({ 
+        		        title: oneData.reserv_name, 
+        		        start: moment(new Date(oneData.reserv_date)).format('YYYY-MM-DD')
+
+        		       });
+        		      }); 
+        		      callback(events); 
+        		     } 
+        		    }) //ajax 
+		},
            eventClick:function(info) {
         	   console.log(info.event.title);
         	   console.log(info.event.start);
-        	   
+        	   console.log(info.event.description);
           	   $('#eventDetails').modal(info);
       			$('#name').val(info.event.title);
+      			$("#phone").val();
+				$("#email").val(info.event.description[2]);
+				$("#persons").val();
+				$("#date").val(info.event.start);
+				$("#time").val();
+				 console.log(event); 
           	   
             }
 
