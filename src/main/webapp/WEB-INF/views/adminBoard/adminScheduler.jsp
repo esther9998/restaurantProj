@@ -25,20 +25,9 @@
 	function
 	resetData() {
 		for (var i = 0; i < data.length; i++) {
-			var resetData = new Object();  */
-			/*  해당 변수에 데이터 저장 (풀캘린더 속성에 맞춰서!!)
-			resetData.title = data[i].reserv_name;
-			resetData.start = data[i].reserv_date
-			resetData.description[0] =  data[i].reserv_idx 
-			resetData.description[1] =  data[i].reserv_phone 
-			resetData.description[2] =  data[i].reserv_email
-			resetData.description[3] =  data[i].reserv_persons
-			resetData.description[4] =  data[i].reserv_time
-			resetData.description[5] =  data[i].reserv_register
-			resetData.description[6] =  data[i].reserv_etc
-			resetData.id = data[i].reserv_status;
-			*/
-			/* resetData.title = data[i].reserv_name;
+			var resetData = new Object();  
+			해당 변수에 데이터 저장 (풀캘린더 속성에 맞춰서!!)
+			 resetData.title = data[i].reserv_name;
 			resetData.start = moment(new Date(data[i].reserv_date)).format('YYYY-MM-DD');
 			resetData.description= [ data[i].reserv_idx,data[i].reserv_phone,data[i].reserv_email,data[i].reserv_persons,data[i].reserv_time,data[i].reserv_register,data[i].reserv_etc];
 			resetData.id = data[i].reserv_status;
@@ -47,7 +36,37 @@
 		console.log(dataArray);
 	}
 	resetData();*/
-	
+var eventData = []; 
+function getData() {
+	$.ajax({ 
+	     url: '/getSchedule', 
+	     dataType: 'json', 
+	     type: "GET",
+	     async:false,
+	     success: function(rst) { 
+	      $.each(rst, function(index, oneData) { 
+	    	  eventData.push({ 
+	       	 	title: oneData.reserv_name, 
+	        	start: moment(new Date(oneData.reserv_date)).format('YYYY-MM-DD'),
+	        	description:  [
+	        		oneData.reserv_idx,						//index 0
+	        		oneData.reserv_phone,					//index 1
+	        		oneData.reserv_email,					//index 2
+	        		oneData.reserv_persons,				//index 3
+	        		oneData.reserv_time,						//index 4
+	        		oneData.reserv_register,				//index 5
+	        		oneData.reserv_etc 
+	        		],
+	        	id:oneData.reserv_status
+	    		
+	       });
+	      }); 
+	     } 
+	    }) //ajax  
+}
+	var dd = getData();
+console.log(dd);
+
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar;
@@ -83,37 +102,18 @@
         	    { id: 2, title: 'Cancel' },
         	    { id: 3, title: 'Miss' }
         	  ], 
-          events: function () {
-        	  $.ajax({ 
-        		     url: '/getSchedule', 
-        		     dataType: 'json', 
-        		     type: "GET",
-        		     success: function(rst ,callback) { 
-        		      var events = []; 
-        		      $.each(rst, function(index, oneData) { 
-        		       events.push({ 
-        		        title: oneData.reserv_name, 
-        		        start: moment(new Date(oneData.reserv_date)).format('YYYY-MM-DD')
-
-        		       });
-        		      }); 
-        		      callback(events); 
-        		     } 
-        		    }) //ajax 
-		},
+          events: eventData,
            eventClick:function(info) {
-        	   console.log(info.event.title);
-        	   console.log(info.event.start);
-        	   console.log(info.event.description);
-          	   $('#eventDetails').modal(info);
+        	   // 모달 데이터 출력
+          	    $('#eventDetails').modal(info);
       			$('#name').val(info.event.title);
-      			$("#phone").val();
-				$("#email").val(info.event.description[2]);
-				$("#persons").val();
 				$("#date").val(info.event.start);
-				$("#time").val();
-				 console.log(event); 
-          	   
+      			$("#phone").val(info.event.extendedProps.description[1]);
+				$("#email").val(info.event.extendedProps.description[2]);
+				$("#persons").val(info.event.extendedProps.description[3]);
+				$("#time").val(info.event.extendedProps.description[4]);
+				$("#register").text(moment(new Date(info.event.extendedProps.description[5])).format('YYYY-MM-DD HH:mm'));
+				$("#status").text(info.event.id);
             }
 
         });

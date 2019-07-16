@@ -14,6 +14,7 @@
       <div class="modal-body">
        <div class="row justify-content-center">
               <div class="col-md-10 form-wrap">
+             The customer booked at  <p id="register"></p>
                 <form  name="frm" >
                   <div class="row mb-4">
                     <div class="form-group col-md-4">
@@ -67,8 +68,12 @@
                         <input type="text" class="form-control" id="time">
                       </div>
                     </div>
+                    <p>Please select reservation status:</p><a id="status"></a> <br/>
+					  <input type="radio" name="gender" value="Booking"> Booking
+					  <input type="radio" name="gender" value="Attend"> Attend
+					  <input type="radio" name="gender" value="Cancel"> Cancel
+					  <input type="radio" name="gender" value="Miss"> Miss
                   </div>
-                 
                 </form>
               </div>
             </div>
@@ -98,6 +103,15 @@
 					    scrollbar: true
 					});
 				
+			//	 console.log("88888"+info.event.id);
+				
+				 $('#eventDetails').on('show.bs.modal', function (event) {
+					 var button = $(event.relatedTarget);
+					 var deleteUrl = button.data('title');
+					 var modal = $(this);
+
+					 })
+
 			});
 			
 			/* ********************************************************* */
