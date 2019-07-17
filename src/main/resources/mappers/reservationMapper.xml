@@ -16,5 +16,7 @@
 <update  id="updateOne" parameterType="ReservationVO">
 	UPDATE reservation01 SET reserv_status = #{reserv_status} WHERE reserv_idx = #{reserv_idx}
 </update>
-
+<update  id="adminUpdateEvent" parameterType="ReservationVO">
+	UPDATE reservation01 SET reserv_status = #{reserv_status} WHERE reserv_idx = #{reserv_idx}
+</update>
 </mapper>

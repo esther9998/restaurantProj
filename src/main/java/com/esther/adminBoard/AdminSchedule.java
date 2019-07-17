@@ -3,6 +3,9 @@ package com.esther.adminBoard;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +31,7 @@ import com.esther.controller.HomeController;
 import com.esther.model.ReservationVO;
 import com.esther.util.DateFormating;
 import com.esther.util.SendMail;
+import com.esther.util.SendMailUpdate;
 import com.esther.util.TimeFormating;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -71,7 +75,7 @@ public class AdminSchedule {
 	//예약 등록
 		@RequestMapping(value = "/updateEvent", method = RequestMethod.POST)
 		@ResponseBody
-		public int  reservedInfo(@RequestBody Map formData,HttpServletRequest httpRequest){
+		public int  reservedInfo(@RequestBody Map formData,HttpServletRequest httpRequest) throws ParseException{
 			logger.info("ajax 예약 reservedInfo>>>>>>>>>>>>>>>>>>>" );
 				System.out.println("컨트롤에서 출력"+formData);
 				ReservationVO vo = new ReservationVO();
@@ -86,22 +90,28 @@ public class AdminSchedule {
 				vo.setReserv_date(date);
 				//타임 형변
 				String strTime = (String) formData.get("time");
-				Time time = TimeFormating.transToTime(strTime);
+				SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
+				long ms = df.parse(strTime).getTime();
+				Time time = new Time(ms);
+		//		Time time = (Time) formData.get("time");
+				System.out.println(time);
 				vo.setReserv_time(time);
+				int status =  Integer.parseInt((String) formData.get("status"));
+				vo.setReserv_status(status);
 				System.out.println("vo: "+vo.toString());
 				
 				//이메일 발송 성공1, 
 				//디비 저장 성공1,
 				//에러 0, 
 				//이메일 발송 에러 2
-				SendMail sm = new SendMail();
+				SendMailUpdate smu = new SendMailUpdate();
 				try {
 					// 이메일 발송
-					int resp = sm.sendmail(vo);
+					int resp = smu.sendmail(vo);
 					logger.info( "이메일 발송 성공이면  1 : " + resp);
 						if(resp == 1){
 							// 디비에 예약정보 저장
-							int result = sqlSession.insert("insertReserv",vo);
+							int result = sqlSession.update("adminUpdateEvent",vo);
 							System.out.println("결과가 1이면 성공= "+result);
 							return result;
 						}else{

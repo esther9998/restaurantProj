@@ -90,14 +90,15 @@ console.log(dd);
            eventClick:function(info) {
         	   // 모달 데이터 출력
           	    $('#eventDetails').modal();
-      			$('#name').val(info.event.title);
-				$("#date").val(moment(new Date(info.event.start)).format('MM/DD/YYYY'));
-      			$("#phone").val(info.event.extendedProps.description[1]);
-				$("#email").val(info.event.extendedProps.description[2]);
-				$("#persons").val(info.event.extendedProps.description[3]);
-				$("#time").val(info.event.extendedProps.description[4]);
+      			$('#nameEdit').val(info.event.title);
+				$("#dateEdit").val(moment(new Date(info.event.start)).format('MM/DD/YYYY'));
+      			$("#indexEdit").val(info.event.extendedProps.description[0]);
+      			$("#phoneEdit").val(info.event.extendedProps.description[1]);
+				$("#emailEdit").val(info.event.extendedProps.description[2]);
+				$("#personsEdit").val(info.event.extendedProps.description[3]);
+				$("#timeEdit").val(info.event.extendedProps.description[4]);
 				$("#register").text(moment(new Date(info.event.extendedProps.description[5])).format('YYYY-MM-DD HH:mm'));
-				$("#status").text(info.event.id);
+				$("#statusEdit").text(info.event.id);
 			//	$('#calendar').fullCalendar('updateEvent', event);
             }
 

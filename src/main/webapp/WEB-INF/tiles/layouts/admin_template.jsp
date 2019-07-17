@@ -14,7 +14,7 @@
   <meta name="author" content="">
 
   <title>SB Admin - Dashboard</title>
-  <script src="/resources/js/adminBoard/vendor/jquery/jquery.min.js"></script>
+ 
   <!-- Custom fonts for this template-->
   <link href="/resources/js/adminBoard/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
@@ -35,6 +35,7 @@
 <link href='/resources/themesResources/daygrid/main.css' rel='stylesheet' />
 <link href='/resources/themesResources/list/main.css' rel='stylesheet' />
 
+ <script src="/resources/js/adminBoard/vendor/jquery/jquery.min.js"></script>
 <script src='/resources/themesResources/js/moment.js'></script>
 <script src="/resources/js/adminBoard/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src='/resources/themesResources/core/main.js'></script>

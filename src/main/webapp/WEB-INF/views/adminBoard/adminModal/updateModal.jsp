@@ -21,27 +21,29 @@
        <div class="row justify-content-center">
               <div class="col-md-10 form-wrap">
             <p> The customer booked at  <a id="register"> </a></p>
+        <!--     <p id="indexEdit" style="display: none;"></p> -->
+            <p id="indexEdit"></p>
                 <form  name="frm" >
                   <div class="row mb-4">
                     <div class="form-group col-md-4">
                       <label for="name" class="label">Name</label>
                       <div class="form-field-icon-wrap">
                         <span class="icon ion-android-person"></span>
-                        <input type="text" class="form-control" id="name" >
+                        <input type="text" class="form-control" id="nameEdit" >
                       </div>
                     </div>
                     <div class="form-group col-md-4">
                       <label for="email" class="label">Email</label>
                       <div class="form-field-icon-wrap">
                         <span class="icon ion-email"></span>
-                        <input type="email" class="form-control" id="email">
+                        <input type="email" class="form-control" id="emailEdit">
                       </div>
                     </div>
                     <div class="form-group col-md-4">
                       <label for="phone" class="label">Phone</label>
                       <div class="form-field-icon-wrap">
                         <span class="icon ion-android-call"></span>
-                        <input type="text" class="form-control" id="phone">
+                        <input type="text" class="form-control" id="phoneEdit">
                       </div>
                     </div>
 
@@ -49,7 +51,7 @@
                       <label for="persons" class="label">Number of Persons</label>
                       <div class="form-field-icon-wrap">
                         <span class="icon ion-android-arrow-dropdown"></span>
-                        <select name="persons" id="persons" class="form-control">
+                        <select name="persons" id="personsEdit" class="form-control">
                           <option value="1">1 person</option>
                           <option value="2">2 persons</option>
                           <option value="3">3 persons</option>
@@ -64,18 +66,18 @@
                       <label for="date" class="label">Date</label>
                       <div class="form-field-icon-wrap">
                         <span class="icon ion-calendar"></span>
-                        <input type="text" class="form-control" id="date">
+                        <input type="text" class="form-control" id="dateEdit">
                       </div>
                     </div>
                     <div class="form-group col-md-4">
                       <label for="time" class="label">Time</label>
-                      <div class="form-field-icon-wrap" id="datetimepicker1">
+                      <div class="form-field-icon-wrap" id="datetimepickerEdit">
                         <span class="icon ion-android-time"></span>
-                        <input type="text" class="form-control" id="time">
+                        <input type="text" class="form-control" id="timeEdit">
                       </div>
                     </div>
                     <div class="col-md-10 form-wrap" style="margin-top: 50px;">
-	                    <p>Please select reservation status:<a id="status"></a> </p>
+	                    <p>Please select reservation status:<a id="statusEdit"></a> </p>
 						  <input type="radio" name="gender" value="Booking"> Booking
 						  <input type="radio" name="gender" value="Attend"> Attend
 						  <input type="radio" name="gender" value="Cancel"> Cancel
@@ -88,7 +90,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary"  onclick="sendForm()">Save changes</button>
+        <button type="button" class="btn btn-primary"  onclick="editForm()">Save changes</button>
       </div>
     </div>
   </div>
@@ -98,30 +100,6 @@
 			// 페이지 초기 세팅   
 			/* ********************************************************* */
 			 $(document).ready( function() {
-				 $('#datetimepicker1').datetimepicker();
-				 
-				 
-				// 타임피커 초기 세팅
-				 $('#time').timepicker({
-					    timeFormat: 'h:i a',
-					    interval: 30,
-					    minTime: '11',
-					    maxTime: '9:00 pm',
-					    defaultTime: '11',
-					    startTime: '10:00 am',
-					    dynamic: false,
-					    dropdown: true,
-					    scrollbar: true
-					});
-				
-			//	 console.log("88888"+info.event.id);
-				
-				 $('#eventDetails').on('show.bs.modal', function (event) {
-					 var button = $(event.relatedTarget);
-					 var deleteUrl = button.data('title');
-					 var modal = $(this);
-
-					 })
 
 			});
 			
@@ -129,31 +107,31 @@
 			// 유효성 검사 
 			/* ********************************************************* */
 			//이름  
-			function validate(){			
-			    if( $("#name").val().trim()== "" ){
+			function validateEdit(){			
+			    if( $("#nameEdit").val().trim()== "" ){
 			     alert( "Please provide your name!" );
-			     $("#name").focus() ;
+			     $("#nameEdit").focus() ;
 			     return false;
 			   }
 			    //이메일  
-			    if( $("#email").val().trim()== "" ){ 
+			    if( $("#emailEdit").val().trim()== "" ){ 
 				     alert( "Please provide your email!" );
-				     $("#email").focus() ;
+				     $("#emailEdit").focus() ;
 				     return false;
 				   }
 				//전화번호  
-			    if( $("#phone").val().trim()== "" || $("#phone").val().trim().length != 11 ){
+			    if( $("#phoneEdit").val().trim()== "" || $("#phoneEdit").val().trim().length != 11 ){
 				     alert( "Please provide your contact numbers!" );
-				     $("#phone").focus() ;
+				     $("#phoneEdit").focus() ;
 				     return false;
-				   }else if(isNaN($("#phone").val())){
+				   }else if(isNaN($("#phoneEdit").val())){
 				     alert( "Please provide only numbers" );
-				     $("#phone").focus() ;
+				     $("#phoneEdit").focus() ;
 				   }
 			/* ********************************************************* */
 			  //오늘날짜 가져오기 
 			/* ********************************************************* */
-			    	var today = new Date();
+			    /* 	var today = new Date();
 			    	var year = today.getFullYear();
 			    	var month = today.getMonth()+1;
 			    	var day = today.getDate();
@@ -161,77 +139,52 @@
 			    	var dateNow = month+"/"+day+"/"+year;
 			    	var hourNow = today.getHours();
 			    	console.log(dateNow);
-			    	console.log(hourNow);
+			    	console.log(hourNow); */
 			/* ********************************************************* */
 			   //날짜 유효성 검사 
 			/* ********************************************************* */
-			    if( $("#date").val().trim()== ""||$("#date").val().length < 8 || $("#date").val().length > 9){
-			    	alert( "Please choose a day for reservation") ;
+			  /* if( $("#date").val().trim()== ""||$("#date").val().length < 8 || $("#date").val().length > 9){
+			    	
+				  alert( "Please choose a day for reservation") ;
 			  		$("#date").datepicker("setDate", new Date);
 			    	$("#date").focus();
-				     return false;
-				   }
-			/* ********************************************************* */
-				//오늘기준 이전날짜 체크
-			/* ********************************************************* */
-			    var dayCheckArr = $("#date").val().split("/");
-			    if(dayCheckArr[2]<year){
-						alert("The date is not validate.");
-						$("#date").focus() ;
-				     return false;
-			    }else if(dayCheckArr[1]<day){
-						alert("The date is not validate.");
-						$("#date").focus() ;
-				     return false;
-			    }else if(dayCheckArr[0]<month){
-						alert("The date is not validate.");
-						$("#date").focus() ;
-				     return false;
+				     return false; 
+				   }  */
+			    	
+			    if( $("#dateEdit").val().trim()== ""){
+			    	alert( "Please fill out the date.") ;
+			    	return false;
 			    }
+			    /* else if(moment($("#dateEdit").val()).isAfter()==false){
+			    	alert("You cant make a event before today.");
+			    	return false;
+			    } */
+			    
 			/* ********************************************************* */
 				// 시간 유효성
 			/* ********************************************************* */
-			    if( $("#time").val().trim()== "" ){
+			    if( $("#timeEdit").val().trim()== "" ){
 			    	alert( "Please choose a time for reservation" );
-				     $("#time").focus() ;
+				     $("#timeEdit").focus() ;
 				     return false;
 				   }
 			
-			   	var getTodayHour = new Date().getHours();
-				var editTime =0;
-				if($("#time").val().includes("pm")){
-					 var temp = $("#time").val().split(":") ;
-					 if (temp[0]=="12") {
-						editTime =  Number(temp[0]);
-					}else{
-						editTime = 12 + Number(temp[0]);
-					}
-				}
-				    
-		 // 오늘날짜에 이전시간을 입력한경우.  
-		    if(dateNow == $("#date").val() ){
-		    	if (editTime <= hourNow) {
-						 alert("Please set a valid time.");
-						 $('#time').val("");
-						 $('#time').focus();
-						 return false;
-				}
-		    }
-						 
 			   return true ;
 			}
 //ajax 데이터 전
-function sendForm() {
+function editForm() {
 	//유효성 검사 
-				var validateCheked = validate();
+				var validateCheked = validateEdit();
 				if(validateCheked){				
 				var data ={
-						 name : $("#name").val(),
-						 phone : $("#phone").val(),
-						 email : $("#email").val(),
-						 persons : $("#persons").val(),
-						 date : $("#date").val(),
-						 time : $("#time").val()
+						 index : $("#indexEdit").val(),
+						 name : $("#nameEdit").val(),
+						 phone : $("#phoneEdit").val(),
+						 email : $("#emailEdit").val(),
+						 persons : $("#personsEdit").val(),
+						 date : $("#dateEdit").val(),
+						 time : $("#timeEdit").val(),
+						 status : $("#statusEdit").text()
 				}
 					$.ajax({
 						url: '/updateEvent',
@@ -246,7 +199,7 @@ function sendForm() {
 									+ "\n\n To cancel or change your schedule, check the email.");
 							location.reload();
 							}else if(data == 0){
-							alert(data+"Email address is not validate. ");
+							alert("Email address is not validate. ");
 							location.reload();
 							}else{
 							alert(data+"There is error occured. Please try again. ");
