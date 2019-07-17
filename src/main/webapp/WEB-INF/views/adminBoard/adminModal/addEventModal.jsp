@@ -75,7 +75,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" >Save changes</button>
+        <button type="button" class="btn btn-primary"  onclick="sendForm()" >Save</button>
       </div>
     </div>
   </div>
@@ -104,7 +104,7 @@
 				     return false;
 				   }else if(isNaN($("#phone").val())){
 				     alert( "Please provide only numbers" );
-				     $("#phone").focus() ;
+				     $("#phone").focus();
 				   }
 			/* ********************************************************* */
 			  //오늘날짜 가져오기 

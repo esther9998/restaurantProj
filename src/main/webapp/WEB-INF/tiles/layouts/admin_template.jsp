@@ -26,8 +26,7 @@
   
 <!-- Bootstrap core JavaScript-->
 
-  <script src='/resources/themesResources/js/moment.js'></script>
-  <script src="/resources/js/adminBoard/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
 <!--  calendar 관련 소-->
 <link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'>
 <link href='/resources/themesResources/core/main.css' rel='stylesheet' />
@@ -35,13 +34,19 @@
 <link href='/resources/themesResources/timegrid/main.css' rel='stylesheet' />
 <link href='/resources/themesResources/daygrid/main.css' rel='stylesheet' />
 <link href='/resources/themesResources/list/main.css' rel='stylesheet' />
+
+<script src='/resources/themesResources/js/moment.js'></script>
+<script src="/resources/js/adminBoard/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src='/resources/themesResources/core/main.js'></script>
 <script src='/resources/themesResources/interaction/main.js'></script>
 <script src='/resources/themesResources/bootstrap/main.js'></script>
+<script src="/resources/js/bootstrap-datepicker.js"></script>
+		<script src="/resources/js/jquery.timepicker.min.js"></script>
 <script src='/resources/themesResources/daygrid/main.js'></script>
 <script src='/resources/themesResources/timegrid/main.js'></script>
 <script src='/resources/themesResources/list/main.js'></script>
 <script src='/resources/themesResources/js/theme-chooser.js'></script>
+
 
 </head>
 
@@ -195,8 +200,7 @@ function logout() {
 	location.href ="/adminBoard/main";
 }
 </script>
-	<script src="/resources/js/bootstrap-datepicker.js"></script>
-		<script src="/resources/js/jquery.timepicker.min.js"></script>
+	
   <!-- Core plugin JavaScript-->
   <script src="/resources/js/adminBoard/vendor/jquery-easing/jquery.easing.min.js"></script>
 

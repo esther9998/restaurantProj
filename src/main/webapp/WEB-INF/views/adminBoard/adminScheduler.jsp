@@ -20,22 +20,6 @@
 /*
 데이터 : controller에서 예약 스케줄 가져온뒤, 캘린더 데이터 양식으로 변환, 화면에 뿌려줌. 
 */
-	/*  var data = ${reserveList};
-	var dataArray = new Array();
-	function
-	resetData() {
-		for (var i = 0; i < data.length; i++) {
-			var resetData = new Object();  
-			해당 변수에 데이터 저장 (풀캘린더 속성에 맞춰서!!)
-			 resetData.title = data[i].reserv_name;
-			resetData.start = moment(new Date(data[i].reserv_date)).format('YYYY-MM-DD');
-			resetData.description= [ data[i].reserv_idx,data[i].reserv_phone,data[i].reserv_email,data[i].reserv_persons,data[i].reserv_time,data[i].reserv_register,data[i].reserv_etc];
-			resetData.id = data[i].reserv_status;
-			dataArray.push(resetData);
-		} 
-		console.log(dataArray);
-	}
-	resetData();*/
 var eventData = []; 
 function getData() {
 	$.ajax({ 
@@ -75,7 +59,7 @@ console.log(dd);
 
       init: function(themeSystem) {
         calendar = new FullCalendar.Calendar(calendarEl, {
-          plugins: [ 'bootstrap', 'interaction', 'dayGrid', 'timeGrid', 'list' ],
+          plugins: [ 'bootstrap', 'interaction', 'dayGrid', 'timeGrid', 'list'],
           themeSystem: themeSystem,
           customButtons: { 
         	  addEvent: { 
@@ -105,15 +89,16 @@ console.log(dd);
           events: eventData,
            eventClick:function(info) {
         	   // 모달 데이터 출력
-          	    $('#eventDetails').modal(info);
+          	    $('#eventDetails').modal();
       			$('#name').val(info.event.title);
-				$("#date").val(info.event.start);
+				$("#date").val(moment(new Date(info.event.start)).format('MM/DD/YYYY'));
       			$("#phone").val(info.event.extendedProps.description[1]);
 				$("#email").val(info.event.extendedProps.description[2]);
 				$("#persons").val(info.event.extendedProps.description[3]);
 				$("#time").val(info.event.extendedProps.description[4]);
 				$("#register").text(moment(new Date(info.event.extendedProps.description[5])).format('YYYY-MM-DD HH:mm'));
 				$("#status").text(info.event.id);
+			//	$('#calendar').fullCalendar('updateEvent', event);
             }
 
         });

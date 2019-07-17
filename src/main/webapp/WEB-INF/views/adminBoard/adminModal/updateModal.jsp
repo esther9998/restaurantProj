@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
    <%--  <jsp:include page="../../../tiles/components/head.jsp"></jsp:include> --%>
+  <style>
+  .form-field-icon-wrap .icon {
+  top: 70%;
+  }
+  </style> 
+   
  <!-- 달력 클릭 모달 : 예약 디테일, 예약 시간 변경, 상태 변경-->
 <div class="modal fade bd-example-modal-lg" id="eventDetails" tabindex="-1" role="dialog" aria-labelledby="updateBookingScheduleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -14,7 +20,7 @@
       <div class="modal-body">
        <div class="row justify-content-center">
               <div class="col-md-10 form-wrap">
-             The customer booked at  <p id="register"></p>
+            <p> The customer booked at  <a id="register"> </a></p>
                 <form  name="frm" >
                   <div class="row mb-4">
                     <div class="form-group col-md-4">
@@ -68,11 +74,13 @@
                         <input type="text" class="form-control" id="time">
                       </div>
                     </div>
-                    <p>Please select reservation status:</p><a id="status"></a> <br/>
-					  <input type="radio" name="gender" value="Booking"> Booking
-					  <input type="radio" name="gender" value="Attend"> Attend
-					  <input type="radio" name="gender" value="Cancel"> Cancel
-					  <input type="radio" name="gender" value="Miss"> Miss
+                    <div class="col-md-10 form-wrap" style="margin-top: 50px;">
+	                    <p>Please select reservation status:<a id="status"></a> </p>
+						  <input type="radio" name="gender" value="Booking"> Booking
+						  <input type="radio" name="gender" value="Attend"> Attend
+						  <input type="radio" name="gender" value="Cancel"> Cancel
+						  <input type="radio" name="gender" value="Miss"> Miss
+					  </div>
                   </div>
                 </form>
               </div>
@@ -90,6 +98,9 @@
 			// 페이지 초기 세팅   
 			/* ********************************************************* */
 			 $(document).ready( function() {
+				 $('#datetimepicker1').datetimepicker();
+				 
+				 
 				// 타임피커 초기 세팅
 				 $('#time').timepicker({
 					    timeFormat: 'h:i a',
@@ -157,7 +168,7 @@
 			    if( $("#date").val().trim()== ""||$("#date").val().length < 8 || $("#date").val().length > 9){
 			    	alert( "Please choose a day for reservation") ;
 			  		$("#date").datepicker("setDate", new Date);
-			    	$("#date").focus() ;
+			    	$("#date").focus();
 				     return false;
 				   }
 			/* ********************************************************* */
@@ -223,7 +234,7 @@ function sendForm() {
 						 time : $("#time").val()
 				}
 					$.ajax({
-						url: '/reservedInfo',
+						url: '/updateEvent',
 						type: "POST",
 						contentType: 'application/json;charset=UTF-8',
 						dataType: 'json',
@@ -254,7 +265,4 @@ function sendForm() {
 					};
 				};
 					
-            $(function () {
-                $('#datetimepicker1').datetimepicker();
-            });
 			</script>
