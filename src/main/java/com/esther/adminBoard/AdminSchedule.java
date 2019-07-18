@@ -75,11 +75,11 @@ public class AdminSchedule {
 	//예약 등록
 		@RequestMapping(value = "/updateEvent", method = RequestMethod.POST)
 		@ResponseBody
-		public int  reservedInfo(@RequestBody Map formData,HttpServletRequest httpRequest) throws ParseException{
-			logger.info("ajax 예약 reservedInfo>>>>>>>>>>>>>>>>>>>" );
+		public int  updateEvent(@RequestBody Map formData,HttpServletRequest httpRequest) throws ParseException{
+			logger.info("ajax 예약 updateEvent>>>>>>>>>>>>>>>>>>>" );
 				System.out.println("컨트롤에서 출력"+formData);
 				ReservationVO vo = new ReservationVO();
-				
+				vo.setReserv_idx(Integer.valueOf((String)formData.get("index")));
 				vo.setReserv_name((String)formData.get("name"));
 				vo.setReserv_phone((String)formData.get("phone"));
 				vo.setReserv_email((String)formData.get("email"));
@@ -105,24 +105,24 @@ public class AdminSchedule {
 				//에러 0, 
 				//이메일 발송 에러 2
 				SendMailUpdate smu = new SendMailUpdate();
+				int result;
 				try {
-					// 이메일 발송
-					int resp = smu.sendmail(vo);
-					logger.info( "이메일 발송 성공이면  1 : " + resp);
-						if(resp == 1){
-							// 디비에 예약정보 저장
-							int result = sqlSession.update("adminUpdateEvent",vo);
-							System.out.println("결과가 1이면 성공= "+result);
-							return result;
-						}else{
-							return 0;
-						}
-					
+					// 디비에 예약정보 저장
+					result = sqlSession.update("reservationMapper.updateEvent",vo);
+					logger.info( "데이터 업데이트 성공이면  1 : " + result);
+					if(result == 1){
+						// 이메일 발송
+						int resp = smu.sendmail(vo);
+						System.out.println("결과가 1이면 성공 이메일 발송 성공  = "+resp);
+						result = resp;
+					}
 				} catch (Exception e) {
 					System.out.println("컨트롤러에서 에러"+vo.toString());
 					e.printStackTrace();
-					return 0;
+					result = 0;
 				}
+				
+				return result;
 				
 		}
 		
