@@ -194,12 +194,7 @@ function editForm() {
 						data:  JSON.stringify(data),
 						success :function(data){
 							if(data == 1){
-							alert( "Thank you for your booking!"
-									+ "\n\n We send you the confirmation email. " 
-									+ "\n\n To cancel or change your schedule, check the email.");
-							location.reload();
-							}else if(data == 0){
-							alert("Email address is not validate. ");
+							alert( "The booking is successfully updated.");
 							location.reload();
 							}else{
 							alert(data+"There is error occured. Please try again. ");
@@ -208,7 +203,7 @@ function editForm() {
 							},
 						error:function(xhr, status,error){
 							alert("There is an error occured. Please fill the form again. ");
-						alert(xhr+"+++++++++" +status+"////////////"+error);
+				//		alert(xhr+"+++++++++" +status+"////////////"+error);
 							location.reload();
 						}
 					

@@ -13,10 +13,17 @@
 		values (
 			#{reserv_name},#{reserv_phone}, #{reserv_email},#{reserv_persons},#{reserv_date}, #{reserv_time}, now(), null,0)
 		</insert>
-<update  id="updateOne" parameterType="ReservationVO">
-	UPDATE reservation01 SET reserv_status = #{reserv_status} WHERE reserv_idx = #{reserv_idx}
-</update>
-<update  id="adminUpdateEvent" parameterType="ReservationVO">
-	UPDATE reservation01 SET reserv_status = #{reserv_status} WHERE reserv_idx = #{reserv_idx}
-</update>
+		<update  id="updateOne" parameterType="ReservationVO">
+			UPDATE reservation01 SET reserv_status = #{reserv_status} WHERE reserv_idx = #{reserv_idx}
+		</update>
+		<update  id="updateEvent" parameterType="ReservationVO">
+			UPDATE reservation01 SET reserv_name = #{reserv_name}, 
+					reserv_phone = #{reserv_phone}, 
+					reserv_email= #{reserv_email}, 
+					reserv_persons= #{reserv_persons},
+					reserv_date= #{reserv_date}, 
+					reserv_time= #{reserv_time}, 
+					reserv_status = #{reserv_status}
+					 WHERE reserv_idx = #{reserv_idx}
+		</update>
 </mapper>
