@@ -77,11 +77,11 @@
                       </div>
                     </div>
                     <div class="col-md-10 form-wrap" style="margin-top: 50px;">
-	                    <p>Please select reservation status:<a id="statusEdit"></a> </p>
-						  <input type="radio" name="gender" value="Booking"> Booking
-						  <input type="radio" name="gender" value="Attend"> Attend
-						  <input type="radio" name="gender" value="Cancel"> Cancel
-						  <input type="radio" name="gender" value="Miss"> Miss
+	                    <p>Please select reservation status:</p>
+						  <input type="radio" name="statusEdit" value="0"> Booking
+						  <input type="radio" name="statusEdit" value="1"> Attend
+						  <input type="radio" name="statusEdit" value="2"> Cancel
+						  <input type="radio" name="statusEdit" value="3"> Miss
 					  </div>
                   </div>
                 </form>
@@ -97,10 +97,24 @@
 </div>
 		<script>
 			/* ********************************************************* */
+			// status 체크값세팅   
+			/* ********************************************************* */
+			var statusEdit ="";
+			function checkStatus(statusNum) {
+	//			var status = $("#statusEdit").text();
+				console.log(statusNum);
+				  
+				  $('input[name="statusEdit"]').removeAttr('checked');
+				   $('input[name="statusEdit"]:radio[value='+statusNum+']').prop('checked',true);
+	    	console.log("test = "+statusEdit);
+			}
+			
+			
+			/* ********************************************************* */
 			// 페이지 초기 세팅   
 			/* ********************************************************* */
 			 $(document).ready( function() {
-
+					
 			});
 			
 			/* ********************************************************* */
@@ -184,7 +198,7 @@ function editForm() {
 						 persons : $("#personsEdit").val(),
 						 date : $("#dateEdit").val(),
 						 time : $("#timeEdit").val(),
-						 status : $("#statusEdit").text()
+						 status :  $('input[name="statusEdit"]:checked').val()
 				}
 					$.ajax({
 						url: '/updateEvent',

@@ -98,7 +98,8 @@ console.log(dd);
 				$("#personsEdit").val(info.event.extendedProps.description[3]);
 				$("#timeEdit").val(info.event.extendedProps.description[4]);
 				$("#register").text(moment(new Date(info.event.extendedProps.description[5])).format('YYYY-MM-DD HH:mm'));
-				$("#statusEdit").text(info.event.id);
+			//	$("#statusEdit").text(info.event.id);
+				checkStatus(info.event.id);  //상테 체크
 			//	$('#calendar').fullCalendar('updateEvent', event);
             }
 

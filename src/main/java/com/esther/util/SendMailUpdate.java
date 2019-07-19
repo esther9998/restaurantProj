@@ -32,6 +32,22 @@ import java.util.Properties;
 	        return new PasswordAuthentication(username, password); 
 	        }});
 	        
+	        String status ="";
+	        switch(vo.getReserv_status()) {
+	        	case 0:
+	        		status = "Booking";
+	        		break;
+	        	case 1:
+	        		status = "Attend Customer";
+	        		break;
+	        	case 2:
+	        		status = "Booking Cancel";
+	        		break;
+	        	case 3:
+	        		status = "Customer Absence ";
+	        		break;
+	        }
+	        
 	        
 	        try{
 	            Message message = new MimeMessage(session); 
@@ -41,7 +57,7 @@ import java.util.Properties;
 	            message.setText("Dear,"   
 	       //     message.setContent("Dear, customer"
 	            		+ "\n\n Your booking is updated."
-	            		+ "\n\n The booking detail is here."
+	            		+ "\n\n "+ status + " Details"
 	            		+ "\n\n Name :  " +vo.getReserv_name()
 	            		+ "\n\n Date : " + vo.getReserv_date()
 	            		+ "\n\n Time : "+ vo.getReserv_time()
