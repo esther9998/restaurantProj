@@ -63,14 +63,14 @@
                       </div>
                     </div>
                     <div class="form-group col-md-4">
-                      <label for="date" class="label">Date</label>
+                      <label for="date" class="label">Date (format : MM/DD/YYYY)</label>
                       <div class="form-field-icon-wrap">
                         <span class="icon ion-calendar"></span>
                         <input type="text" class="form-control" id="dateEdit">
                       </div>
                     </div>
                     <div class="form-group col-md-4">
-                      <label for="time" class="label">Time</label>
+                      <label for="time" class="label">Time (format: HH:MM:SS)</label>
                       <div class="form-field-icon-wrap" id="datetimepickerEdit">
                         <span class="icon ion-android-time"></span>
                         <input type="text" class="form-control" id="timeEdit">

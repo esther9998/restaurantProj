@@ -47,13 +47,12 @@ public class AdminSchedule {
 	@RequestMapping(value="/adminBoard/scheduler")
 	public ModelAndView adminScheduler(ReservationVO  vo, HttpSession session) throws JsonProcessingException{
 		ModelAndView mav = new ModelAndView();
-//		List<ReservationVO> rstVo = new ArrayList<>();
-//		rstVo = sqlSession.selectList("reservationMapper.selectAll", vo);
-//
-//		String jsonRst = new ObjectMapper().writeValueAsString(rstVo);
-//		mav.addObject("reserveList", jsonRst);
-//		System.out.println(jsonRst);
-		mav.setViewName("/adminBoard/adminScheduler");
+		if (session.getAttribute("admin_session") != null) {
+			mav.setViewName("/adminBoard/adminScheduler");
+			
+		} else {
+			mav.setViewName("/adminBoard/adminLogin");
+		}
 		return mav;
 	}
 	
@@ -72,7 +71,7 @@ public class AdminSchedule {
 		}
 		
 	}
-	//예약 등록
+	//예약 업데이트 
 		@RequestMapping(value = "/updateEvent", method = RequestMethod.POST)
 		@ResponseBody
 		public int  updateEvent(@RequestBody Map formData,HttpServletRequest httpRequest) throws ParseException{
@@ -125,5 +124,52 @@ public class AdminSchedule {
 				return result;
 				
 		}
+		//예약 등록
+				@RequestMapping(value = "/addEvent", method = RequestMethod.POST)
+				@ResponseBody
+				public int addEvent(@RequestBody Map formData,HttpServletRequest httpRequest) throws ParseException{
+					logger.info("ajax 예약 addEvent>>>>>>>>>>>>>>>>>>>" );
+						System.out.println("addEvent 어드민 : "+formData);
+						ReservationVO vo = new ReservationVO();
+						vo.setReserv_name((String)formData.get("name"));
+						vo.setReserv_phone((String)formData.get("phone"));
+						vo.setReserv_email((String)formData.get("email"));
+						vo.setReserv_persons(Integer.valueOf((String) formData.get("persons")));
+						//데이트 형변환 
+						String strDate = (String) formData.get("date");
+						Date date = DateFormating.transformDate(strDate);
+						vo.setReserv_date(date);
+						//타임 형변
+						String strTime = (String) formData.get("time");
+						SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
+						long ms = df.parse(strTime).getTime();
+						Time time = new Time(ms);
+						vo.setReserv_time(time);
+						
+						//이메일 발송 성공1, 
+						//디비 저장 성공1,
+						//에러 0, 
+						//이메일 발송 에러 2
+						SendMail sm = new SendMail();
+						int result;
+						try {
+							// 디비에 예약정보 저장
+							result = sqlSession.insert("reservationMapper.addEvent",vo);
+							logger.info( "데이터 업데이트 성공이면  1 : " + result);
+							if(result == 1){
+								// 이메일 발송
+								int resp = sm.sendmail(vo);
+								System.out.println("결과가 1이면 성공 이메일 발송 성공  = "+resp);
+								result = resp;
+							}
+						} catch (Exception e) {
+							System.out.println("컨트롤러에서 에러"+vo.toString());
+							e.printStackTrace();
+							result = 0;
+						}
+						
+						return result;
+						
+				}
 		
 }
