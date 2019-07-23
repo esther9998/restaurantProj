@@ -4,6 +4,9 @@
 <!DOCTYPE html>
 <head>
 <meta charset='utf-8' />
+
+<script src="https://cdn.jsdelivr.net/qtip2/3.0.3/jquery.qtip.min.js"></script>
+
 <style>
 .form-field-icon-wrap .icon {
     color: gray;
@@ -29,9 +32,23 @@ function getData() {
 	     async:false,
 	     success: function(rst) { 
 	      $.each(rst, function(index, oneData) { 
+	    	  
+	      //이벤트 컬러 설정
+			var colorSet = "";
+	    	  if(oneData.reserv_status =="1"){
+	    		  colorSet ="green";
+	    	  }else if(oneData.reserv_status =="2"){
+	    		  colorSet ="red";
+	    	  }else if(oneData.reserv_status =="3"){
+	    		  colorSet ="black";
+	    	  }else{
+	    		  colorSet ="blue";
+	    	  }
+	    	  
+	    	  
 	    	  eventData.push({ 
 	       	 	title: oneData.reserv_name, 
-	        	start: moment(new Date(oneData.reserv_date)).format('YYYY-MM-DD'),
+	        	start: moment(new Date(oneData.reserv_date)).format('YYYY-MM-DD')+"T"+oneData.reserv_time,
 	        	description:  [
 	        		oneData.reserv_idx,						//index 0
 	        		oneData.reserv_phone,					//index 1
@@ -41,7 +58,8 @@ function getData() {
 	        		oneData.reserv_register,				//index 5
 	        		oneData.reserv_etc 
 	        		],
-	        	id:oneData.reserv_status
+	        	id:oneData.reserv_status,
+	        	color:colorSet
 	    		
 	       });
 	      }); 
@@ -76,6 +94,7 @@ console.log(dd);
           },
           defaultDate: new Date(),
           weekNumbers: true,
+          allDay: false,
           navLinks: true, // can click day/week names to navigate views
           editable: true,
           eventLimit: true, // allow "more" link when too many events
@@ -217,7 +236,12 @@ console.log(dd);
 
     <div class='clear'></div>
   </div>
-
+  <div class="row" style="height: 50px; border-radius: 50px; ">
+<div style="background-color: green">complete</div>
+<div style="background-color: red">cancel</div>
+<div style="background-color: blue">reservation</div>
+<div style="background-color: black">miss</div>
+</div>
   <div id='calendar'></div>
   <jsp:include page="./adminModal/updateModal.jsp"></jsp:include>
   <jsp:include page="./adminModal/addEventModal.jsp"></jsp:include>

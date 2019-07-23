@@ -4,7 +4,7 @@
       <header class="site-header">
         <div class="row align-items-center">
           <div class="site-logo-wrap">
-            <a href="/" class="site-logo">Morock</a>
+            <a href="/" class="site-logo">EatWell</a>
           </div>
       <div class="col-10 col-md-10 screen-nav">
       	  <ul class="screen-nav-inner">

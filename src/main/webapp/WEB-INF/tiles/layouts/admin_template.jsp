@@ -53,7 +53,7 @@
 
 <body id="page-top">
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-    <a class="navbar-brand mr-1" href="index.html">Your Restaurant </a>
+    <a class="navbar-brand mr-1" href="/adminBoard/main">Your Restaurant </a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="/adminBoard/main">
       <i class="fas fa-bars"></i>
@@ -118,7 +118,7 @@
       <li class="nav-item active">
         <a class="nav-link" href="/adminBoard/main">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span>
+          <span>Dashboard(renewal...)</span>
         </a>
       </li>
       <!-- <li class="nav-item dropdown">
@@ -141,6 +141,11 @@
         <a class="nav-link" href="/adminBoard/scheduler">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Calendar</span></a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="/">
+          <i class="fas fa-home"></i>
+          <span>Restaurant site</span></a>
       </li>
     <!--   <li class="nav-item">
         <a class="nav-link" href="charts.html">
