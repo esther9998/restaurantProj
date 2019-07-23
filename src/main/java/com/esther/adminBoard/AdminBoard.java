@@ -29,10 +29,13 @@ public class AdminBoard {
 	public ModelAndView  adminBoard(ReservationVO  vo, HttpSession session, Locale locale, HttpServletResponse response) throws IOException {
 		logger.info("admin 페이지 >>>>>>>>>>>>>>>>>>>" );
 		ModelAndView mav = new ModelAndView();
+		String url="";
 		if (session.getAttribute("admin_session") != null) {
+		//	url = "/adminBoard/main";
 			mav.setViewName("/adminBoard/adminBoard");
 			
 		} else {
+		//	url = "/adminBoard/login";
 			mav.setViewName("/adminBoard/adminLogin");
 		}
 		return mav;
