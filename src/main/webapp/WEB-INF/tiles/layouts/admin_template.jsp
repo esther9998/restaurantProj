@@ -27,7 +27,7 @@
 <!-- Bootstrap core JavaScript-->
 
   
-<!--  calendar 관련 소-->
+<!--  calendar ê´ë ¨ ì-->
 <link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'>
 <link href='/resources/themesResources/core/main.css' rel='stylesheet' />
 <link href='/resources/themesResources/bootstrap/main.css' rel='stylesheet' /> 
@@ -73,8 +73,8 @@
 
     <!-- Navbar -->
   <ul class="navbar-nav ml-auto" >
-<!--   <ul class="navbar-nav ml-auto ml-md-0" >  기존 ul 스타일   -->
-      <!--   <li class="nav-item dropdown no-arrow mx-1"> 이메일   
+<!--   <ul class="navbar-nav ml-auto ml-md-0" >  ê¸°ì¡´ ul ì¤íì¼   -->
+      <!--   <li class="nav-item dropdown no-arrow mx-1"> ì´ë©ì¼   
         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-bell fa-fw"></i>
           <span class="badge badge-danger">9+</span>
@@ -124,7 +124,7 @@
       <!-- <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-fw fa-folder"></i>
-          <span>Pages 사용자 이미지 및 컨텐츠 수정 </span>
+          <span>Pages ì¬ì©ì ì´ë¯¸ì§ ë° ì»¨íì¸  ìì  </span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <h6 class="dropdown-header">Login Screens:</h6>
@@ -160,7 +160,7 @@
       <footer class="sticky-footer">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright © Your Website 2019</span>
+            <span>Copyright Â© Your Website 2019</span>
           </div>
         </div>
       </footer>
@@ -183,7 +183,7 @@
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
+            <span aria-hidden="true">Ã</span>
           </button>
         </div>
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
@@ -196,7 +196,7 @@
   </div>
 
 <script>
-//로그아웃   
+//ë¡ê·¸ìì   
 function logout() {
 	sessionStorage.removeItem( "admin_session" );
 	location.href ="/adminBoard/main";
