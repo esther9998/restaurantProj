@@ -4,7 +4,7 @@
 
   <div class="container">
     <div class="card card-login mx-auto mt-5">
-      <div class="card-header">Login</div>
+      <div class="card-header">Login (임시비번 이메일 :123  || 비번 :1234)</div>
       <div class="card-body">
         <form>
           <div class="form-group">

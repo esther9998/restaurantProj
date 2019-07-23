@@ -7,13 +7,12 @@
 						<div
 							class="row align-items-center justify-content-center text-center">
 							<div class="col-md-10" data-aos="fade-up">
-								<h2 class="heading mb-5">모락은 엄선된<br> 재료만으로 조리합니다.</h2>
+								<h2 class="heading mb-5">Welcome To EatWell</h2>
 								<p class="sub-heading mb-5">
-								  매달 매장 방문고객님들을 위한<br> 이벤트를 진행하고 있습니다.<br>
-								  <a href="/gallery#section-about"> 이벤트 보러가기 </a>
+								 Tasty & Delicious Food<br>
 								</p>
 								<p>
-									<a href="/menu"class="smoothscroll btn btn-outline-white px-5 py-3">메뉴 보러가기 </a>
+									<a href="/menu"class="smoothscroll btn btn-outline-white px-5 py-3">Menu </a>
 								</p>
 							</div>
 						</div>

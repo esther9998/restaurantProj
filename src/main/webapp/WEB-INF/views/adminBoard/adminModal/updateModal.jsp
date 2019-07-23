@@ -103,10 +103,8 @@
 			function checkStatus(statusNum) {
 	//			var status = $("#statusEdit").text();
 				console.log(statusNum);
-				  
 				  $('input[name="statusEdit"]').removeAttr('checked');
 				   $('input[name="statusEdit"]:radio[value='+statusNum+']').prop('checked',true);
-	    	console.log("test = "+statusEdit);
 			}
 			
 			
