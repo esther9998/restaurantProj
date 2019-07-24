@@ -236,12 +236,19 @@ console.log(dd);
 
     <div class='clear'></div>
   </div>
-  <div class="row" style="margin: 5px auto; line-height: 2.5">
-<div style="height: 25px; width: 25px; background-color: green; border-radius: 50%; display: inline-block; margin: 5px 2px 5px 10px;"></div>reservation
-<div style="height: 25px; width: 25px; background-color: lightblue; border-radius: 50%; display: inline-block; margin: 5px 2px 5px 10px;"></div>complete
-<div style="height: 25px; width: 25px; background-color: pink; border-radius: 50%; display: inline-block;margin: 5px 2px 5px 10px;"></div>cancel
-<div style="height: 25px; width: 25px; background-color: black; border-radius: 50%; display: inline-block;margin: 5px 2px 5px 10px;"></div>miss
-</div>
+          <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="/adminBoard/scheduler">Calendar</a>
+          </li>
+          <li class="breadcrumb-item active">Overview</li>
+  <li style="position: absolute; right:0;">
+<div style="height: 15px; width: 15px; background-color: green; border-radius: 50%; display: inline-block; margin: 5px 2px 5px 10px;"></div>reservation
+<div style="height: 15px; width: 15px; background-color: lightblue; border-radius: 50%; display: inline-block; margin: 5px 2px 5px 10px;"></div>complete
+<div style="height: 15px; width: 15px; background-color: pink; border-radius: 50%; display: inline-block;margin: 5px 2px 5px 10px;"></div>cancel
+<div style="height: 15px; width: 15px; background-color: black; border-radius: 50%; display: inline-block;margin: 5px 2px 5px 10px;"></div>miss
+</li>
+        </ol>
   <div id='calendar'></div>
   <jsp:include page="./adminModal/updateModal.jsp"></jsp:include>
   <jsp:include page="./adminModal/addEventModal.jsp"></jsp:include>

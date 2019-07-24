@@ -27,7 +27,7 @@
 <!-- Bootstrap core JavaScript-->
 
   
-<!--  calendar ê´ë ¨ ì-->
+<!--  calendar 관련 소-->
 <link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'>
 <link href='/resources/themesResources/core/main.css' rel='stylesheet' />
 <link href='/resources/themesResources/bootstrap/main.css' rel='stylesheet' /> 
@@ -53,7 +53,7 @@
 
 <body id="page-top">
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-    <a class="navbar-brand mr-1" href="/adminboard/main">Your Restaurant</a>
+    <a class="navbar-brand mr-1" href="/adminBoard/main">Your Restaurant </a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="/adminBoard/main">
       <i class="fas fa-bars"></i>
@@ -73,8 +73,8 @@
 
     <!-- Navbar -->
   <ul class="navbar-nav ml-auto" >
-<!--   <ul class="navbar-nav ml-auto ml-md-0" >  ê¸°ì¡´ ul ì¤íì¼   -->
-      <!--   <li class="nav-item dropdown no-arrow mx-1"> ì´ë©ì¼   
+<!--   <ul class="navbar-nav ml-auto ml-md-0" >  기존 ul 스타일   -->
+      <!--   <li class="nav-item dropdown no-arrow mx-1"> 이메일   
         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-bell fa-fw"></i>
           <span class="badge badge-danger">9+</span>
@@ -98,6 +98,11 @@
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </li> -->
+        <li class="nav-item dropdown no-arrow">
+        <a class="nav-link dropdown-toggle" href="/"  role="button" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-home"></i>
+        </a>
+      </li>
       <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-user-circle fa-fw"></i>
@@ -124,7 +129,7 @@
       <!-- <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-fw fa-folder"></i>
-          <span>Pages ì¬ì©ì ì´ë¯¸ì§ ë° ì»¨íì¸  ìì  </span>
+          <span>Pages 사용자 이미지 및 컨텐츠 수정 </span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <h6 class="dropdown-header">Login Screens:</h6>
@@ -160,7 +165,7 @@
       <footer class="sticky-footer">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright Â© Your Website 2019</span>
+            <span>Copyright © Your Website 2019</span>
           </div>
         </div>
       </footer>
@@ -183,7 +188,7 @@
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">Ã</span>
+            <span aria-hidden="true">×</span>
           </button>
         </div>
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
@@ -196,7 +201,7 @@
   </div>
 
 <script>
-//ë¡ê·¸ìì   
+//로그아웃   
 function logout() {
 	sessionStorage.removeItem( "admin_session" );
 	location.href ="/adminBoard/main";
