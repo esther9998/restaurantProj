@@ -220,9 +220,7 @@ console.log(dd);
           <option value='yeti'>Yeti</option>
         </select>
       </div>
-
       <span id='loading' style='display:none'>loading theme...</span>
-
     </div>
 
     <div class='right'>
@@ -233,23 +231,24 @@ console.log(dd);
         <a href='https://bootswatch.com/' target='_blank'>Theme by Bootswatch</a>
       </span>
     </div>
-
-    <div class='clear'></div>
   </div>
+    <div class='clear container-fluid'>
+    
           <!-- Breadcrumbs-->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
             <a href="/adminBoard/scheduler">Calendar</a>
           </li>
           <li class="breadcrumb-item active">Overview</li>
-  <li style="position: absolute; right:0;">
-<div style="height: 15px; width: 15px; background-color: green; border-radius: 50%; display: inline-block; margin: 5px 2px 5px 10px;"></div>reservation
-<div style="height: 15px; width: 15px; background-color: lightblue; border-radius: 50%; display: inline-block; margin: 5px 2px 5px 10px;"></div>complete
-<div style="height: 15px; width: 15px; background-color: pink; border-radius: 50%; display: inline-block;margin: 5px 2px 5px 10px;"></div>cancel
-<div style="height: 15px; width: 15px; background-color: black; border-radius: 50%; display: inline-block;margin: 5px 2px 5px 10px;"></div>miss
+  <li style="position: absolute; right: 30px;">
+<button style="height: 15px; width: 15px; background-color: green; border-radius: 50%; display: inline-block; margin: 5px 2px 5px 10px;"></button>reservation
+<button style="height: 15px; width: 15px; background-color: lightblue; border-radius: 50%; display: inline-block; margin: 5px 2px 5px 10px;"></button>complete
+<button style="height: 15px; width: 15px; background-color: pink; border-radius: 50%; display: inline-block;margin: 5px 2px 5px 10px;"></button>cancel
+<button style="height: 15px; width: 15px; background-color: black; border-radius: 50%; display: inline-block;margin: 5px 2px 5px 10px;"></button>miss
 </li>
         </ol>
   <div id='calendar'></div>
+        </div>
   <jsp:include page="./adminModal/updateModal.jsp"></jsp:include>
   <jsp:include page="./adminModal/addEventModal.jsp"></jsp:include>
   
