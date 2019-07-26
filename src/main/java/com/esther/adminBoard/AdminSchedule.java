@@ -47,8 +47,13 @@ public class AdminSchedule {
 	@RequestMapping(value="/adminBoard/scheduler")
 	public ModelAndView adminScheduler(ReservationVO  vo, HttpSession session) throws JsonProcessingException{
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/adminBoard/adminScheduler");
-		return mav;
+		if (session.getAttribute("admin_session") != null) {
+				mav.setViewName("/adminBoard/adminScheduler");
+			} else {
+				mav.setViewName("/adminBoard/adminLogin");
+			}
+			return mav;
+//			 response.sendRedirect(url);
 	}
 	
 	@RequestMapping(value = "/getSchedule", method = RequestMethod.GET)
