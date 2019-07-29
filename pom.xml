@@ -223,7 +223,18 @@
     <artifactId>google-api-client-gson</artifactId>
     <version>1.25.0</version>
 </dependency>
-
+<!-- GA report api -->
+ <dependency>
+      <groupId>com.google.apis</groupId>
+      <artifactId>google-api-services-analyticsreporting</artifactId>
+      <version>v4-rev153-1.25.0</version>
+    </dependency>
+  <dependency>
+      <groupId>com.google.apis</groupId>
+      <artifactId>google-api-services-oauth2</artifactId>
+      <version>v1-rev155-1.25.0</version>
+    </dependency>   
+    
 	</dependencies>
     <build>
         <plugins>
