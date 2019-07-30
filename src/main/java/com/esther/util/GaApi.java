@@ -18,7 +18,9 @@ import java.io.InputStream;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.annotation.Resource;
@@ -41,7 +43,7 @@ import com.google.api.services.analyticsreporting.v4.model.Report;
 import com.google.api.services.analyticsreporting.v4.model.ReportRequest;
 import com.google.api.services.analyticsreporting.v4.model.ReportRow;
 
-public class GaTest {
+public class GaApi {
 	
 	/*
 	 * String imagePath = request.getServletContext().getRealPath("resources/image/"
@@ -54,28 +56,26 @@ public class GaTest {
   private static String KEY_FILE_LOCATION = "";
   private static final String VIEW_ID = "196870503";
   
-	  public static void main(String[] args) { 
-
-		try {
-			File accFile = ResourceUtils.getFile( "classpath:json/client_secret.json");
-			System.out.println(accFile.toURI().toString());
-			String file = accFile.toURI().toString();
-			String subFile = file.substring(0,5);
-			System.out.println(subFile);
-			KEY_FILE_LOCATION =subFile;
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			System.out.println("file not found ~~");
-			e1.printStackTrace();
-		}
+//	  public static void main(String[] args) { 
+//		try {
+//			File accFile = ResourceUtils.getFile( "classpath:json/client_secret.json");
+//			String file = accFile.toURI().toString();
+//			String subFile = file.substring(5,file.length());
+//			KEY_FILE_LOCATION =subFile;
+//		} catch (FileNotFoundException e1) {
+//			// TODO Auto-generated catch block
+//			System.out.println("file not found ~~");
+//			e1.printStackTrace();
+//		}
 		
-	try { AnalyticsReporting service = initializeAnalyticsReporting();
-			  		GetReportsResponse response = getReport(service); 
-			  		printResponse(response); 
-			  }catch (Exception e) {
-				  e.printStackTrace(); } 
-			  
-		  }
+//	try { AnalyticsReporting service = initializeAnalyticsReporting();
+//			  		GetReportsResponse response = getReport(service); 
+//			  		System.out.println(response);
+//			  		Map map =  printResponse(response); 
+//			  }catch (Exception e) {
+//				  e.printStackTrace(); } 
+//			  
+//		  }
   /**
    * Initializes an Analytics Reporting API V4 service object.
    *
@@ -83,11 +83,11 @@ public class GaTest {
    * @throws IOException
    * @throws GeneralSecurityException
    */
-  public static AnalyticsReporting initializeAnalyticsReporting() throws GeneralSecurityException, IOException {
+  public static AnalyticsReporting initializeAnalyticsReporting(String key) throws GeneralSecurityException, IOException {
 
     HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
     GoogleCredential credential = GoogleCredential
-        .fromStream(new FileInputStream(KEY_FILE_LOCATION))
+        .fromStream(new FileInputStream(key))
         .createScoped(AnalyticsReportingScopes.all());
 
     // Construct the Analytics Reporting service object.
@@ -159,7 +159,8 @@ public class GaTest {
    *
    * @param response An Analytics Reporting API V4 response.
    */
-  public static void printResponse(GetReportsResponse response) {
+  public static Map printResponse(GetReportsResponse response) {
+	  HashMap<String, String> map = new HashMap<String, String>();
 
     for (Report report: response.getReports()) {
       ColumnHeader header = report.getColumnHeader();
@@ -169,9 +170,8 @@ public class GaTest {
 
       if (rows == null) {
          System.out.println("No data found for " + VIEW_ID);
-         return;
+         return null;
       }
-
       for (ReportRow row: rows) {
         List<String> dimensions = row.getDimensions();
         List<DateRangeValues> metrics = row.getMetrics();
@@ -185,9 +185,11 @@ public class GaTest {
           DateRangeValues values = metrics.get(j);
           for (int k = 0; k < values.getValues().size() && k < metricHeaders.size(); k++) {
             System.out.println(metricHeaders.get(k).getName() + ": " + values.getValues().get(k));
+            map.put(metricHeaders.get(k).getName(), values.getValues().get(k));
           }
         }
       }
     }
+	return map;
   }
 }
