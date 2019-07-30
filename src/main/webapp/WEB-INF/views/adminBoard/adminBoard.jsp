@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<meta name="google-signin-client_id" content="797674242275-q3ocnl8vpot5ke4oeog84q9eusfuqr5f.apps.googleusercontent.com">
-<meta name="google-signin-scope" content="https://www.googleapis.com/auth/analytics.readonly">
 
       <div class="container-fluid">
 
@@ -588,7 +586,6 @@
       </div>
       <!-- /.container-fluid -->
 
-<h1>Analytics Reporting API V4</h1>
 <p>
   <div class="g-signin2" data-onsuccess="queryReports"></div>
 
@@ -597,41 +594,6 @@
 <!-- The API response will be printed here. -->
 <textarea cols="80" rows="20" id="query-output"></textarea>
 
-<script>
-  // Replace with your view ID.
-  var VIEW_ID = '196870503';
 
-  // Query the API and print the results to the page.
-  function queryReports() {
-    gapi.client.request({
-      path: '/v4/reports:batchGet',
-      root: 'https://analyticsreporting.googleapis.com/',
-      method: 'POST',
-      body: {
-        reportRequests: [
-          {
-            viewId: VIEW_ID,
-            dateRanges: [
-              {
-                startDate: '7daysAgo',
-                endDate: '6daysAgo'
-              }
-            ],
-            metrics: [
-              {
-                expression: 'ga:sessions'
-              }
-            ]
-          }
-        ]
-      }
-    }).then(function (response) {
-      var formattedJson = JSON.stringify(response.result, null, 2);
-      document.getElementById('query-output').value = formattedJson;
-    }, console.error.bind(console));
-  }
-</script>
-<script src="https://apis.google.com/js/client:platform.js"></script>
     
  
-    

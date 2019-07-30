@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.esther.model.ReservationVO;
+import com.esther.util.GaTest;
+import com.google.api.services.analyticsreporting.v4.AnalyticsReporting;
+import com.google.api.services.analyticsreporting.v4.model.GetReportsResponse;
 
 
 @Controller
@@ -31,7 +34,16 @@ public class AdminBoard {
 		ModelAndView mav = new ModelAndView();
 		String url="";
 		if (session.getAttribute("admin_session") != null) {
-		//	url = "/adminBoard/main";
+			// 대쉬보드 GA데이터 요청 
+				  try { 
+					  AnalyticsReporting service = GaTest.initializeAnalyticsReporting();
+					  GetReportsResponse gaResp = GaTest.getReport(service); 
+					  GaTest.printResponse(gaResp); 
+					  }catch (Exception e) {
+						  e.printStackTrace(); 
+					  }
+						
+				  
 			mav.setViewName("/adminBoard/adminBoard");
 			
 		} else {
