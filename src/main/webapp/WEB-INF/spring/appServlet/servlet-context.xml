@@ -42,7 +42,6 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.esther.controller" />
-	<context:component-scan base-package="com.esther.admin" />
 	<context:component-scan base-package="com.esther.adminBoard" />
 	
 </beans:beans>
