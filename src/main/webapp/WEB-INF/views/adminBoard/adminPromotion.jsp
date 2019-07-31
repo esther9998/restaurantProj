@@ -22,7 +22,7 @@
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                   <tr>
-                    <th>Name</th>
+                    <th>Promotion Title</th>
                     <th>Position</th>
                     <th>Office</th>
                     <th>Age</th>
@@ -32,7 +32,7 @@
                 </thead>
                 <tfoot>
                   <tr>
-                    <th>Name</th>
+                    <th>Promotion Title</th>
                     <th>Position</th>
                     <th>Office</th>
                     <th>Age</th>

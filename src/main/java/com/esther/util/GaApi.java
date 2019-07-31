@@ -29,7 +29,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.ResourceUtils;
 
 import com.google.api.services.analyticsreporting.v4.AnalyticsReportingScopes;
-import com.google.api.services.analytics.Analytics.Data.Ga.Get;
 import com.google.api.services.analyticsreporting.v4.AnalyticsReporting;
 
 import com.google.api.services.analyticsreporting.v4.model.ColumnHeader;
@@ -111,6 +110,7 @@ public class GaApi {
 
     // Create the Metrics object.
     Metric sessions = new Metric().setExpression("ga:sessions").setAlias("sessions");
+    
     Metric users = new Metric().setExpression("ga:users").setAlias("users");
     Metric newUsers = new Metric().setExpression("ga:newUsers").setAlias("newUsers");
     
@@ -135,6 +135,7 @@ public class GaApi {
             .setDateRanges(Arrays.asList(dateRange))
             .setMetrics(Arrays.asList(newUsers))
             .setDimensions(Arrays.asList(pageTitle));
+    
     
     
     ArrayList<ReportRequest> requests = new ArrayList<ReportRequest>();
@@ -191,6 +192,4 @@ public class GaApi {
     }
 	return map;
   }
-  
-  
 }
