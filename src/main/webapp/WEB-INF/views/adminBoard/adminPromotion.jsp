@@ -16,7 +16,9 @@
         <div class="card mb-3">
           <div class="card-header">
             <i class="fas fa-table"></i>
-           Upload Promotion</div>
+           Upload Promotion
+           	<button class="btn-primary float-right" data-toggle="modal" data-target="#addPromotion">Add New Promotion</button>
+           </div>
           <div class="card-body">
             <div class="table-responsive">
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -504,5 +506,5 @@
           <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
         </div>
 	</div>
- 
       <!-- /.container-fluid -->
+<jsp:include page="./adminModal/addPromotion.jsp"></jsp:include>

@@ -16,149 +16,151 @@
       <div class="modal-body">
        <div class="row justify-content-center">
               <div class="col-md-10 form-wrap">
-                <form  name="frm" >
+                <form id="promotionForm" enctype="multipart/form-data">
                   <div class="row mb-4">
-                    <div class="form-group col-md-12">
-                      <label for="promo_title" class="label">Title <p style="font-size: 10px; color: grey">(Administrator will be recognized what promotion is by the title.)</p></label>
-                      <div class="form-field-icon-wrap">
-                        <input type="text" class="form-control" id="promo_title">
-                      </div>
+                    <div class=" col-md-6">
+                      <label for="promo_title" class="label">Title</label>
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Promotion title">
+                    </div>
+                    <div class=" col-md-3">
+                    	<label for="" class="label">Priority</label>
+                    	  <input type="text" class="form-control" name="priority" id="priority" placeholder="Number">
+                    </div>
+                    <div class=" col-md-3">
+                    	<label for="" class="label" style="display: block;">Status</label>
+                    	<input type="radio" name="status" value="active" style="margin: 5px;">active
+                    	<input type="radio" name="status" value="inactive" style="margin: 5px;">inactive
                     </div>
                      </div>
-
+               <!--  가격 -->
+			<div class="row mb-4">
+                    <div class="col-md-6">
+                      <label for="" class="label">Price</label>
+                        <input type="text" class="form-control" name="price" placeholder="Promotion price">
+                    </div>
+                    	
+               <!--  이미지 업로드 -->
+					<div class="input-group col-md-6">
+						<label for="" class="label">Upload Image</label>
+						<div class="input-group mb-3">
+						<div class="custom-file">
+						    <input type="file" name="file" id="file" class="custom-file-input">
+						    <label  id="filename" class="custom-file-label" for="inputGroupFile02">Choose file</label>
+						  </div>
+						<!--   <div class="input-group-append">
+						    <input class="input-group-text" id=""  type="submit">
+						  </div> -->
+						</div>
+						</div>
+                  </div>
+                 <!--  콘텐츠 --> 
+                  <div class="row mb-4">
+                  <div class="col-md-12">
+                      <label for="promo_title" class="label">Contents</label>
+                        <textarea cols="10" rows="5" class="form-control" name="content"placeholder="" ></textarea>
+                    </div>
+                    </div>
+                  
+				<!--  날짜 -->
 				<div class="row mb-4">
-                    <div class="form-group col-md-6">
-                      <label for="date" class="label">Start Date  <p style="font-size: 10px; color: grey">(format : MM/DD/YYYY)</p></label>
-                      <div class="form-field-icon-wrap">
-                        <input type="text" class="form-control" id="dateAdd">
-                      </div>
+                    <div class="col-md-6">
+                      <label for="date" class="label">Start Date</label>
+                        <input type="text" class="form-control" name="startDate" id="startDate" placeholder="format : YYYY-MM-DD">
                     </div>
-                    
-                     <div class="form-group col-md-6">
-                      <label for="date" class="label">End Date  <p style="font-size: 10px; color: grey">(format : MM/DD/YYYY)</p></label>
-                      <div class="form-field-icon-wrap">
-                        <input type="text" class="form-control" id="dateAdd">
-                      </div>
+                     <div class="col-md-6">
+                      <label for="date" class="label">End Date </label>
+                        <input type="text" class="form-control" name="endDate" id="endDate" placeholder="format : YYYY-MM-DD">
                     </div>
-
                   </div>
                   
                   <!-- Smart Editor -->
-                  <textarea name="ir1" id="ir1" rows="10" cols="100">에디터에 기본으로 삽입할 글(수정 모드)이 없다면 이 value 값을 지정하지 않으시면 됩니다.</textarea>
-                  
-                  
+              <!--     <textarea name="ir1" id="ir1" rows="10" cols="100">에디터에 기본으로 삽입할 글(수정 모드)이 없다면 이 value 값을 지정하지 않으시면 됩니다.</textarea>
+                   -->
+               <!--      <input  type="submit" style="display: hidden;" onclick="submitForm()" > -->
                 </form>
-              </div>
-            </div>
-      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary"  onclick="addForm()" >Save</button>
+        <button class="btn btn-primary" onclick="javascript:sendPromotion();">Save</button>
+      </div>
+              </div>
+            </div>
       </div>
     </div>
   </div>
 </div>
 
-<script type="text/javascript">
-var oEditors = [];
-//추가 글꼴 목록
-//var aAdditionalFontSet = [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]];
-
-nhn.husky.EZCreator.createInIFrame({
-	oAppRef: oEditors,
-	elPlaceHolder: "ir1",
-	sSkinURI: "/resources/js/smarteditor2-2.8.2.3/SmartEditor2Skin.html",	
-	htParams : {
-		bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-		bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-		bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-		//bSkipXssFilter : true,		// client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
-		//aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
-		fOnBeforeUnload : function(){
-			//alert("완료!");
-		}
-	}, //boolean
-	fOnAppLoad : function(){
-		//예제 코드
-		//oEditors.getById["ir1"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
-	},
-	fCreator: "createSEditor2"
-});
-</script>
-
-
 <script>
-			/* ********************************************************* */
-			// 유효성 검사 
-			/* ********************************************************* */
-			function validate(){			
-			    if( $("#nameAdd").val().trim()== ""){
-			     alert( "Please provide your name!" );
-			     return false;
-			    	
-			    }else if($("#phoneAdd").val().trim()== "" ){
-			     alert( "Please provide your phone!" );
-			     return false;
-			    	
-			    }else if($("#emailAdd").val().trim()== "" ){
-			     alert( "Please provide your email!" );
-			     return false;
-			    	
-			    }else if($("#personsAdd").val().trim()== "" ){
-			     alert( "Please provide your persons!" );
-			     return false;
-			    	
-			    }else if($("#timeAdd").val().trim()== "" ){
-			     alert( "Please provide your time" );
-			     return false;
-			     
-			    }else{
-			    	   return true;
-			    }
-			    }
-			    		
-			
-//ajax 데이터 전
-function addForm() {
-	//유효성 검사 
-				var validateCheked = validate();
-				if(validateCheked){				
-				var data ={
-						 name : $("#nameAdd").val(),
-						 phone : $("#phoneAdd").val(),
-						 email : $("#emailAdd").val(),
-						 persons : $("#personsAdd").val(),
-						 date : $("#dateAdd").val(),
-						 time : $("#timeAdd").val()
-				}
-					$.ajax({
-						url: '/addEvent',
-						type: "POST",
-						contentType: 'application/json;charset=UTF-8',
-						dataType: 'json',
-						data:  JSON.stringify(data),
-						success :function(data){
-							if(data == 1){
-							alert( "Successfully booked");
-							location.reload();
-							}else if(data == 0){
-							alert("Email address is not validate. ");
-							location.reload();
-							}else{
-							alert(data+"There is error occured. Please try again. ");
-							location.reload();
-							}
-							},
-						error:function(xhr, status,error){
-							alert("There is an error occured. Please fill the form again. ");
-						alert(xhr+"+++++++++" +status+"////////////"+error);
-							location.reload();
-						}
-					
-					});
-					}else{
-						console.log("form is not complated");
-					};
-				};
-					
-			</script>
+function sendPromotion() {
+	
+    //preventDefault 는 기본으로 정의된 이벤트를 작동하지 못하게 하는 메서드이다. submit을 막음
+    // 유효성 검사  
+     var re = /^[0-9]+$/;
+        if(!re.test($("#priority").val())) {
+               alert("Input ONLY number!!");
+               $("#priority").val("");
+               $("#priority").focus();
+               return;
+        }
+        	if ($("#title").val() ==""||$("#status").val() ==""||$("#priority").val() ==""||$("#price").val() ==""||$("#contents").val() ==""||$("#file").val() =="") {
+        		alert("Please fillout.");
+        		return;
+			} 
+        	
+        	//날짜 유효성 검사 
+        	try{
+        		var pattern = /[0-9]{4}-[0-9]{2}-[0-9]{2}/;
+        		 var startDate = pattern.test($("#startDate").val());
+        		 var endDate = pattern.test($("#endDate").val());
+	        		if(!startDate) {
+	            		alert("The startDate form is not correct.")
+					return;
+	        		} else if(!endDate){
+	        			alert("The endDate form is not correct. end")
+						return;
+	        		}
+              }catch (e){
+                return  false;
+              }
+    
+    var form = $('#promotionForm')[0];
+    var data = new FormData(form);
+
+   // disabled the submit button
+    $("#promotionFormSubmit").prop("disabled", true);
+   
+    $.ajax({
+        type: "POST",
+        enctype: 'multipart/form-data',
+        url: "/adminBoard/promotionForm",
+        data: data,
+        processData: false,
+        contentType: false,
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+            alert("complete");
+        },
+        error: function (e) {
+            console.log("ERROR : ", e);
+            alert("fail");
+        }
+    });
+}
+
+/* 선택한  파일명 input에 입력  */
+$( document ).ready(function() {
+	  $('input[type="file"]').change(function() {
+	    if ($(this).val()) {
+	    	error=false;
+	         var filename = $(this).val();
+	     	var afterStr = filename.split( "\\" );
+	         $('#filename').text(afterStr[afterStr.length-1]);
+	    }
+	    if (error) {
+	        alert("fileupload error occured.")
+	      }
+	  });
+	});
+
+		
+</script>
