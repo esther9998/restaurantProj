@@ -8,6 +8,7 @@ public class PromotionVO {
 	String promo_title;
 	String promo_price;
 	String promo_content;
+	String promo_imgNm;
 	String promo_uuid;
 	String start_date;
 	String end_date;
@@ -50,6 +51,12 @@ public class PromotionVO {
 	public void setPromo_content(String promo_content) {
 		this.promo_content = promo_content;
 	}
+	public String getPromo_imgNm() {
+		return promo_imgNm;
+	}
+	public void setPromo_imgNm(String promo_imgNm) {
+		this.promo_imgNm = promo_imgNm;
+	}
 	public String getPromo_uuid() {
 		return promo_uuid;
 	}
@@ -84,8 +91,8 @@ public class PromotionVO {
 	@Override
 	public String toString() {
 		return "PromotionVO [idx=" + idx + ", priority=" + priority + ", status=" + status + ", promo_title="
-				+ promo_title + ", promo_price=" + promo_price + ", promo_content=" + promo_content + ", promo_uuid="
-				+ promo_uuid + ", start_date=" + start_date + ", end_date=" + end_date + ", create_at=" + create_at
-				+ ", update_at=" + update_at + "]";
+				+ promo_title + ", promo_price=" + promo_price + ", promo_content=" + promo_content + ", promo_imgNm="
+				+ promo_imgNm + ", promo_uuid=" + promo_uuid + ", start_date=" + start_date + ", end_date=" + end_date
+				+ ", create_at=" + create_at + ", update_at=" + update_at + "]";
 	}
 }

@@ -1,7 +1,14 @@
 package com.esther.adminBoard;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
+
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -30,7 +37,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.esther.model.PromotionVO;
 import com.esther.model.ReservationVO;
+import com.esther.util.ImageUpload;
 
 @Controller
 public class AdminPromotion {
@@ -38,9 +47,6 @@ public class AdminPromotion {
 @Autowired
 private SqlSession sqlSession;
 private static final Logger logger = LoggerFactory.getLogger(AdminPromotion.class);
-
-@Resource(name="uploadPath")
-String uploadPath;
 
 @RequestMapping(value = "/adminBoard/promotion")
 public ModelAndView  adminPromotion(ReservationVO  vo, HttpSession session, Locale locale, HttpServletResponse response) throws IOException {
@@ -51,40 +57,29 @@ public ModelAndView  adminPromotion(ReservationVO  vo, HttpSession session, Loca
 
 @RequestMapping("/adminBoard/promotionForm")
 @ResponseBody
-public ModelAndView  promotionForm(MultipartHttpServletRequest request, @RequestParam HashMap<String, Object> params) throws IOException {
-	ModelAndView mav = new ModelAndView();
-	List<MultipartFile> mFiles = request.getFiles("file");
-	for(MultipartFile mFile : mFiles) {
-		System.out.println("file length : " + mFile.getBytes().length); 
-		String orgName = mFile.getOriginalFilename(); 
+public void  promotionForm(MultipartHttpServletRequest request, @RequestParam HashMap<String, Object> params) throws IOException {
+	MultipartFile mFile = request.getFile("file");
+	
+		//서버 저장 폴더 path
+		String folderPath =  request.getSession().getServletContext().getRealPath("/");
+		System.out.println(folderPath);
 		
-		String fakeName = UUID.randomUUID().toString().replace("-", "");
-		params.put("fakeName", fakeName); // 가짜이름
-		String rootPath = request.getSession().getServletContext().getRealPath("/") ;
-System.out.println("vvvvvvvvvvvvvv"+rootPath);
-        	File target = new File(uploadPath, orgName);
-        	if (!target.exists()) {
-        		try{
-        			target.mkdir(); //폴더 생성합니다.
-        		    System.out.println("폴더가 생성되었습니다.");
-        	        } 
-        	        catch(Exception e){
-        		    e.getStackTrace();
-        		}        
-        	}else{
-        		System.out.println("이미 폴더가 생성되어 있습니다.");
-        	}
-        	
-        	FileCopyUtils.copy(mFile.getBytes(), target);
-        //필요정보 파람스에 담은 후 ,board_attach DB insert 쿼리날림.(*없던 boardSeq도 담겼다.)
-    //    attFileDao.addAttFile(params);
+		ImageUpload up = new ImageUpload();
+		int rst = up.imgUpload(mFile, folderPath);
+		System.out.println("업로드 결과 1이면 성공 : "+rst +" // 파라미터:"+params);
         
-        //3. DB에 정보 저장만했으니, 이제 실제파일을 지정해놓은 물리적 위치로 카피 ..
+		
+        //db저장 (파일명, 서버파일명)
+		PromotionVO vo = new PromotionVO();
+		vo.setPromo_title((String)params.get("title"));
+		vo.setPromo_title((String)params.get("price"));
+		vo.setPromo_title((String)params.get("priority"));
+		vo.setPromo_title((String)params.get("content"));
+		vo.setPromo_title((String)params.get("status"));
+		vo.setPromo_title((String)params.get("startDate"));
+		vo.setPromo_title((String)params.get("endDate"));
+        
       
-    }
-	System.out.println(params);
-	mav.setViewName("/adminBoard/adminPromotion");
-	return mav;
 	}
 }
 	
