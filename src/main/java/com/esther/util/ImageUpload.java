@@ -8,17 +8,20 @@ import java.util.UUID;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.esther.model.PromotionVO;
+
 public class ImageUpload {
 
-	public int imgUpload(MultipartFile mFile, String folderPath) {
+	public PromotionVO imgUpload(MultipartFile mFile, String folderPath) {
+		PromotionVO vo = new PromotionVO();
 		
-        File imgFolder = new File(folderPath+"/imgUpload");
+        File imgFolder = new File(folderPath+"/resources/imgUpload");
         if(!imgFolder.exists()) {
         	imgFolder.mkdirs();
         }
         	
         	
-        //서버 파일이름 
+        //서버 파일이름 (날짜 + uuid)
         SimpleDateFormat sdf= new SimpleDateFormat("yyyMMdd");
         String date = sdf.format(new Date());
         String uu = UUID.randomUUID().toString().replace("-", "");
@@ -26,21 +29,21 @@ public class ImageUpload {
         
         //서버에 파일 쓰기
         File file = new File(imgFolder, fileNm);
+        
+        
         try {
 			mFile.transferTo(file);
-			return 1;
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return 0;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return 0;
 		}
 		
-		
-		
+        vo.setPromo_uuid(uu);
+        vo.setPromo_imgNm(fileNm);
+		return vo;
 		
 	}
 }

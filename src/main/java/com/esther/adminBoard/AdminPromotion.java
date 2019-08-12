@@ -2,8 +2,10 @@ package com.esther.adminBoard;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.esther.model.AdminVO;
 import com.esther.model.PromotionVO;
 import com.esther.model.ReservationVO;
 import com.esther.util.ImageUpload;
@@ -31,8 +34,17 @@ private SqlSession sqlSession;
 private static final Logger logger = LoggerFactory.getLogger(AdminPromotion.class);
 
 @RequestMapping(value = "/adminBoard/promotion")
-public ModelAndView  adminPromotion(ReservationVO  vo, HttpSession session, Locale locale, HttpServletResponse response) throws IOException {
+public ModelAndView  adminPromotion( HttpSession session, Locale locale, HttpServletRequest request) throws IOException {
 	ModelAndView mav = new ModelAndView();
+	
+	//Promotion 데이터 가져오기
+	List<PromotionVO> list = sqlSession.selectList("adminMapper.selectPromotion");
+	
+	//이미지 파일 가져오기 
+	String folderPath =  request.getSession().getServletContext().getRealPath("/");
+	
+	mav.addObject("imgPath", folderPath);
+	mav.addObject("promoList", list);
 	mav.setViewName("/adminBoard/adminPromotion");
 	return mav;
 	}
@@ -42,25 +54,37 @@ public ModelAndView  adminPromotion(ReservationVO  vo, HttpSession session, Loca
 public void  promotionForm(MultipartHttpServletRequest request, @RequestParam HashMap<String, Object> params) throws IOException {
 	MultipartFile mFile = request.getFile("file");
 	
-		//서버 저장 폴더 path
+		//서버 이미지저장 폴더 path
 		String folderPath =  request.getSession().getServletContext().getRealPath("/");
 		System.out.println(folderPath);
 		
 		ImageUpload up = new ImageUpload();
-		int rst = up.imgUpload(mFile, folderPath);
-		System.out.println("업로드 결과 1이면 성공 : "+rst +" // 파라미터:"+params);
+		PromotionVO fileInfo = up.imgUpload(mFile, folderPath);
+		System.out.println("업로드 결과 : "+fileInfo +" // 파라미터:"+params);
         
 		
         //db저장 (파일명, 서버파일명)
 		PromotionVO vo = new PromotionVO();
+		if(params.get("status")=="active") {
+			vo.setStatus(1);
+		}else {
+			vo.setStatus(0);
+		}
+		vo.setPriority(params.get("priority"));
 		vo.setPromo_title((String)params.get("title"));
-		vo.setPromo_title((String)params.get("price"));
-		vo.setPromo_title((String)params.get("priority"));
-		vo.setPromo_title((String)params.get("content"));
-		vo.setPromo_title((String)params.get("status"));
-		vo.setPromo_title((String)params.get("startDate"));
-		vo.setPromo_title((String)params.get("endDate"));
+		vo.setPromo_price((String)params.get("price"));
+		vo.setPromo_content((String)params.get("content"));
+		vo.setPromo_imgNm(fileInfo.getPromo_imgNm());
+		vo.setPromo_uuid(fileInfo.getPromo_uuid());
+		vo.setStart_date((String)params.get("startDate"));
+		vo.setEnd_date((String)params.get("endDate"));
         
+		vo.toString();
+		
+		int result;
+		//데이터값 조회 
+		result = sqlSession.insert("adminMapper.insertPromotion", vo);
+		System.out.println("결과가 1이면 데이터 삽입 성공 : "+ result);
       
 	}
 }

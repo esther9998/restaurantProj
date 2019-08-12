@@ -8,9 +8,30 @@
         WHERE
 		admin_email= #{admin_email} and admin_pw = #{admin_pw}
     </select>
-    <insert id="insertAdmin" parameterType="AdminVo" > 
+    <insert id="insertAdmin" parameterType="AdminVO" > 
     INSERT into adminAccount(admin_name, admin_pw, admin_lebel, admin_email, admin_register)
     values(
     #{admin_name}, #{admin_pw}, 0, #{admin_email}, now()    )
     </insert>
+    
+     <insert id="insertPromotion" parameterType="PromotionVO" > 
+    INSERT into promotion(priority,status,promo_title,promo_price,promo_content,
+    													promo_uuid,promo_imgNm,start_date,end_date,create_at)
+    values(
+		    #{priority},
+		    #{status}, 
+		    #{promo_title}, 
+		    #{promo_price}, 
+		    #{promo_content}, 
+		    #{promo_uuid}, 
+		    #{promo_imgNm}, 
+		    #{start_date}, 
+		    #{end_date}, 
+		    now()
+    	)
+    </insert>
+    <select id="selectPromotion"  resultType="PromotionVO" >
+    SELECT * FROM promotion;
+    </select>
+    
 </mapper>

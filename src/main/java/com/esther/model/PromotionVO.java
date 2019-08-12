@@ -95,4 +95,8 @@ public class PromotionVO {
 				+ promo_imgNm + ", promo_uuid=" + promo_uuid + ", start_date=" + start_date + ", end_date=" + end_date
 				+ ", create_at=" + create_at + ", update_at=" + update_at + "]";
 	}
+	public void setPriority(Object object) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
      <div class="container-fluid">
@@ -20,6 +20,10 @@
            	<button class="btn-primary float-right" data-toggle="modal" data-target="#addPromotion">Add New Promotion</button>
            </div>
           <div class="card-body">
+           <c:forEach items=" ${promoList}" var = "promoVO">
+${promoVO}
+    <!--  <img src="/resources/imgUpload/20190812b57e30e4d3d94e089c036118385a9c19"> -->
+      </c:forEach>
             <div class="table-responsive">
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>

@@ -138,11 +138,12 @@ function sendPromotion() {
         cache: false,
         timeout: 600000,
         success: function (data) {
-            alert("complete");
+        	window.location.href = '/adminBoard/promotion';
+           // alert("complete");
         },
         error: function (e) {
             console.log("ERROR : ", e);
-            alert("fail");
+            alert("다시시도 해주세요.");
         }
     });
 }
