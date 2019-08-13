@@ -52,8 +52,11 @@
                     <td>	${count.count}</td>
                     <td>	${list.title}</td>
                     <td>	${list.imgNm}</td>
-                    <td>	${list.priority}</td>
-                    <td>	${list.status}</td>
+                    <td>	<input type="text" name="priority" id="priority" value="${list.priority}"  style="width:30px;"></td>
+                    <td>
+	                    	<input type="radio" name="${list.idx}" value="active" style="margin: 5px;" <c:if  test="${list.status eq 1}"> checked="checked"</c:if>/>ative <br>
+	                    <input type="radio" name="${list.idx}"  value="inactive" style="margin: 5px;" <c:if  test="${list.status eq 0}">checked="checked"</c:if>/>Inactive 
+	                </td>
                     <td>	<button class="btn btn-primary">Edit</button></td>
                     <td>	${list.createdAt}</td>
                   </tr>
@@ -67,3 +70,8 @@
 	</div>
       <!-- /.container-fluid -->
 <jsp:include page="./adminModal/addPromotion.jsp"></jsp:include>
+<script>
+
+
+
+</script>

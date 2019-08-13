@@ -42,12 +42,10 @@ public class AdminPromotion {
 
 		// Promotion 데이터 가져오기
 		List<PromotionVO> list = sqlSession.selectList("adminMapper.selectPromotion");
-
+		// 데이터 매핑  
 		ArrayList <HashMap<String,Object>> promoList = new ArrayList<HashMap<String,Object>>();
-		HashMap<String, Object> map = new HashMap<String,Object>();
-
 		  for(PromotionVO vo: list) { 
-			
+			  HashMap<String, Object> map = new HashMap<String,Object>();
 			  map.put("idx" , vo.getIdx());
 			  map.put("title" , vo.getPromo_title());
 			  map.put("price" , vo.getPromo_price());
@@ -61,7 +59,6 @@ public class AdminPromotion {
 			  map.put("createdAt" , vo.getCreate_at());
 			  System.out.println("///////////////"+ map);
 			  promoList.add(map);
-			  
 		  }
 		  
 		// 이미지 파일 가져오기
