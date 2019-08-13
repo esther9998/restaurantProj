@@ -1,9 +1,11 @@
 package com.esther.adminBoard;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,64 +30,87 @@ import com.esther.util.ImageUpload;
 
 @Controller
 public class AdminPromotion {
-	
-@Autowired
-private SqlSession sqlSession;
-private static final Logger logger = LoggerFactory.getLogger(AdminPromotion.class);
 
-@RequestMapping(value = "/adminBoard/promotion")
-public ModelAndView  adminPromotion( HttpSession session, Locale locale, HttpServletRequest request) throws IOException {
-	ModelAndView mav = new ModelAndView();
-	
-	//Promotion 데이터 가져오기
-	List<PromotionVO> list = sqlSession.selectList("adminMapper.selectPromotion");
-	
-	//이미지 파일 가져오기 
-	String folderPath =  request.getSession().getServletContext().getRealPath("/");
-	
-	mav.addObject("imgPath", folderPath);
-	mav.addObject("promoList", list);
-	mav.setViewName("/adminBoard/adminPromotion");
-	return mav;
+	@Autowired
+	private SqlSession sqlSession;
+	private static final Logger logger = LoggerFactory.getLogger(AdminPromotion.class);
+
+	@RequestMapping(value = "/adminBoard/promotion")
+	public ModelAndView adminPromotion(HttpSession session, Locale locale, HttpServletRequest request)
+			throws IOException {
+		ModelAndView mav = new ModelAndView();
+
+		// Promotion 데이터 가져오기
+		List<PromotionVO> list = sqlSession.selectList("adminMapper.selectPromotion");
+
+		ArrayList <HashMap<String,Object>> promoList = new ArrayList<HashMap<String,Object>>();
+		HashMap<String, Object> map = new HashMap<String,Object>();
+
+		  for(PromotionVO vo: list) { 
+			
+			  map.put("idx" , vo.getIdx());
+			  map.put("title" , vo.getPromo_title());
+			  map.put("price" , vo.getPromo_price());
+			  map.put("content" , vo.getPromo_content());
+			  map.put("start" , vo.getStart_date());
+			  map.put("end" , vo.getEnd_date());
+			  map.put("priority" , vo.getPriority());
+			  map.put("status" , vo.getStatus());
+			  map.put("imgNm" , vo.getPromo_imgNm());
+			  map.put("uuid" , vo.getPromo_uuid());
+			  map.put("createdAt" , vo.getCreate_at());
+			  System.out.println("///////////////"+ map);
+			  promoList.add(map);
+			  
+		  }
+		  
+		// 이미지 파일 가져오기
+		String folderPath = request.getSession().getServletContext().getRealPath("/");
+		
+		
+
+		mav.addObject("imgPath", folderPath);
+		mav.addObject("promoList", promoList);
+		mav.setViewName("/adminBoard/adminPromotion");
+		return mav;
 	}
 
-@RequestMapping("/adminBoard/promotionForm")
-@ResponseBody
-public void  promotionForm(MultipartHttpServletRequest request, @RequestParam HashMap<String, Object> params) throws IOException {
-	MultipartFile mFile = request.getFile("file");
-	
-		//서버 이미지저장 폴더 path
-		String folderPath =  request.getSession().getServletContext().getRealPath("/");
+	@RequestMapping("/adminBoard/promotionForm")
+	@ResponseBody
+	public void promotionForm(MultipartHttpServletRequest request, @RequestParam HashMap<String, Object> params)
+			throws IOException {
+		MultipartFile mFile = request.getFile("file");
+
+		// 서버 이미지저장 폴더 path
+		String folderPath = request.getSession().getServletContext().getRealPath("/");
 		System.out.println(folderPath);
-		
+
 		ImageUpload up = new ImageUpload();
 		PromotionVO fileInfo = up.imgUpload(mFile, folderPath);
-		System.out.println("업로드 결과 : "+fileInfo +" // 파라미터:"+params);
-        
-		
-        //db저장 (파일명, 서버파일명)
+		System.out.println("업로드 결과 : " + fileInfo + " // 파라미터:" + params);
+
+		// db저장 (파일명, 서버파일명)
 		PromotionVO vo = new PromotionVO();
-		if(params.get("status")=="active") {
+		if (params.get("status") == "active") {
 			vo.setStatus(1);
-		}else {
+		} else {
 			vo.setStatus(0);
 		}
 		vo.setPriority(params.get("priority"));
-		vo.setPromo_title((String)params.get("title"));
-		vo.setPromo_price((String)params.get("price"));
-		vo.setPromo_content((String)params.get("content"));
+		vo.setPromo_title((String) params.get("title"));
+		vo.setPromo_price((String) params.get("price"));
+		vo.setPromo_content((String) params.get("content"));
 		vo.setPromo_imgNm(fileInfo.getPromo_imgNm());
 		vo.setPromo_uuid(fileInfo.getPromo_uuid());
-		vo.setStart_date((String)params.get("startDate"));
-		vo.setEnd_date((String)params.get("endDate"));
-        
+		vo.setStart_date((String) params.get("startDate"));
+		vo.setEnd_date((String) params.get("endDate"));
+
 		vo.toString();
-		
+
 		int result;
-		//데이터값 조회 
+		// 데이터값 조회
 		result = sqlSession.insert("adminMapper.insertPromotion", vo);
-		System.out.println("결과가 1이면 데이터 삽입 성공 : "+ result);
-      
+		System.out.println("결과가 1이면 데이터 삽입 성공 : " + result);
+
 	}
 }
-	
