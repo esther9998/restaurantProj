@@ -10,11 +10,18 @@ public class PromotionVO {
 	String promo_content;
 	String promo_imgNm;
 	String promo_uuid;
+	String promo_userFile;
 	String start_date;
 	String end_date;
 	String create_at;
 	String update_at;
 	
+	public String getPromo_userFile() {
+		return promo_userFile;
+	}
+	public void setPromo_userFile(String promo_userFile) {
+		this.promo_userFile = promo_userFile;
+	}
 	public int getIdx() {
 		return idx;
 	}
@@ -92,8 +99,8 @@ public class PromotionVO {
 	public String toString() {
 		return "PromotionVO [idx=" + idx + ", priority=" + priority + ", status=" + status + ", promo_title="
 				+ promo_title + ", promo_price=" + promo_price + ", promo_content=" + promo_content + ", promo_imgNm="
-				+ promo_imgNm + ", promo_uuid=" + promo_uuid + ", start_date=" + start_date + ", end_date=" + end_date
-				+ ", create_at=" + create_at + ", update_at=" + update_at + "]";
+				+ promo_imgNm + ", promo_uuid=" + promo_uuid + ", promo_userFile=" + promo_userFile + ", start_date="
+				+ start_date + ", end_date=" + end_date + ", create_at=" + create_at + ", update_at=" + update_at + "]";
 	}
 	public void setPriority(Object object) {
 		// TODO Auto-generated method stub

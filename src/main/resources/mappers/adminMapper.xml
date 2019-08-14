@@ -16,7 +16,7 @@
     
      <insert id="insertPromotion" parameterType="PromotionVO" > 
     INSERT into promotion(priority,status,promo_title,promo_price,promo_content,
-    													promo_uuid,promo_imgNm,start_date,end_date,create_at)
+    													promo_uuid,promo_imgNm,promo_userFile,start_date,end_date,create_at)
     values(
 		    #{priority},
 		    #{status}, 
@@ -25,6 +25,7 @@
 		    #{promo_content}, 
 		    #{promo_uuid}, 
 		    #{promo_imgNm}, 
+		    #{promo_userFile}, 
 		    #{start_date}, 
 		    #{end_date}, 
 		    now()

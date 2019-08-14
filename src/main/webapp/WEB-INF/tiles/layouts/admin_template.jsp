@@ -178,7 +178,7 @@
   
    <!-- Scroll to Top Button-->
   <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
+    <i class="fas fa-angle-up" style="font-size: 40px; padding-top: 5px;"></i>
   </a>
 
   <!-- Logout Modal-->

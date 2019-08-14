@@ -20,8 +20,6 @@
            	<button class="btn-primary float-right" data-toggle="modal" data-target="#addPromotion">Add New Promotion</button>
            </div>
           <div class="card-body">
-    <!--  <img src="/resources/imgUpload/20190812b57e30e4d3d94e089c036118385a9c19"> -->
-
             <div class="table-responsive">
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
@@ -33,6 +31,7 @@
                     <th>Status</th>
                     <th>Edit</th>
                     <th>Created At</th>
+                    <th>Delete</th>
                   </tr>
                 </thead>
                 <tfoot>
@@ -44,6 +43,7 @@
                     <th>Status</th>
                     <th>Edit</th>
                     <th>Created At</th>
+                    <th>Delete</th>
                   </tr>
                 </tfoot>
                 <tbody>
@@ -51,14 +51,29 @@
                   <tr>
                     <td>	${count.count}</td>
                     <td>	${list.title}</td>
-                    <td>	${list.imgNm}</td>
-                    <td>	<input type="text" name="priority" id="priority" value="${list.priority}"  style="width:30px;"></td>
+                    <td>	${list.file}<br>
+                    	<img alt="" src="/resources/imgUpload/${list.imgNm}" style="width: 100px;">
+                    </td>
+                    <td>
+                    	<select name="priority" id="priority" value="${list.priority}" >
+						  <option value="1" <c:if test="${list.priority eq 1}">selected</c:if>>1</option>
+						  <option value="2" <c:if test="${list.priority eq 2}">selected</c:if>>2</option>
+						  <option value="3" <c:if test="${list.priority eq 3}">selected</c:if>>3</option>
+						  <option value="4" <c:if test="${list.priority eq 4}">selected</c:if>>4</option>
+						  <option value="5" <c:if test="${list.priority eq 5}">selected</c:if>>5</option>
+						  <option value="6" <c:if test="${list.priority eq 6}">selected</c:if>>6</option>
+						  <option value="7" <c:if test="${list.priority eq 7}">selected</c:if>>7</option>
+						  <option value="8" <c:if test="${list.priority eq 8}">selected</c:if>>8</option>
+						</select>
+                    	</td>
                     <td>
 	                    	<input type="radio" name="${list.idx}" value="active" style="margin: 5px;" <c:if  test="${list.status eq 1}"> checked="checked"</c:if>/>ative <br>
 	                    <input type="radio" name="${list.idx}"  value="inactive" style="margin: 5px;" <c:if  test="${list.status eq 0}">checked="checked"</c:if>/>Inactive 
 	                </td>
-                    <td>	<button class="btn btn-primary">Edit</button></td>
+                    <td>	<button class="btn btn-primary" data-toggle="modal" data-target="#editPromotion"  
+                    data-edit="${list.idx},${list.title},${list.priority},${list.status},${list.price}, ${list.content},${list.file},${list.imgNm}, ${list.uuid},${list.start},${list.end}" >Edit</button></td>
                     <td>	${list.createdAt}</td>
+                    <td>	<i class="fa fa-trash" aria-hidden="true" style="color: red; "></i></td>
                   </tr>
           		</c:forEach>
                 </tbody>
@@ -70,8 +85,13 @@
 	</div>
       <!-- /.container-fluid -->
 <jsp:include page="./adminModal/addPromotion.jsp"></jsp:include>
+<jsp:include page="./adminModal/editPromotion.jsp"></jsp:include>
 <script>
-
-
+$('#editPromotion').on('show.bs.modal', function (event) {
+	  var button = $(event.relatedTarget) // Button that triggered the modal
+	  var recipient = button.data('edit') 
+	  
+	 console.log(recipient);
+});
 
 </script>

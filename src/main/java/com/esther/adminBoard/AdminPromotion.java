@@ -56,6 +56,7 @@ public class AdminPromotion {
 			  map.put("status" , vo.getStatus());
 			  map.put("imgNm" , vo.getPromo_imgNm());
 			  map.put("uuid" , vo.getPromo_uuid());
+			  map.put("file" , vo.getPromo_userFile());
 			  map.put("createdAt" , vo.getCreate_at());
 			  System.out.println("///////////////"+ map);
 			  promoList.add(map);
@@ -71,6 +72,7 @@ public class AdminPromotion {
 		mav.setViewName("/adminBoard/adminPromotion");
 		return mav;
 	}
+	
 
 	@RequestMapping("/adminBoard/promotionForm")
 	@ResponseBody
@@ -99,6 +101,7 @@ public class AdminPromotion {
 		vo.setPromo_content((String) params.get("content"));
 		vo.setPromo_imgNm(fileInfo.getPromo_imgNm());
 		vo.setPromo_uuid(fileInfo.getPromo_uuid());
+		vo.setPromo_userFile((String) params.get("file"));
 		vo.setStart_date((String) params.get("startDate"));
 		vo.setEnd_date((String) params.get("endDate"));
 
