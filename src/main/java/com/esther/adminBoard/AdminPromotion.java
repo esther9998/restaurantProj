@@ -27,6 +27,7 @@ import com.esther.model.AdminVO;
 import com.esther.model.PromotionVO;
 import com.esther.model.ReservationVO;
 import com.esther.util.ImageUpload;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class AdminPromotion {
@@ -35,44 +36,45 @@ public class AdminPromotion {
 	private SqlSession sqlSession;
 	private static final Logger logger = LoggerFactory.getLogger(AdminPromotion.class);
 
+//	데이터를 두가지 형식( json, list<map<vo>>)으로 전송함. 
 	@RequestMapping(value = "/adminBoard/promotion")
 	public ModelAndView adminPromotion(HttpSession session, Locale locale, HttpServletRequest request)
 			throws IOException {
 		ModelAndView mav = new ModelAndView();
+		// 이미지 파일 가져오기
+		String folderPath = request.getSession().getServletContext().getRealPath("/");
 
 		// Promotion 데이터 가져오기
 		List<PromotionVO> list = sqlSession.selectList("adminMapper.selectPromotion");
 		// 데이터 매핑  
-		ArrayList <HashMap<String,Object>> promoList = new ArrayList<HashMap<String,Object>>();
-		  for(PromotionVO vo: list) { 
-			  HashMap<String, Object> map = new HashMap<String,Object>();
-			  map.put("idx" , vo.getIdx());
-			  map.put("title" , vo.getPromo_title());
-			  map.put("price" , vo.getPromo_price());
-			  map.put("content" , vo.getPromo_content());
-			  map.put("start" , vo.getStart_date());
-			  map.put("end" , vo.getEnd_date());
-			  map.put("priority" , vo.getPriority());
-			  map.put("status" , vo.getStatus());
-			  map.put("imgNm" , vo.getPromo_imgNm());
-			  map.put("uuid" , vo.getPromo_uuid());
-			  map.put("file" , vo.getPromo_userFile());
-			  map.put("createdAt" , vo.getCreate_at());
-			  System.out.println("///////////////"+ map);
-			  promoList.add(map);
-		  }
-		  
-		// 이미지 파일 가져오기
-		String folderPath = request.getSession().getServletContext().getRealPath("/");
-		
-		
+				ArrayList <HashMap<String,Object>> promoList = new ArrayList<HashMap<String,Object>>();
+				  for(PromotionVO vo: list) { 
+					  HashMap<String, Object> map = new HashMap<String,Object>();
+					  map.put("idx" , vo.getIdx());
+					  map.put("title" , vo.getPromo_title());
+					  map.put("price" , vo.getPromo_price());
+					  map.put("content" , vo.getPromo_content());
+					  map.put("start" , vo.getStart_date());
+					  map.put("end" , vo.getEnd_date());
+					  map.put("priority" , vo.getPriority());
+					  map.put("status" , vo.getStatus());
+					  map.put("imgNm" , vo.getPromo_imgNm());
+					  map.put("uuid" , vo.getPromo_uuid());
+					  map.put("file" , vo.getPromo_userFile());
+					  map.put("createdAt" , vo.getCreate_at());
+					  System.out.println("///////////////"+ map);
+					  promoList.add(map);
+				  }
 
-		mav.addObject("imgPath", folderPath);
+		  String jsonPromo = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(list);
+		  System.out.println("jsonPromotion Data ::: "+jsonPromo);
+		
 		mav.addObject("promoList", promoList);
+		mav.addObject("jsonPromo", jsonPromo);
+		mav.addObject("imgPath", folderPath);
 		mav.setViewName("/adminBoard/adminPromotion");
 		return mav;
 	}
-	
 
 	@RequestMapping("/adminBoard/promotionForm")
 	@ResponseBody

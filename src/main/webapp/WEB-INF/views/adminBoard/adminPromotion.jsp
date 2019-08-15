@@ -46,16 +46,16 @@
                     <th>Delete</th>
                   </tr>
                 </tfoot>
-                <tbody>
-                  <c:forEach  items="${promoList}" var = "list" varStatus="count">
+                <tbody id="promoData">
+                	<c:forEach items="${promoList}" var="list" varStatus="count" >
                   <tr>
-                    <td>	${count.count}</td>
+                  <td>	${count.count}</td>
                     <td>	${list.title}</td>
                     <td>	${list.file}<br>
                     	<img alt="" src="/resources/imgUpload/${list.imgNm}" style="width: 100px;">
                     </td>
-                    <td>
-                    	<select name="priority" id="priority" value="${list.priority}" >
+                 <td>
+                    	<select name="priority" id="priority">
 						  <option value="1" <c:if test="${list.priority eq 1}">selected</c:if>>1</option>
 						  <option value="2" <c:if test="${list.priority eq 2}">selected</c:if>>2</option>
 						  <option value="3" <c:if test="${list.priority eq 3}">selected</c:if>>3</option>
@@ -71,11 +71,12 @@
 	                    <input type="radio" name="${list.idx}"  value="inactive" style="margin: 5px;" <c:if  test="${list.status eq 0}">checked="checked"</c:if>/>Inactive 
 	                </td>
                     <td>	<button class="btn btn-primary" data-toggle="modal" data-target="#editPromotion"  
-                    data-edit="${list.idx},${list.title},${list.priority},${list.status},${list.price}, ${list.content},${list.file},${list.imgNm}, ${list.uuid},${list.start},${list.end}" >Edit</button></td>
+                   <%--  data-edit="${list.idx},${list.title},${list.priority},${list.status},${list.price}, ${list.content},${list.file},${list.imgNm}, ${list.uuid},${list.start},${list.end}"  --%>
+                    data-edit="${list.idx}"  >Edit</button></td>
                     <td>	${list.createdAt}</td>
-                    <td>	<i class="fa fa-trash" aria-hidden="true" style="color: red; "></i></td>
+                    <td>	<i class="fa fa-trash" aria-hidden="true" style="color: red; "></i></td> 
                   </tr>
-          		</c:forEach>
+                	</c:forEach>
                 </tbody>
               </table>
             </div>
@@ -87,11 +88,37 @@
 <jsp:include page="./adminModal/addPromotion.jsp"></jsp:include>
 <jsp:include page="./adminModal/editPromotion.jsp"></jsp:include>
 <script>
+
+
+//TODO seclect change
+$('#slctColors').change(function() {
+    var value = $(this).val();
+    $(this).css('color', value);
+});
+
+// 프로모션 수정 모달에 값 전달 
 $('#editPromotion').on('show.bs.modal', function (event) {
-	  var button = $(event.relatedTarget) // Button that triggered the modal
-	  var recipient = button.data('edit') 
+	  var button = $(event.relatedTarget) 	// Button that triggered the modal
+	  var index = button.data('edit');
+
+	  //jstl에서 받은 index로 js로받은 데이터와 비교하여 같으면,수정 모달창에 입력한다. 
+	var data = ${jsonPromo};
+	for (var key in data) {
+	     if (data.hasOwnProperty(key)) {
+	    	 	if(data[key].idx == index){
+	    	 		$("#editTitle").val(data[key].promo_title);
+	    	 		$("#editContent").val(data[key].promo_content);
+	    	 		$("#editEndDate").val(data[key].end_date);
+	    	 		$("#editStartDate").val(data[key].start_date);
+	    	 		$("#editPriority").val(data[key].priority);
+	    	 		$("#editPrice").val(data[key].promo_price);
+	    	 		//$("#editFileName").val(data[key].promo_userFile);
+	    	 		//status
+	    	 	}
+	     }
+	}
+
 	  
-	 console.log(recipient);
 });
 
 </script>

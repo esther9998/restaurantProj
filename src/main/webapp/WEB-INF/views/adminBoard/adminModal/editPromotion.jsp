@@ -28,15 +28,15 @@
                     </div>
                     <div class=" col-md-3">
                     	<label for="" class="label" style="display: block;">Status</label>
-                    	<input type="radio" name="editStatus" value="active" style="margin: 5px;">active
-                    	<input type="radio" name="editStatus" value="inactive" style="margin: 5px;">inactive
+                    	<input type="radio" id="editStatus" name="editStatus" value="active" style="margin: 5px;">active
+                    	<input type="radio" id="editStatus" name="editStatus" value="inactive" style="margin: 5px;">inactive
                     </div>
                      </div>
                <!--  가격 -->
 			<div class="row mb-4">
                     <div class="col-md-6">
                       <label for="" class="label">Price</label>
-                        <input type="text" class="form-control" name="eidtPrice" placeholder="Promotion price">
+                        <input type="text" class="form-control" id="editPrice" name="editPrice" placeholder="Promotion price">
                     </div>
                     	
                <!--  이미지 업로드 -->
@@ -44,8 +44,8 @@
 						<label for="" class="label">Upload Image</label>
 						<div class="input-group mb-3">
 						<div class="custom-file">
-						    <input type="file" name="editFile" id="file" class="custom-file-input">
-						    <label  id="editFilename" class="custom-file-label" for="inputGroupFile02">Choose file</label>
+						    <input type="file" name="editFile" id="editFileName" class="custom-file-input">
+						    <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
 						  </div>
 						<!--   <div class="input-group-append">
 						    <input class="input-group-text" id=""  type="submit">
@@ -57,7 +57,7 @@
                   <div class="row mb-4">
                   <div class="col-md-12">
                       <label for="promo_title" class="label">Contents</label>
-                        <textarea cols="10" rows="5" class="form-control" name="editContent"placeholder="" ></textarea>
+                        <textarea cols="10" rows="5" class="form-control" id="editContent" name="editContent"placeholder="" ></textarea>
                     </div>
                     </div>
                   
@@ -65,11 +65,11 @@
 				<div class="row mb-4">
                     <div class="col-md-6">
                       <label for="date" class="label">Start Date</label>
-                        <input type="text" class="form-control" name="editStartDate" id="startDate" placeholder="format : YYYY-MM-DD">
+                        <input type="text" class="form-control" name="editStartDate" id="editStartDate" placeholder="format : YYYY-MM-DD">
                     </div>
                      <div class="col-md-6">
                       <label for="date" class="label">End Date </label>
-                        <input type="text" class="form-control" name="editEndDate" id="endDate" placeholder="format : YYYY-MM-DD">
+                        <input type="text" class="form-control" name="editEndDate" id="editEndDate" placeholder="format : YYYY-MM-DD">
                     </div>
                   </div>
                   
@@ -90,14 +90,6 @@
 </div>
 
 <script>
-function editData(idx, title, priority, status, price, content, file, imgNm, uuid, start, end) {
-	//${list.idx},${list.title},${list.priority},${list.status},${list.price}, ${list.content},${list.file},${list.imgNm}, ${list.uuid}
-	console.log("idx: "+idx,+"title: "+ title, +"priority: "+priority, +"status: "+status, +"price: "+price,+"content: "+ content,+"file: "+ file,+"imgNm: "+ imgNm, +"uuid: "+uuid, +"start: "+start, +"end: "+end);
-	
-
-	$("#editTitle").val(title);
-}
-
 function sendPromotion() {
 	
     //preventDefault 는 기본으로 정의된 이벤트를 작동하지 못하게 하는 메서드이다. submit을 막음
