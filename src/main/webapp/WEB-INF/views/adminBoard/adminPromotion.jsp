@@ -90,13 +90,13 @@
 <script>
 
 
-//TODO seclect change
+//TODO seclect change on adminPromotion.jsp
 $('#slctColors').change(function() {
     var value = $(this).val();
     $(this).css('color', value);
 });
 
-// 프로모션 수정 모달에 값 전달 
+// 프로모션 수정 모달에 값 전달 (editPromotion.jsp)
 $('#editPromotion').on('show.bs.modal', function (event) {
 	  var button = $(event.relatedTarget) 	// Button that triggered the modal
 	  var index = button.data('edit');
@@ -105,15 +105,27 @@ $('#editPromotion').on('show.bs.modal', function (event) {
 	var data = ${jsonPromo};
 	for (var key in data) {
 	     if (data.hasOwnProperty(key)) {
+	    	 alert(	data[key].promo_userFile);
 	    	 	if(data[key].idx == index){
+	    	 		$("#indexOfOne").val(data[key].idx);
 	    	 		$("#editTitle").val(data[key].promo_title);
 	    	 		$("#editContent").val(data[key].promo_content);
 	    	 		$("#editEndDate").val(data[key].end_date);
 	    	 		$("#editStartDate").val(data[key].start_date);
 	    	 		$("#editPriority").val(data[key].priority);
 	    	 		$("#editPrice").val(data[key].promo_price);
-	    	 		//$("#editFileName").val(data[key].promo_userFile);
-	    	 		//status
+	    	 		$("#editFileName").text(data[key].promo_userFile);
+	    	 		$("#editImgNm").val(data[key].promo_imgNm);
+	    	 		$("#editUuid").val(data[key].promo_uuid);
+	    	 //		$("#editFile").text(data[key].promo_uuid);
+	    	 		
+	    	 		
+	    	 		if (data[key].status == '1') {
+	    	 			$("input:radio[id ='editStatus']:input[value='active']").attr("checked", true);
+					}else{
+	    	 			$("input:radio[id ='editStatus']:input[value='inactive']").attr("checked", true);
+					}
+	    	 		
 	    	 	}
 	     }
 	}
