@@ -28,8 +28,8 @@
                     </div>
                     <div class=" col-md-3">
                     	<label for="" class="label" style="display: block;">Status</label>
-                    	<input type="radio" name="status" value="active" style="margin: 5px;">active
-                    	<input type="radio" name="status" value="inactive" style="margin: 5px;">inactive
+                    	<input type="radio" name="status" value="1" style="margin: 5px;">active
+                    	<input type="radio" name="status" value="0" style="margin: 5px;">inactive
                     </div>
                      </div>
                <!--  가격 -->

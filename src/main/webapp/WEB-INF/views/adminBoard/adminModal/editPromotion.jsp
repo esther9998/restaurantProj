@@ -16,7 +16,8 @@
       <div class="modal-body">
        <div class="row justify-content-center">
               <div class="col-md-10 form-wrap">
-                <form id="promotionForm" enctype="multipart/form-data">
+                <form id="editPromotionForm" enctype="multipart/form-data">
+                <input type="text" name="editIdx" id="editIdx" style="display: none;">
                   <div class="row mb-4">
                     <div class=" col-md-6">
                       <label for="promo_title" class="label">Title</label>
@@ -28,8 +29,8 @@
                     </div>
                     <div class=" col-md-3">
                     	<label for="" class="label" style="display: block;">Status</label>
-                    	<input type="radio" id="editStatus" name="editStatus" value="active" style="margin: 5px;">active
-                    	<input type="radio" id="editStatus" name="editStatus" value="inactive" style="margin: 5px;">inactive
+                    	<input type="radio" name="editStatus" value="1" style="margin: 5px;">active
+                    	<input type="radio" name="editStatus" value="0" style="margin: 5px;">inactive
                     </div>
                      </div>
                <!--  가격 -->
@@ -44,8 +45,8 @@
 						<label for="" class="label">Upload Image</label>
 						<div class="input-group mb-3">
 						<div class="custom-file">
-						    <input type="file" name="editFile" id="editFileName" class="custom-file-input">
-						    <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+						    <input type="file" name="editFile" id="editFile" class="custom-file-input" >
+						    <label class="custom-file-label" id="editFileName" for="inputGroupFile02">Choose file</label>
 						  </div>
 						<!--   <div class="input-group-append">
 						    <input class="input-group-text" id=""  type="submit">
@@ -73,14 +74,10 @@
                     </div>
                   </div>
                   
-                  <!-- Smart Editor -->
-              <!--     <textarea name="ir1" id="ir1" rows="10" cols="100">에디터에 기본으로 삽입할 글(수정 모드)이 없다면 이 value 값을 지정하지 않으시면 됩니다.</textarea>
-                   -->
-               <!--      <input  type="submit" style="display: hidden;" onclick="submitForm()" > -->
                 </form>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button class="btn btn-primary" onclick="javascript:sendPromotion();">Save</button>
+        <button class="btn btn-primary" onclick="javascript:sendEditPromotion();">Save</button>
       </div>
               </div>
             </div>
@@ -90,18 +87,17 @@
 </div>
 
 <script>
-function sendPromotion() {
-	
+function sendEditPromotion() {
     //preventDefault 는 기본으로 정의된 이벤트를 작동하지 못하게 하는 메서드이다. submit을 막음
     // 유효성 검사  
      var re = /^[0-9]+$/;
-        if(!re.test($("#priority").val())) {
+        if(!re.test($("#editPriority").val())) {
                alert("Input ONLY number!!");
-               $("#priority").val("");
-               $("#priority").focus();
+               $("#editPriority").val("");
+               $("#editPriority").focus();
                return;
         }
-        	if ($("#title").val() ==""||$("#status").val() ==""||$("#priority").val() ==""||$("#price").val() ==""||$("#contents").val() ==""||$("#file").val() =="") {
+        	if ($("#editTitle").val() ==""||$("#editStatus").val() ==""||$("#editPriority").val() ==""||$("#editPrice").val() ==""||$("#editContents").val() ==""||$("#editFileName").text() =="") {
         		alert("Please fillout.");
         		return;
 			} 
@@ -109,8 +105,8 @@ function sendPromotion() {
         	//날짜 유효성 검사 
         	try{
         		var pattern = /[0-9]{4}-[0-9]{2}-[0-9]{2}/;
-        		 var startDate = pattern.test($("#startDate").val());
-        		 var endDate = pattern.test($("#endDate").val());
+        		 var startDate = pattern.test($("#editStartDate").val());
+        		 var endDate = pattern.test($("#editEndDate").val());
 	        		if(!startDate) {
 	            		alert("The startDate form is not correct.")
 					return;
@@ -122,16 +118,14 @@ function sendPromotion() {
                 return  false;
               }
     
-    var form = $('#promotionForm')[0];
+    var form = $('#editPromotionForm')[0];
     var data = new FormData(form);
 
-   // disabled the submit button
-    $("#promotionFormSubmit").prop("disabled", true);
    
     $.ajax({
         type: "POST",
         enctype: 'multipart/form-data',
-        url: "/adminBoard/promotionForm",
+        url: "/adminBoard/editPromotionForm",
         data: data,
         processData: false,
         contentType: false,
@@ -149,19 +143,20 @@ function sendPromotion() {
 }
 
 /* 선택한  파일명 input에 입력  */
-$( document ).ready(function() {
-	  $('input[type="file"]').change(function() {
-	    if ($(this).val()) {
-	    	error=false;
+	$( document ).ready(function() {
+	  $('input[name="editFile"]').change(function() {
+  	if ($(this).val()) {
+	    		error=false;
 	         var filename = $(this).val();
 	     	var afterStr = filename.split( "\\" );
-	         $('#editFilename').text(afterStr[afterStr.length-1]);
-	    }
+	         $('#editFileName').text(afterStr[afterStr.length-1]);
+	         $('#editFile').text(afterStr[afterStr.length-1]);
+   }
 	    if (error) {
 	        alert("fileupload error occured.")
 	      }
 	  });
-	});
+	}); 
 
 		
 </script>

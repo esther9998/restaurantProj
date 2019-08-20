@@ -3,6 +3,7 @@ package com.esther.adminBoard;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -81,7 +82,40 @@ public class AdminPromotion {
 	public void promotionForm(MultipartHttpServletRequest request, @RequestParam HashMap<String, Object> params)
 			throws IOException {
 		MultipartFile mFile = request.getFile("file");
+		
+		// 서버 이미지저장 폴더 path
+		String folderPath = request.getSession().getServletContext().getRealPath("/");
 
+		ImageUpload up = new ImageUpload();
+		PromotionVO fileInfo = up.imgUpload(mFile, folderPath);
+		System.out.println("업로드 결과 : " + fileInfo + " // 파라미터:" + params);
+
+		// db저장 (파일명, 서버파일명)
+		PromotionVO vo = new PromotionVO();
+		vo.setPriority(Integer.parseInt((String)params.get("status")));
+		vo.setPriority(params.get("priority"));
+		vo.setPromo_title((String) params.get("title"));
+		vo.setPromo_price((String) params.get("price"));
+		vo.setPromo_content((String) params.get("content"));
+		vo.setPromo_imgNm(fileInfo.getPromo_imgNm());
+		vo.setPromo_uuid(fileInfo.getPromo_uuid());
+		vo.setPromo_userFile(mFile.getOriginalFilename());
+		vo.setStart_date((String) params.get("startDate"));
+		vo.setEnd_date((String) params.get("endDate"));
+
+		vo.toString();
+
+		int result;
+		// 데이터값 조회
+		result = sqlSession.insert("adminMapper.insertPromotion", vo);
+		System.out.println("결과가 1이면 데이터 삽입 성공 : " + result);
+
+	}
+	@RequestMapping("/adminBoard/editPromotionForm")
+	@ResponseBody
+	public void editPromotionForm(MultipartHttpServletRequest request, @RequestParam HashMap<String, Object> params)
+			throws IOException {
+		MultipartFile mFile = request.getFile("editFile");
 		// 서버 이미지저장 폴더 path
 		String folderPath = request.getSession().getServletContext().getRealPath("/");
 		System.out.println(folderPath);
@@ -92,27 +126,25 @@ public class AdminPromotion {
 
 		// db저장 (파일명, 서버파일명)
 		PromotionVO vo = new PromotionVO();
-		if (params.get("status") == "active") {
-			vo.setStatus(1);
-		} else {
-			vo.setStatus(0);
-		}
-		vo.setPriority(params.get("priority"));
-		vo.setPromo_title((String) params.get("title"));
-		vo.setPromo_price((String) params.get("price"));
-		vo.setPromo_content((String) params.get("content"));
+		vo.setIdx(Integer.parseInt((String)params.get("editIdx")));
+		vo.setStatus(Integer.parseInt((String)params.get("editStatus")));
+		vo.setPriority(Integer.parseInt((String)params.get("editPriority")));
+		vo.setPromo_title((String) params.get("editTitle"));
+		vo.setPromo_price((String) params.get("editPrice"));
+		vo.setPromo_content((String) params.get("editContent"));
 		vo.setPromo_imgNm(fileInfo.getPromo_imgNm());
 		vo.setPromo_uuid(fileInfo.getPromo_uuid());
-		vo.setPromo_userFile((String) params.get("file"));
-		vo.setStart_date((String) params.get("startDate"));
-		vo.setEnd_date((String) params.get("endDate"));
+		//vo.setPromo_userFile(mFile.getOriginalFilename());
+		//vo.setPromo_userFile((String) params.get("editFile"));
+		vo.setStart_date((String) params.get("editStartDate"));
+		vo.setEnd_date((String) params.get("editEndDate"));
 
 		vo.toString();
 
 		int result;
 		// 데이터값 조회
-		result = sqlSession.insert("adminMapper.insertPromotion", vo);
-		System.out.println("결과가 1이면 데이터 삽입 성공 : " + result);
+		result = sqlSession.update("adminMapper.updatePromotion", vo);
+		System.out.println("결과가 1이면 데이터 업데이트 성공 : " + result);
 
 	}
 }

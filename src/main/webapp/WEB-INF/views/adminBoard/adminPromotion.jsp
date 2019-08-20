@@ -56,6 +56,7 @@
                     </td>
                  <td>
                     	<select name="priority" id="priority">
+						  <option value="0" <c:if test="${list.priority eq 0}">selected</c:if>>0</option>
 						  <option value="1" <c:if test="${list.priority eq 1}">selected</c:if>>1</option>
 						  <option value="2" <c:if test="${list.priority eq 2}">selected</c:if>>2</option>
 						  <option value="3" <c:if test="${list.priority eq 3}">selected</c:if>>3</option>
@@ -67,8 +68,8 @@
 						</select>
                     	</td>
                     <td>
-	                    	<input type="radio" name="${list.idx}" value="active" style="margin: 5px;" <c:if  test="${list.status eq 1}"> checked="checked"</c:if>/>ative <br>
-	                    <input type="radio" name="${list.idx}"  value="inactive" style="margin: 5px;" <c:if  test="${list.status eq 0}">checked="checked"</c:if>/>Inactive 
+	                    	<input type="radio" name="${list.idx }" value="1" style="margin: 5px;" <c:if  test="${list.status eq 1}"> checked="checked"</c:if>/>active <br>
+	                    <input type="radio" name="${list.idx }"   value="0" style="margin: 5px;" <c:if  test="${list.status eq 0}">checked="checked"</c:if>/>Inactive 
 	                </td>
                     <td>	<button class="btn btn-primary" data-toggle="modal" data-target="#editPromotion"  
                    <%--  data-edit="${list.idx},${list.title},${list.priority},${list.status},${list.price}, ${list.content},${list.file},${list.imgNm}, ${list.uuid},${list.start},${list.end}"  --%>
@@ -101,18 +102,20 @@ $('#editPromotion').on('show.bs.modal', function (event) {
 	  var button = $(event.relatedTarget) 	// Button that triggered the modal
 	  var index = button.data('edit');
 
-	  //jstl에서 받은 index로 js로받은 데이터와 비교하여 같으면,수정 모달창에 입력한다. 
+	  //jstl에서 받은 idx로 js로받은 데이터와 비교하여 같으면,수정 모달창에 입력한다. 
 	var data = ${jsonPromo};
 	for (var key in data) {
 	     if (data.hasOwnProperty(key)) {
 	    	 	if(data[key].idx == index){
+	    	 		$("#editIdx").val(data[key].idx);
 	    	 		$("#editTitle").val(data[key].promo_title);
 	    	 		$("#editContent").val(data[key].promo_content);
 	    	 		$("#editEndDate").val(data[key].end_date);
 	    	 		$("#editStartDate").val(data[key].start_date);
 	    	 		$("#editPriority").val(data[key].priority);
 	    	 		$("#editPrice").val(data[key].promo_price);
-	    	 		//$("#editFileName").val(data[key].promo_userFile);
+	    	 		$('input:radio[name="editStatus"]:input[value='+data[key].status+']').attr("checked", true);
+	    	 		$("#editFileName").text(data[key].promo_userFile);
 	    	 		//status
 	    	 	}
 	     }
