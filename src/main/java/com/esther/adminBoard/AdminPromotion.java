@@ -115,27 +115,42 @@ public class AdminPromotion {
 	@ResponseBody
 	public void editPromotionForm(MultipartHttpServletRequest request, @RequestParam HashMap<String, Object> params)
 			throws IOException {
-		MultipartFile mFile = request.getFile("editFile");
+		PromotionVO vo = new PromotionVO();
+		// TODO :  만약 파일명이 다른거라면 새롭게 업로드. if 설정, sql 
+
 		// 서버 이미지저장 폴더 path
 		String folderPath = request.getSession().getServletContext().getRealPath("/");
 		System.out.println(folderPath);
-
-		ImageUpload up = new ImageUpload();
-		PromotionVO fileInfo = up.imgUpload(mFile, folderPath);
-		System.out.println("업로드 결과 : " + fileInfo + " // 파라미터:" + params);
+		PromotionVO fileInfo = null;
+		MultipartFile mFile = request.getFile("editFile");
+		System.out.println("mfile 결과 : "+mFile.isEmpty()); 
+		if(mFile.isEmpty()) {
+			vo.setPromo_imgNm((String) params.get("editImgNm"));
+			vo.setPromo_uuid((String)params.get("editUuid"));
+		}else {
+			ImageUpload up = new ImageUpload();
+			fileInfo = up.imgUpload(mFile, folderPath);
+			System.out.println("업로드 결과 : " + fileInfo + " // 파라미터:" + params);
+			
+			vo.setPromo_imgNm(fileInfo.getPromo_imgNm());
+			vo.setPromo_uuid(fileInfo.getPromo_uuid());
+		}
+		
 
 		// db저장 (파일명, 서버파일명)
-		PromotionVO vo = new PromotionVO();
-		vo.setIdx(Integer.parseInt((String)params.get("editIdx")));
-		vo.setStatus(Integer.parseInt((String)params.get("editStatus")));
-		vo.setPriority(Integer.parseInt((String)params.get("editPriority")));
+		if (params.get("status") == "active") {
+			vo.setStatus(1);
+		} else {
+			vo.setStatus(0);
+		}
+	//	Object test = params.get("indexOfOne");
+		vo.setIdx(Integer.valueOf((String) params.get("indexOfOne")));
+		vo.setPriority(params.get("editPriority"));
 		vo.setPromo_title((String) params.get("editTitle"));
 		vo.setPromo_price((String) params.get("editPrice"));
 		vo.setPromo_content((String) params.get("editContent"));
-		vo.setPromo_imgNm(fileInfo.getPromo_imgNm());
-		vo.setPromo_uuid(fileInfo.getPromo_uuid());
-		//vo.setPromo_userFile(mFile.getOriginalFilename());
-		//vo.setPromo_userFile((String) params.get("editFile"));
+		vo.setPromo_userFile((String) params.get("editFileName"));
+		System.out.println("업로드 결과 : " + params.get("editFileName") );
 		vo.setStart_date((String) params.get("editStartDate"));
 		vo.setEnd_date((String) params.get("editEndDate"));
 
@@ -144,7 +159,7 @@ public class AdminPromotion {
 		int result;
 		// 데이터값 조회
 		result = sqlSession.update("adminMapper.updatePromotion", vo);
-		System.out.println("결과가 1이면 데이터 업데이트 성공 : " + result);
+		System.out.println("결과가 1이면 데이터 삽입 성공 : " + result);
 
 	}
 }
