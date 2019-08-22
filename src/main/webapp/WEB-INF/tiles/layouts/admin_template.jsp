@@ -139,7 +139,7 @@
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <h6 class="dropdown-header">Pages:</h6>
           <a class="dropdown-item" href="/adminBoard/promotion">Promotions</a>
-          <a class="dropdown-item" href="#">Menu</a>
+          <a class="dropdown-item" href="/adminBoard/menu">Menu</a>
          <!--  <div class="dropdown-divider"></div>
           <h6 class="dropdown-header">Other Pages:</h6>
           <a class="dropdown-item" href="404.html">404 Page</a>

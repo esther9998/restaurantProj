@@ -144,7 +144,7 @@ public class AdminPromotion {
 			vo.setStatus(0);
 		}
 	//	Object test = params.get("indexOfOne");
-		vo.setIdx(Integer.valueOf((String) params.get("indexOfOne")));
+		vo.setIdx(Integer.valueOf((String) params.get("editIdx")));
 		vo.setPriority(params.get("editPriority"));
 		vo.setPromo_title((String) params.get("editTitle"));
 		vo.setPromo_price((String) params.get("editPrice"));
@@ -158,8 +158,8 @@ public class AdminPromotion {
 
 		int result;
 		// 데이터값 조회
-		result = sqlSession.update("adminMapper.updatePromotion", vo);
-		System.out.println("결과가 1이면 데이터 삽입 성공 : " + result);
+	//	result = sqlSession.update("adminMapper.updatePromotion", vo);
+	//	System.out.println("결과가 1이면 데이터 삽입 성공 : " + result);
 
 	}
 }

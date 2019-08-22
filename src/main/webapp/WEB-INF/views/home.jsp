@@ -149,7 +149,7 @@
 			<!-- .section -->
 
 <script>
-
+/********************************* Promotion 데이터 가져오기 ******************************************/
 var data = ${jsonPromo};
 /* alert(data);
 var t = $("[class=owl-item]");
@@ -160,7 +160,7 @@ for (var key in data) {
     	 
     	 var cloneElements = $('.item').clone();
     	 var cc = cloneElements.css('display','block');
-    	 alert(cc);
+    //	 alert(cc);
 	   	cloneElements.appendTo('.owl-carousel');
     	 // 변수 cloneElements를 만들어 복사된 요소들을 저장
 
