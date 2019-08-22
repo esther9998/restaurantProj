@@ -24,7 +24,8 @@
 		<script src="/resources/js/slideImg.js"></script>
 		<script>
 		function main() {
-
+			$('.owl-carousel').owlCarousel();
+			
 			(function () {
 			   'use strict';
 
