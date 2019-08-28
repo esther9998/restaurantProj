@@ -34,5 +34,20 @@
     <select id="selectPromotion"  resultType="PromotionVO" >
     SELECT * FROM promotion;
     </select>
+    <update id="updatePromotion"  parameterType="PromotionVO"  >
+    UPDATE promotion 
+    SET priority = #{priority},
+	    status =   #{status},
+	    promo_title = #{promo_title},
+	    promo_price =  #{promo_price},
+	    promo_content =#{promo_content}, 
+	    promo_uuid =#{promo_uuid}, 
+	    promo_imgNm =#{promo_imgNm}, 
+	    promo_userFile =#{promo_userFile}, 
+	    start_date =#{start_date}, 
+	    end_date = #{end_date}, 
+	    update_at = now()
+	WHERE idx = #{idx}					
+    </update>
     
 </mapper>

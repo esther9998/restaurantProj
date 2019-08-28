@@ -91,13 +91,13 @@
 <script>
 
 
-//TODO seclect change
+//TODO seclect change on adminPromotion.jsp
 $('#slctColors').change(function() {
     var value = $(this).val();
     $(this).css('color', value);
 });
 
-// 프로모션 수정 모달에 값 전달 
+// 프로모션 수정 모달에 값 전달 (editPromotion.jsp)
 $('#editPromotion').on('show.bs.modal', function (event) {
 	  var button = $(event.relatedTarget) 	// Button that triggered the modal
 	  var index = button.data('edit');
@@ -106,6 +106,7 @@ $('#editPromotion').on('show.bs.modal', function (event) {
 	var data = ${jsonPromo};
 	for (var key in data) {
 	     if (data.hasOwnProperty(key)) {
+	    	 alert(	data[key].promo_userFile);
 	    	 	if(data[key].idx == index){
 	    	 		$("#editIdx").val(data[key].idx);
 	    	 		$("#editTitle").val(data[key].promo_title);
@@ -117,6 +118,12 @@ $('#editPromotion').on('show.bs.modal', function (event) {
 	    	 		$('input:radio[name="editStatus"]:input[value='+data[key].status+']').attr("checked", true);
 	    	 		$("#editFileName").text(data[key].promo_userFile);
 	    	 		//status
+	    	 		$("#editFileName").text(data[key].promo_userFile);
+	    	 		$("#editImgNm").val(data[key].promo_imgNm);
+	    	 		$("#editUuid").val(data[key].promo_uuid);
+	    	 //		$("#editFile").text(data[key].promo_uuid);
+	    	 		
+	    	 		
 	    	 	}
 	     }
 	}

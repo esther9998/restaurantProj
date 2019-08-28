@@ -17,7 +17,11 @@
        <div class="row justify-content-center">
               <div class="col-md-10 form-wrap">
                 <form id="editPromotionForm" enctype="multipart/form-data">
+<<<<<<< HEAD
                 <input type="text" name="editIdx" id="editIdx" style="display: none;">
+=======
+                <input id="indexOfOne"  name="indexOfOne"  style="display: none;">
+>>>>>>> refs/remotes/origin/master
                   <div class="row mb-4">
                     <div class=" col-md-6">
                       <label for="promo_title" class="label">Title</label>
@@ -45,8 +49,13 @@
 						<label for="" class="label">Upload Image</label>
 						<div class="input-group mb-3">
 						<div class="custom-file">
+<<<<<<< HEAD
 						    <input type="file" name="editFile" id="editFile" class="custom-file-input" >
 						    <label class="custom-file-label" id="editFileName" for="inputGroupFile02">Choose file</label>
+=======
+						    <input type="file" name="editFile" id="editFile" class="custom-file-input">
+						    <label id="editFileName"  class="custom-file-label" for="editFile">Choose file</label>
+>>>>>>> refs/remotes/origin/master
 						  </div>
 						<!--   <div class="input-group-append">
 						    <input class="input-group-text" id=""  type="submit">
@@ -74,6 +83,11 @@
                     </div>
                   </div>
                   
+<<<<<<< HEAD
+=======
+                  <input style="display: none;"  id="editImgNm"  name="editImgNm">
+                  <input style="display: none;"  id="editUuid" name="editUuid">
+>>>>>>> refs/remotes/origin/master
                 </form>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -88,6 +102,10 @@
 
 <script>
 function sendEditPromotion() {
+<<<<<<< HEAD
+=======
+	
+>>>>>>> refs/remotes/origin/master
     //preventDefault 는 기본으로 정의된 이벤트를 작동하지 못하게 하는 메서드이다. submit을 막음
     // 유효성 검사  
      var re = /^[0-9]+$/;
@@ -97,10 +115,14 @@ function sendEditPromotion() {
                $("#editPriority").focus();
                return;
         }
+<<<<<<< HEAD
         	if ($("#editTitle").val() ==""||$("#editStatus").val() ==""||$("#editPriority").val() ==""||$("#editPrice").val() ==""||$("#editContents").val() ==""||$("#editFileName").text() =="") {
+=======
+        	/* if ($("#editTitle").val() ==""||$("#editStatus").val() ==""||$("#editPriority").val() ==""||$("#editPrice").val() ==""||$("#editContents").val() ==""||$("#editFileName").val() =="") {
+>>>>>>> refs/remotes/origin/master
         		alert("Please fillout.");
         		return;
-			} 
+			}  */
         	
         	//날짜 유효성 검사 
         	try{
@@ -120,8 +142,17 @@ function sendEditPromotion() {
     
     var form = $('#editPromotionForm')[0];
     var data = new FormData(form);
+<<<<<<< HEAD
 
    
+=======
+    
+	//Form data 디버깅 
+  		for(var item of data.entries()) {
+    	  alert(item [0]+ ', '+ item [1]); // key, value를 각각 출력
+    	} ; 
+    	
+>>>>>>> refs/remotes/origin/master
     $.ajax({
         type: "POST",
         enctype: 'multipart/form-data',
@@ -143,15 +174,29 @@ function sendEditPromotion() {
 }
 
 /* 선택한  파일명 input에 입력  */
+<<<<<<< HEAD
 	$( document ).ready(function() {
 	  $('input[name="editFile"]').change(function() {
   	if ($(this).val()) {
 	    		error=false;
+=======
+$( document ).ready(function() {
+	  $('input[id="editFile"]').change(function() {
+	    if ($("#editFileName").text()) {
+	    	
+	    	error=false;
+>>>>>>> refs/remotes/origin/master
 	         var filename = $(this).val();
 	     	var afterStr = filename.split( "\\" );
+<<<<<<< HEAD
 	         $('#editFileName').text(afterStr[afterStr.length-1]);
 	         $('#editFile').text(afterStr[afterStr.length-1]);
    }
+=======
+	         $('#editFileName').text("");
+	         $('#editFileName').text(afterStr[afterStr.length-1]);
+	    }
+>>>>>>> refs/remotes/origin/master
 	    if (error) {
 	        alert("fileupload error occured.")
 	      }

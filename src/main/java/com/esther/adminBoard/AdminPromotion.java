@@ -161,5 +161,6 @@ public class AdminPromotion {
 	//	result = sqlSession.update("adminMapper.updatePromotion", vo);
 	//	System.out.println("결과가 1이면 데이터 삽입 성공 : " + result);
 
+
 	}
 }
