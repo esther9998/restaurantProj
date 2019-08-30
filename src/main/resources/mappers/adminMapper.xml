@@ -3,11 +3,14 @@
 
 
 <mapper namespace="adminMapper">
+  <!-- SELECT -->
     <select id="selectAdmin" resultType="AdminVO" parameterType="AdminVO">
         SELECT * FROM adminAccount 
         WHERE
 		admin_email= #{admin_email} and admin_pw = #{admin_pw}
     </select>
+    
+    <!-- INSERT -->
     <insert id="insertAdmin" parameterType="AdminVO" > 
     INSERT into adminAccount(admin_name, admin_pw, admin_lebel, admin_email, admin_register)
     values(
@@ -31,6 +34,8 @@
 		    now()
     	)
     </insert>
+    
+   <!-- UPDATE -->
     <select id="selectPromotion"  resultType="PromotionVO" >
     SELECT * FROM promotion;
     </select>
@@ -49,5 +54,18 @@
 	    update_at = now()
 	WHERE idx = #{idx}					
     </update>
+    <update id="updatePromotionStatus"  parameterType="PromotionVO"  >
+    UPDATE promotion SET priority = #{priority} WHERE idx = #{idx}		
+    </update>
+    <update id="updatePromotionPriority"  parameterType="PromotionVO"  >
+     UPDATE promotion SET status = #{status} WHERE idx = #{idx}		
+    </update>
+    
+    
+      <!-- DELETE -->
+    <delete id="deletePromotion" parameterType="PromotionVO"  >
+    DELETE FROM promotion WHERE idx = #{idx}
+    </delete>
+    
     
 </mapper>

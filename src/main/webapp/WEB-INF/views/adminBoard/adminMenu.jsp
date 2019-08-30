@@ -71,9 +71,7 @@
 	                    	<input type="radio" name="${list.idx }" value="1" style="margin: 5px;" <c:if  test="${list.status eq 1}"> checked="checked"</c:if>/>active <br>
 	                    <input type="radio" name="${list.idx }"   value="0" style="margin: 5px;" <c:if  test="${list.status eq 0}">checked="checked"</c:if>/>Inactive 
 	                </td>
-                    <td>	<button class="btn btn-primary" data-toggle="modal" data-target="#editPromotion"  
-                   <%--  data-edit="${list.idx},${list.title},${list.priority},${list.status},${list.price}, ${list.content},${list.file},${list.imgNm}, ${list.uuid},${list.start},${list.end}"  --%>
-                    data-edit="${list.idx}"  >Edit</button></td>
+                    <td>	<button class="btn btn-primary" data-toggle="modal" data-target="#editPromotion"   data-edit="${list.idx}"  >Edit</button></td>
                     <td>	${list.createdAt}</td>
                     <td>	<i class="fa fa-trash" aria-hidden="true" style="color: red; "></i></td> 
                   </tr>

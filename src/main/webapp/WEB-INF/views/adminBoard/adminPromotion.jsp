@@ -55,7 +55,7 @@
                     	<img alt="" src="/resources/imgUpload/${list.imgNm}" style="width: 100px;">
                     </td>
                  <td>
-                    	<select name="priority" id="priority">
+                    	<select name="priority" id="priority" >
 						  <option value="0" <c:if test="${list.priority eq 0}">selected</c:if>>0</option>
 						  <option value="1" <c:if test="${list.priority eq 1}">selected</c:if>>1</option>
 						  <option value="2" <c:if test="${list.priority eq 2}">selected</c:if>>2</option>
@@ -71,11 +71,9 @@
 	                    	<input type="radio" name="${list.idx }" value="1" style="margin: 5px;" <c:if  test="${list.status eq 1}"> checked="checked"</c:if>/>active <br>
 	                    <input type="radio" name="${list.idx }"   value="0" style="margin: 5px;" <c:if  test="${list.status eq 0}">checked="checked"</c:if>/>Inactive 
 	                </td>
-                    <td>	<button class="btn btn-primary" data-toggle="modal" data-target="#editPromotion"  
-                   <%--  data-edit="${list.idx},${list.title},${list.priority},${list.status},${list.price}, ${list.content},${list.file},${list.imgNm}, ${list.uuid},${list.start},${list.end}"  --%>
-                    data-edit="${list.idx}"  >Edit</button></td>
+                    <td>	<button class="btn btn-primary" data-toggle="modal" data-target="#editPromotion"  data-edit="${list.idx}"  >Edit</button></td>
                     <td>	${list.createdAt}</td>
-                    <td>	<i class="fa fa-trash" aria-hidden="true" style="color: red; "></i></td> 
+                    <td>	<i class="fa fa-trash" aria-hidden="true" style="color: red; " data-edit="${list.idx}"  onclick="deletePromotion(${list.idx})"></i></td> 
                   </tr>
                 	</c:forEach>
                 </tbody>
@@ -88,15 +86,29 @@
       <!-- /.container-fluid -->
 <jsp:include page="./adminModal/addPromotion.jsp"></jsp:include>
 <jsp:include page="./adminModal/editPromotion.jsp"></jsp:include>
+
 <script>
+//change priority
+
+	//var numIdx =  $(this).data('num');
+   /*  var value = $(this).val();
+    console.log(numIdx + "dddd")
+     */
+ /*     $(document).ready(function(){
+    		$('#priority').on('change',function() {
+    			 // var value = $(this).val();
+    		    alert( "ddddddd");
+    		}); 
+    	}); */
+    /* $('input:radio[name="editStatus"]:input[value='+data[key].status+']').attr("checked", true);
+    $(this).css('color', value); */
+
+   /*  function changePriority(e) {
+  	  alert( e);
+  } */
 
 
-//TODO seclect change on adminPromotion.jsp
-$('#slctColors').change(function() {
-    var value = $(this).val();
-    $(this).css('color', value);
-});
-
+$(document).ready(function(){
 // 프로모션 수정 모달에 값 전달 (editPromotion.jsp)
 $('#editPromotion').on('show.bs.modal', function (event) {
 	  var button = $(event.relatedTarget) 	// Button that triggered the modal
@@ -106,7 +118,7 @@ $('#editPromotion').on('show.bs.modal', function (event) {
 	var data = ${jsonPromo};
 	for (var key in data) {
 	     if (data.hasOwnProperty(key)) {
-	    	 alert(	data[key].promo_userFile);
+	    //	 alert(	data[key].promo_userFile);
 	    	 	if(data[key].idx == index){
 	    	 		$("#editIdx").val(data[key].idx);
 	    	 		$("#editTitle").val(data[key].promo_title);
@@ -117,18 +129,46 @@ $('#editPromotion').on('show.bs.modal', function (event) {
 	    	 		$("#editPrice").val(data[key].promo_price);
 	    	 		$('input:radio[name="editStatus"]:input[value='+data[key].status+']').attr("checked", true);
 	    	 		$("#editFileName").text(data[key].promo_userFile);
+	    	 		$("#editFileName02").val(data[key].promo_userFile);
 	    	 		//status
-	    	 		$("#editFileName").text(data[key].promo_userFile);
 	    	 		$("#editImgNm").val(data[key].promo_imgNm);
 	    	 		$("#editUuid").val(data[key].promo_uuid);
-	    	 //		$("#editFile").text(data[key].promo_uuid);
 	    	 		
 	    	 		
-	    	 	}
-	     }
-	}
-
-	  
+		    	 	}
+		     }
+		}
+	
+		  
+	});
 });
+
+$('#priority').change(function() {
+	 // var value = $(this).val();
+   alert( "ddddddd");
+}); 
+
+//프로모션 삭제
+function deletePromotion(idx) {
+	  console.log(idx);
+		 $.ajax({
+		        type: "POST",
+		        url: "/adminBoard/promoDelete",
+		        data: idx,
+		        processData: false,
+		        contentType: false,
+		        cache: false,
+		        timeout: 600000,
+		        success: function (data) {
+		        	window.location.href = '/adminBoard/promotion';
+		           // alert("complete");
+		        },
+		        error: function (e) {
+		            console.log("ERROR : ", e);
+		            alert("다시시도 해주세요.");
+		        }
+		    });
+}
+  
 
 </script>

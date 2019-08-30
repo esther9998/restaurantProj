@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -63,12 +64,11 @@ public class AdminPromotion {
 					  map.put("uuid" , vo.getPromo_uuid());
 					  map.put("file" , vo.getPromo_userFile());
 					  map.put("createdAt" , vo.getCreate_at());
-					  System.out.println("///////////////"+ map);
 					  promoList.add(map);
 				  }
 
 		  String jsonPromo = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(list);
-		  System.out.println("jsonPromotion Data ::: "+jsonPromo);
+	//	  System.out.println("jsonPromotion Data ::: "+jsonPromo);
 		
 		mav.addObject("promoList", promoList);
 		mav.addObject("jsonPromo", jsonPromo);
@@ -88,12 +88,13 @@ public class AdminPromotion {
 
 		ImageUpload up = new ImageUpload();
 		PromotionVO fileInfo = up.imgUpload(mFile, folderPath);
-		System.out.println("업로드 결과 : " + fileInfo + " // 파라미터:" + params);
+		System.out.println("업로드 결과 : " + fileInfo);
+		System.out.println("form 파라미터:" + params);
 
 		// db저장 (파일명, 서버파일명)
 		PromotionVO vo = new PromotionVO();
-		vo.setPriority(Integer.parseInt((String)params.get("status")));
-		vo.setPriority(params.get("priority"));
+		vo.setStatus(Integer.parseInt((String)params.get("status")));
+		vo.setPriority(Integer.parseInt((String)params.get("priority")));
 		vo.setPromo_title((String) params.get("title"));
 		vo.setPromo_price((String) params.get("price"));
 		vo.setPromo_content((String) params.get("content"));
@@ -116,7 +117,6 @@ public class AdminPromotion {
 	public void editPromotionForm(MultipartHttpServletRequest request, @RequestParam HashMap<String, Object> params)
 			throws IOException {
 		PromotionVO vo = new PromotionVO();
-		// TODO :  만약 파일명이 다른거라면 새롭게 업로드. if 설정, sql 
 
 		// 서버 이미지저장 폴더 path
 		String folderPath = request.getSession().getServletContext().getRealPath("/");
@@ -130,37 +130,86 @@ public class AdminPromotion {
 		}else {
 			ImageUpload up = new ImageUpload();
 			fileInfo = up.imgUpload(mFile, folderPath);
-			System.out.println("업로드 결과 : " + fileInfo + " // 파라미터:" + params);
 			
 			vo.setPromo_imgNm(fileInfo.getPromo_imgNm());
 			vo.setPromo_uuid(fileInfo.getPromo_uuid());
 		}
+		System.out.println("Form 가져온 파라미터:" + params);
+		System.out.println("수정 이미지 파일 업로드 있을때 : " + fileInfo );
+		System.out.println("- : " + params.get("editPriority") );
 		
 
-		// db저장 (파일명, 서버파일명)
-		if (params.get("status") == "active") {
-			vo.setStatus(1);
-		} else {
-			vo.setStatus(0);
-		}
-	//	Object test = params.get("indexOfOne");
 		vo.setIdx(Integer.valueOf((String) params.get("editIdx")));
-		vo.setPriority(params.get("editPriority"));
+		vo.setPriority(Integer.valueOf((String)params.get("editPriority")));
+		vo.setStatus(Integer.valueOf((String)params.get("editStatus")));
 		vo.setPromo_title((String) params.get("editTitle"));
 		vo.setPromo_price((String) params.get("editPrice"));
 		vo.setPromo_content((String) params.get("editContent"));
-		vo.setPromo_userFile((String) params.get("editFileName"));
-		System.out.println("업로드 결과 : " + params.get("editFileName") );
+		vo.setPromo_userFile((String) params.get("editFileName02"));
 		vo.setStart_date((String) params.get("editStartDate"));
 		vo.setEnd_date((String) params.get("editEndDate"));
+		System.out.println("업데이트할 데이터 : " + vo );
 
 		vo.toString();
 
 		int result;
 		// 데이터값 조회
-	//	result = sqlSession.update("adminMapper.updatePromotion", vo);
-	//	System.out.println("결과가 1이면 데이터 삽입 성공 : " + result);
+		result = sqlSession.update("adminMapper.updatePromotion", vo);
+		System.out.println("결과가 1이면 데이터 삽입 성공 : " + result);
 
 
 	}
+	///////////////////////////////////// 순위 변경
+	@RequestMapping("/adminBoard/promoPriority")
+	@ResponseBody
+	public void promoPriority(MultipartHttpServletRequest request, @RequestParam HashMap<String, Object> params)
+			throws IOException {
+		
+		PromotionVO vo = new PromotionVO();
+		// todo 파라미터 indx , priority 넘기기
+		vo.setIdx(Integer.valueOf((String) params.get("idx")));
+		vo.setPriority(Integer.valueOf((String)params.get("priority")));
+		
+		int result;
+		result = sqlSession.update("adminMapper.updatePromotionPriority",vo);
+		System.out.println("결과가 1이면 데이터 삽입 성공 : " + result);
+		
+	}
+	
+	///////////////////////////////////// 상태 변경
+	@RequestMapping("/adminBoard/promoStatus")
+	@ResponseBody
+	public void promoStatus(MultipartHttpServletRequest request, @RequestParam HashMap<String, Object> params)
+			throws IOException {
+		
+		PromotionVO vo = new PromotionVO();
+		// todo 파라미터 indx, status 넘기기
+		vo.setIdx(Integer.valueOf((String) params.get("editIdx")));
+		vo.setStatus(Integer.valueOf((String)params.get("status")));
+		
+		int result;
+		result = sqlSession.update("adminMapper.updatePromotionStatus",vo);
+		System.out.println("결과가 1이면 데이터 삽입 성공 : " + result);
+		
+		
+	}
+	
+	///////////////////////////////////// 삭제
+	@RequestMapping("/adminBoard/promoDelete")
+	@ResponseBody
+	public void promoDelete(@RequestBody String request)
+			throws IOException {
+		
+		PromotionVO vo = new PromotionVO();
+		// todo 파라미터 indx, status 넘기기
+		vo.setIdx(Integer.valueOf(request));
+		
+		
+		 int result; result = sqlSession.update("adminMapper.deletePromotion",vo);
+		 System.out.println("결과가 1이면 데이터 삽입 성공 : " + result);
+		
+		
+	}
+	
+	
 }

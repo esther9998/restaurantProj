@@ -45,7 +45,7 @@
 						<div class="input-group mb-3">
 						<div class="custom-file">
 						    <input type="file" name="file" id="file" class="custom-file-input">
-						    <label  id="filename" class="custom-file-label" for="inputGroupFile02">Choose file</label>
+						    <label  id="filename" class="custom-file-label" for="inputGroupFile02" >Choose file</label>
 						  </div>
 						<!--   <div class="input-group-append">
 						    <input class="input-group-text" id=""  type="submit">

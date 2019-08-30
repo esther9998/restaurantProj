@@ -137,7 +137,7 @@
     <!-- 클론 모델  -->
     <div class="item clone"  style="display: none;">
                 <div class="media d-block mb-4 text-center ftco-media ftco-animate border-0">
-                  <img id="promoImg" src="" alt="Free Template by Free-Template.co" class="img-fluid promoImg">
+                  <img id="promoImg" src="" alt="Free Template by Free-Template.co" class="img-fluid" style="height: 246px; padding:5px" >
                   <div class="media-body p-md-5 p-4">
                     <h5 class="text-primary  " id="promoPrice">$39.50</h5>
                     <h5 class="mt-0 h4 " id="promoTitle">Beef with Sauce</h5>
@@ -154,9 +154,6 @@
 <script>
 /********************************* Promotion 데이터 가져오기 ******************************************/
 var data = ${jsonPromo};
-/* alert(data);
-var t = $("[class=owl-item]");
-console.log(t); */
 for (var key in data) {
 	
 	  	if (data.hasOwnProperty(key)) {
@@ -168,7 +165,7 @@ for (var key in data) {
 		  	 
 		  	//데이터 입력 (카드 id : 'price#' / 'title#' / 'content#' / 'date#')
 		  	cloneElements.find( $("#promoImg")).attr('id', 'img'+ data[key].idx);
-		  	$('#img'+data[key].idx).attr('src', data[key].promo_uuid);
+		  	$('#img'+data[key].idx).attr('src',  '/resources/imgUpload/'+data[key].promo_imgNm);
 		  	cloneElements.find( $("#promoPrice")).attr('id', 'price'+ data[key].idx);
 		  	$('#price'+data[key].idx).text(data[key].promo_price);
 		  	cloneElements.find( $("#promoTitle")).attr('id', 'title'+ data[key].idx);
@@ -177,8 +174,6 @@ for (var key in data) {
 		  	$('#content'+data[key].idx).text(data[key].promo_content);
     	 
 	    }
-	     
-	     
 }
 	   	
 </script>

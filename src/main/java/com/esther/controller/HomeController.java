@@ -46,7 +46,6 @@ public class HomeController {
 		// Promotion 데이터 가져오기
 		List<PromotionVO> list = sqlSession.selectList("adminMapper.selectPromotion");
 		  String jsonPromo = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(list);
-		  System.out.println("jsonPromotion Data ::: "+jsonPromo);
 		  mav.addObject("jsonPromo", jsonPromo);
 		  
 		  
