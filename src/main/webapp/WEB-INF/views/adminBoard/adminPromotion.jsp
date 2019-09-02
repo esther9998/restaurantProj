@@ -55,7 +55,7 @@
                     	<img alt="" src="/resources/imgUpload/${list.imgNm}" style="width: 100px;">
                     </td>
                  <td>
-                    	<select name="priority" id="priority" >
+                    	<select name="priority" id="priority"  data-idx="${list.idx}">
 						  <option value="0" <c:if test="${list.priority eq 0}">selected</c:if>>0</option>
 						  <option value="1" <c:if test="${list.priority eq 1}">selected</c:if>>1</option>
 						  <option value="2" <c:if test="${list.priority eq 2}">selected</c:if>>2</option>
@@ -68,8 +68,8 @@
 						</select>
                     	</td>
                     <td>
-	                    	<input type="radio" name="${list.idx }" value="1" style="margin: 5px;" <c:if  test="${list.status eq 1}"> checked="checked"</c:if>/>active <br>
-	                    <input type="radio" name="${list.idx }"   value="0" style="margin: 5px;" <c:if  test="${list.status eq 0}">checked="checked"</c:if>/>Inactive 
+	                    <input type="radio" data-idx="${list.idx}" id="status" name="${list.idx }" value="1" style="margin: 5px;" <c:if  test="${list.status eq 1}"> checked="checked"</c:if>/>active <br>
+	                    <input type="radio" data-idx="${list.idx}" id="status"  name="${list.idx }"   value="0" style="margin: 5px;" <c:if  test="${list.status eq 0}">checked="checked"</c:if>/>Inactive 
 	                </td>
                     <td>	<button class="btn btn-primary" data-toggle="modal" data-target="#editPromotion"  data-edit="${list.idx}"  >Edit</button></td>
                     <td>	${list.createdAt}</td>
@@ -143,14 +143,73 @@ $('#editPromotion').on('show.bs.modal', function (event) {
 	});
 });
 
-$('#priority').change(function() {
-	 // var value = $(this).val();
-   alert( "ddddddd");
+  // 순서 변경시
+$("[id^='priority']").change(function () {
+	  if (confirm('Do you want to change the priority to ?' + 'value :'+ $(this).val())) {
+		    console.log('yes');
+		
+		    
+		    var data= {}
+		    data['boardPriority']= $(this).val();
+		    data['boardIdx']= $(this).data("idx");
+		    $.ajax({
+			       type: "POST",
+			       url: "/adminBoard/promoPriority",
+			       async      : false,
+			   //    data: 'priority='+$(this).val(),
+			       data: JSON.stringify(data),
+			       dataType : 'json',
+			       contentType: 'application/json',
+			       success: function (rst) {
+			           alert("complete");
+			       }
+			       
+			   });
+   
+	  } else {
+		    console.log('no');
+		   window.location.href = '/adminBoard/promotion';
+		    //$.data(this, 'current', $(this).val());
+		}
+   
 }); 
+
+$("[id^='status']").change(function () {
+	var status ;
+	if($(this).val() == 1){
+		status = ' Active';
+	}else{
+		status = ' Inactive';
+	}
+	 if (confirm('Do you want to change the status to ' + status +"?")) {
+		    console.log('yes');
+		    
+		    var data= {}
+		    data['boardStatus']= $(this).val();
+		    data['boardIdx']= $(this).data("idx");
+		    $.ajax({
+			       type: "POST",
+			       url: "/adminBoard/promoStatus",
+			   //    data: 'priority='+$(this).val(),
+			       data: JSON.stringify(data),
+			       dataType : 'json',
+			       contentType: 'application/json',
+			       success: function (rst) {
+			           alert("complete");
+			       }
+			       
+			   });
+
+	  } else {
+		    console.log('no');
+		   window.location.href = '/adminBoard/promotion';
+		    //$.data(this, 'current', $(this).val());
+		}
+	
+});
 
 //프로모션 삭제
 function deletePromotion(idx) {
-	  console.log(idx);
 		 $.ajax({
 		        type: "POST",
 		        url: "/adminBoard/promoDelete",

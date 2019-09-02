@@ -55,10 +55,10 @@
 	WHERE idx = #{idx}					
     </update>
     <update id="updatePromotionStatus"  parameterType="PromotionVO"  >
-    UPDATE promotion SET priority = #{priority} WHERE idx = #{idx}		
+    UPDATE promotion SET status = #{status} WHERE idx = #{idx}		
     </update>
     <update id="updatePromotionPriority"  parameterType="PromotionVO"  >
-     UPDATE promotion SET status = #{status} WHERE idx = #{idx}		
+     UPDATE promotion SET priority = #{priority} WHERE idx = #{idx}		
     </update>
     
     

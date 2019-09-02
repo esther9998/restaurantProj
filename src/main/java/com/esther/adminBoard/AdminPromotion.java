@@ -162,13 +162,12 @@ public class AdminPromotion {
 	///////////////////////////////////// 순위 변경
 	@RequestMapping("/adminBoard/promoPriority")
 	@ResponseBody
-	public void promoPriority(MultipartHttpServletRequest request, @RequestParam HashMap<String, Object> params)
-			throws IOException {
+	public void promoPriority(@RequestBody HashMap<String, Integer> params)throws IOException {
 		
 		PromotionVO vo = new PromotionVO();
 		// todo 파라미터 indx , priority 넘기기
-		vo.setIdx(Integer.valueOf((String) params.get("idx")));
-		vo.setPriority(Integer.valueOf((String)params.get("priority")));
+		vo.setIdx((Integer) params.get("boardIdx"));
+		vo.setPriority((Integer)params.get("boardPriority"));
 		
 		int result;
 		result = sqlSession.update("adminMapper.updatePromotionPriority",vo);
@@ -179,13 +178,12 @@ public class AdminPromotion {
 	///////////////////////////////////// 상태 변경
 	@RequestMapping("/adminBoard/promoStatus")
 	@ResponseBody
-	public void promoStatus(MultipartHttpServletRequest request, @RequestParam HashMap<String, Object> params)
-			throws IOException {
+	public void promoStatus(@RequestBody HashMap<String, Integer> params)throws IOException {
 		
 		PromotionVO vo = new PromotionVO();
 		// todo 파라미터 indx, status 넘기기
-		vo.setIdx(Integer.valueOf((String) params.get("editIdx")));
-		vo.setStatus(Integer.valueOf((String)params.get("status")));
+		vo.setIdx((Integer) params.get("boardIdx"));
+		vo.setStatus((Integer)params.get("boardStatus"));
 		
 		int result;
 		result = sqlSession.update("adminMapper.updatePromotionStatus",vo);
