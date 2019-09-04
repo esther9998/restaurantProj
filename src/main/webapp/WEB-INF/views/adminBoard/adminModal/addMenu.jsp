@@ -4,11 +4,11 @@
 <script type="text/javascript" src="/resources/js/smarteditor2-2.8.2.3/js/HuskyEZCreator.js" charset="utf-8"></script>
     
  <!-- 달력 클릭 모달 : 예약 디테일, 예약 시간 변경, 상태 변경-->
-<div class="modal fade bd-example-modal-lg" id="addPromotion" tabindex="-1" role="dialog" aria-labelledby="updateBookingScheduleModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" id="addMenu" tabindex="-1" role="dialog" aria-labelledby="updateBookingScheduleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content" style="width:1000px">
      	<div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add New Promotion</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add New Menu</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -16,15 +16,19 @@
       <div class="modal-body">
        <div class="row justify-content-center">
               <div class="col-md-10 form-wrap">
-                <form id="promotionForm" enctype="multipart/form-data">
+                <form id="menuAddForm" enctype="multipart/form-data">
                   <div class="row mb-4">
-                    <div class=" col-md-6">
+                    <div class=" col-md-5">
                       <label for="promo_title" class="label">Title</label>
-                        <input type="text" class="form-control" id="title" name="title" placeholder="Promotion title">
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Menu title">
                     </div>
-                    <div class=" col-md-3">
+                  <div class=" col-md-2">
+                      <label for="promo_category" class="label">Category</label>
+                        <input type="text" class="form-control" id="category" name="category" placeholder="Number">
+                    </div>
+                    <div class=" col-md-2">
                     	<label for="" class="label">Priority</label>
-                    	  <input type="text" class="form-control" name="priority" id="addPriority" placeholder="Number">
+                    	  <input type="text" class="form-control" name="priority" id="priority" placeholder="Number">
                     </div>
                     <div class=" col-md-3">
                     	<label for="" class="label" style="display: block;">Status</label>
@@ -36,7 +40,7 @@
 			<div class="row mb-4">
                     <div class="col-md-6">
                       <label for="" class="label">Price</label>
-                        <input type="text" class="form-control" name="price" placeholder="Promotion price">
+                        <input type="text" class="form-control" name="price" placeholder="Menu price">
                     </div>
                     	
                <!--  이미지 업로드 -->
@@ -61,26 +65,10 @@
                     </div>
                     </div>
                   
-				<!--  날짜 -->
-				<div class="row mb-4">
-                    <div class="col-md-6">
-                      <label for="date" class="label">Start Date</label>
-                        <input type="text" class="form-control" name="startDate" id="startDate" placeholder="format : YYYY-MM-DD">
-                    </div>
-                     <div class="col-md-6">
-                      <label for="date" class="label">End Date </label>
-                        <input type="text" class="form-control" name="endDate" id="endDate" placeholder="format : YYYY-MM-DD">
-                    </div>
-                  </div>
-                  
-                  <!-- Smart Editor -->
-              <!--     <textarea name="ir1" id="ir1" rows="10" cols="100">에디터에 기본으로 삽입할 글(수정 모드)이 없다면 이 value 값을 지정하지 않으시면 됩니다.</textarea>
-                   -->
-               <!--      <input  type="submit" style="display: hidden;" onclick="submitForm()" > -->
                 </form>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button class="btn btn-primary" onclick="javascript:sendPromotion();">Save</button>
+        <button class="btn btn-primary" onclick="javascript:sendAddMenu();">Save</button>
       </div>
               </div>
             </div>
@@ -90,7 +78,7 @@
 </div>
 
 <script>
-function sendPromotion() {
+function sendAddMenu() {
 	
     //preventDefault 는 기본으로 정의된 이벤트를 작동하지 못하게 하는 메서드이다. submit을 막음
     // 유효성 검사  
@@ -106,39 +94,21 @@ function sendPromotion() {
         		return;
 			} 
         	
-        	//날짜 유효성 검사 
-        	try{
-        		var pattern = /[0-9]{4}-[0-9]{2}-[0-9]{2}/;
-        		 var startDate = pattern.test($("#startDate").val());
-        		 var endDate = pattern.test($("#endDate").val());
-	        		if(!startDate) {
-	            		alert("The startDate form is not correct.")
-					return;
-	        		} else if(!endDate){
-	        			alert("The endDate form is not correct. end")
-						return;
-	        		}
-              }catch (e){
-                return  false;
-              }
-    
-    var form = $('#promotionForm')[0];
+    var form = $('#menuAddForm')[0];
     var data = new FormData(form);
 
-   // disabled the submit button
-    $("#promotionFormSubmit").prop("disabled", true);
    
     $.ajax({
         type: "POST",
         enctype: 'multipart/form-data',
-        url: "/adminBoard/promotionForm",
+        url: "/adminBoard/addMenuForm",
         data: data,
         processData: false,
         contentType: false,
         cache: false,
         timeout: 600000,
         success: function (data) {
-        	window.location.href = '/adminBoard/promotion';
+        	window.location.href = '/adminBoard/menu';
            // alert("complete");
         },
         error: function (e) {

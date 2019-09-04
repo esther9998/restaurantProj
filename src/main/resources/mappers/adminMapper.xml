@@ -37,7 +37,7 @@
     
    <!-- UPDATE -->
     <select id="selectPromotion"  resultType="PromotionVO" >
-    SELECT * FROM promotion;
+    SELECT * FROM promotion WHERE status ='1' and end_date >= now() 
     </select>
     <update id="updatePromotion"  parameterType="PromotionVO"  >
     UPDATE promotion 

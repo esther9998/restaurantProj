@@ -87,7 +87,7 @@ public class AdminPromotion {
 		String folderPath = request.getSession().getServletContext().getRealPath("/");
 
 		ImageUpload up = new ImageUpload();
-		PromotionVO fileInfo = up.imgUpload(mFile, folderPath);
+		Map fileInfo = up.imgUpload(mFile, folderPath);
 		System.out.println("업로드 결과 : " + fileInfo);
 		System.out.println("form 파라미터:" + params);
 
@@ -98,8 +98,7 @@ public class AdminPromotion {
 		vo.setPromo_title((String) params.get("title"));
 		vo.setPromo_price((String) params.get("price"));
 		vo.setPromo_content((String) params.get("content"));
-		vo.setPromo_imgNm(fileInfo.getPromo_imgNm());
-		vo.setPromo_uuid(fileInfo.getPromo_uuid());
+		vo.setPromo_imgNm((String) fileInfo.get("serverFileNm"));
 		vo.setPromo_userFile(mFile.getOriginalFilename());
 		vo.setStart_date((String) params.get("startDate"));
 		vo.setEnd_date((String) params.get("endDate"));
@@ -121,7 +120,7 @@ public class AdminPromotion {
 		// 서버 이미지저장 폴더 path
 		String folderPath = request.getSession().getServletContext().getRealPath("/");
 		System.out.println(folderPath);
-		PromotionVO fileInfo = null;
+		Map fileInfo = null;
 		MultipartFile mFile = request.getFile("editFile");
 		System.out.println("mfile 결과 : "+mFile.isEmpty()); 
 		if(mFile.isEmpty()) {
@@ -131,8 +130,7 @@ public class AdminPromotion {
 			ImageUpload up = new ImageUpload();
 			fileInfo = up.imgUpload(mFile, folderPath);
 			
-			vo.setPromo_imgNm(fileInfo.getPromo_imgNm());
-			vo.setPromo_uuid(fileInfo.getPromo_uuid());
+			vo.setPromo_imgNm((String)fileInfo.get("serverFileNm"));
 		}
 		System.out.println("Form 가져온 파라미터:" + params);
 		System.out.println("수정 이미지 파일 업로드 있을때 : " + fileInfo );

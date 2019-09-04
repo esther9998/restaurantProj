@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -12,8 +14,9 @@ import com.esther.model.PromotionVO;
 
 public class ImageUpload {
 
-	public PromotionVO imgUpload(MultipartFile mFile, String folderPath) {
+	public Map imgUpload(MultipartFile mFile, String folderPath) {
 		PromotionVO vo = new PromotionVO();
+		Map<String, String> map = new HashMap<String, String>();
 		
         File imgFolder = new File(folderPath+"/resources/imgUpload");
         if(!imgFolder.exists()) {
@@ -30,7 +33,6 @@ public class ImageUpload {
         //서버에 파일 쓰기
         File file = new File(imgFolder, fileNm);
         
-        
         try {
 			mFile.transferTo(file);
 		} catch (IllegalStateException e) {
@@ -41,9 +43,8 @@ public class ImageUpload {
 			e.printStackTrace();
 		}
 		
-        vo.setPromo_uuid(uu);
-        vo.setPromo_imgNm(fileNm);
-		return vo;
+        map.put("serverFileNm", fileNm);
+		return map;
 		
 	}
 }

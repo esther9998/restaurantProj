@@ -142,7 +142,7 @@
                     <h5 class="text-primary  " id="promoPrice">$39.50</h5>
                     <h5 class="mt-0 h4 " id="promoTitle">Beef with Sauce</h5>
                     <p class="mb-4 " id="promoContent" style="height: 99px;">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                     <p class="mb-0"><a href="#" class="btn btn-primary btn-sm"  id="promoDate">Order Now!</a></p>
+                     <p class="mb-0"><a  class="btn btn-primary btn-sm"  id="promoDate">Order Now!</a></p>
                   </div>
                 </div>
               </div>
@@ -172,7 +172,12 @@ for (var key in data) {
 		  	$('#title'+data[key].idx).text(data[key].promo_title);
 		  	cloneElements.find( $("#promoContent")).attr('id', 'content'+ data[key].idx);
 		  	$('#content'+data[key].idx).text(data[key].promo_content);
-    	 
+		  	var start = data[key].start_date;
+		  	var startFix = start.substring(5,10);
+		  	var end = data[key].end_date;
+		  	var endFix = end.substring(5,10);
+		  	cloneElements.find( $("#promoDate")).attr('id', 'promoDate'+ data[key].idx);
+		  	$('#promoDate'+data[key].idx).text(startFix+'~'+endFix);
 	    }
 }
 	   	

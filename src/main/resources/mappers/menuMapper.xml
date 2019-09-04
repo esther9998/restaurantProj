@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="menuMapper">
+  <!-- SELECT -->
+    <select id="selectMenu" resultType="MenuVO" parameterType="MenuVO">
+    SELECT * FROM menuList;
+    </select>
+    
+    <!-- INSERT -->
+     <insert id="insertMenu" parameterType="MenuVO" > 
+    INSERT into menuList(priority,status,category, menu_title, menu_price, menu_content,
+    				menu_serverImgFile, menu_userImgNm,create_at)
+    values(
+		    #{priority},
+		    #{status}, 
+		    #{category}, 
+		    #{menu_title}, 
+		    #{menu_price}, 
+		    #{menu_content}, 
+		    #{menu_serverImgFile}, 
+		    #{menu_userImgNm}, 
+		    now()
+    	)
+    </insert>
+    
+   <!-- UPDATE -->
+  
+    <update id="updateMenu"  parameterType="MenuVO"  >
+    UPDATE menuList 
+    SET priority = #{priority},
+	    status =   #{status},
+	    category =   #{category},
+	    menu_title = #{menu_title},
+	    menu_price =  #{menu_price},
+	    menu_content =#{menu_content}, 
+	    menu_serverImgFile =#{menu_serverImgFile}, 
+	    menu_userImgNm =#{menu_userImgNm}, 
+	    update_at = now()
+	WHERE idx = #{idx}					
+    </update>
+    
+    <update id="updateMenuStatus"  parameterType="MenuVO"  >
+    UPDATE menuList SET status = #{status} WHERE idx = #{idx}		
+    </update>
+    <update id="updateMenuPriority"  parameterType="MenuVO"  >
+     UPDATE menuList SET priority = #{priority} WHERE idx = #{idx}		
+    </update>
+     <update id="updateMenuCategory"  parameterType="MenuVO"  >
+     UPDATE menuList SET category = #{category} WHERE idx = #{idx}		
+    </update>
+    
+    
+      <!-- DELETE -->
+    <delete id="deleteMenu" parameterType="MenuVO"  >
+    DELETE FROM menuList WHERE idx = #{idx}
+    </delete>
+    
+    
+</mapper>

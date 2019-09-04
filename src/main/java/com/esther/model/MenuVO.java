@@ -2,85 +2,109 @@ package com.esther.model;
 
 public class MenuVO {
 	
-	String category;
-	String title;
-	String content;
-	String price;
-	String imgNm;
-	String fileNm;
-	String priority;
-	String active;
-	String updated_at;
-	String created_at;
 	
-
-	public String getCategory() {
-		return category;
+	int idx;
+	int priority;
+	int status;
+	int category;
+	
+	String menu_title;
+	String menu_price;
+	String menu_content;
+	String menu_serverImgFile;
+	String menu_userImgNm;
+	String start_date;
+	String end_date;
+	String create_at;
+	String update_at;
+	
+	public int getIdx() {
+		return idx;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	public String getPrice() {
-		return price;
-	}
-	public void setPrice(String price) {
-		this.price = price;
-	}
-	public String getImgNm() {
-		return imgNm;
-	}
-	public void setImgNm(String imgNm) {
-		this.imgNm = imgNm;
-	}
-	public String getFileNm() {
-		return fileNm;
-	}
-	public void setFileNm(String fileNm) {
-		this.fileNm = fileNm;
-	}
-	public String getPriority() {
+	public int getPriority() {
 		return priority;
 	}
-	public void setPriority(String priority) {
+	public void setPriority(int priority) {
 		this.priority = priority;
 	}
-	public String getActive() {
-		return active;
+	public int getStatus() {
+		return status;
 	}
-	public void setActive(String active) {
-		this.active = active;
+	public void setStatus(int status) {
+		this.status = status;
 	}
-	public String getUpdated_at() {
-		return updated_at;
+	public int getCategory() {
+		return category;
 	}
-	public void setUpdated_at(String updated_at) {
-		this.updated_at = updated_at;
+	public void setCategory(int category) {
+		this.category = category;
 	}
-	public String getCreated_at() {
-		return created_at;
+	public String getMenu_title() {
+		return menu_title;
 	}
-	public void setCreated_at(String created_at) {
-		this.created_at = created_at;
+	public void setMenu_title(String menu_title) {
+		this.menu_title = menu_title;
+	}
+	public String getMenu_price() {
+		return menu_price;
+	}
+	public void setMenu_price(String menu_price) {
+		this.menu_price = menu_price;
+	}
+	public String getMenu_content() {
+		return menu_content;
+	}
+	public void setMenu_content(String menu_content) {
+		this.menu_content = menu_content;
+	}
+	public String getmenu_serverImgFile() {
+		return menu_serverImgFile;
+	}
+	public void setmenu_serverImgFile(String menu_serverImgFile) {
+		this.menu_serverImgFile = menu_serverImgFile;
+	}
+	public String getmenu_userImgNm() {
+		return menu_userImgNm;
+	}
+	public void setmenu_userImgNm(String menu_userImgNm) {
+		this.menu_userImgNm = menu_userImgNm;
+	}
+	public String getStart_date() {
+		return start_date;
+	}
+	public void setStart_date(String start_date) {
+		this.start_date = start_date;
+	}
+	public String getEnd_date() {
+		return end_date;
+	}
+	public void setEnd_date(String end_date) {
+		this.end_date = end_date;
+	}
+	public String getCreate_at() {
+		return create_at;
+	}
+	public void setCreate_at(String create_at) {
+		this.create_at = create_at;
+	}
+	public String getUpdate_at() {
+		return update_at;
+	}
+	public void setUpdate_at(String update_at) {
+		this.update_at = update_at;
 	}
 	@Override
 	public String toString() {
-		return "MenuVO [category=" + category + ", title=" + title + ", content=" + content + ", price=" + price
-				+ ", imgNm=" + imgNm + ", fileNm=" + fileNm + ", priority=" + priority + ", active=" + active
-				+ ", updated_at=" + updated_at + ", created_at=" + created_at + "]";
+		return "MenuVO [idx=" + idx + ", priority=" + priority + ", status=" + status + ", category=" + category
+				+ ", menu_title=" + menu_title + ", menu_price=" + menu_price + ", menu_content=" + menu_content
+				+ ", menu_serverImgFile=" + menu_serverImgFile + ", menu_userImgNm=" + menu_userImgNm
+				+ ", start_date=" + start_date + ", end_date=" + end_date + ", create_at=" + create_at + ", update_at="
+				+ update_at + "]";
 	}
 	
-	
+
 	
 }
