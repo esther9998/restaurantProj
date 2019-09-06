@@ -30,239 +30,12 @@
 								</li>
 							</ul>
 							<div class="tab-content" id="pills-tabContent">
+							<!-- 탭 nav -->
+								<div class="tab-pane fade show active" id="pills-01" role="tabpanel" aria-labelledby="pills-01-tab"></div>
+								<div class="tab-pane fade" id="pills-02" role="tabpanel" aria-labelledby="pills-02-tab"></div>
+								<div class="tab-pane fade" id="pills-03" role="tabpanel"aria-labelledby="pills-03-tab"></div>
+								<div class="tab-pane fade show" id="pills-04" role="tabpanel" aria-labelledby="pills-04-tab"></div>
 							
-								<div class="tab-pane fade show active" id="pills-01"
-									role="tabpanel" aria-labelledby="pills-01-tab">
-									<div class="d-block d-md-flex menu-food-item">
-
-										<div class="text order-1 mb-3">
-											<img src="/resources/images/img_1.jpg"
-												alt="Free Website Template for Restaurants by Free-Template.co">
-											<h3>
-												<a href="#">Warm Spinach Dip &amp; Chips</a>
-											</h3>
-											<p>Spinach and artichokes in a creamy cheese dip with
-												warm tortilla chips &amp; salsa.</p>
-										</div>
-										<div class="price order-2">
-											<strong>$10.49</strong>
-										</div>
-									</div>
-									<!-- .menu-food-item -->
-
-									<div class="d-block d-md-flex menu-food-item">
-										<div class="text order-1 mb-3">
-											<img src="/resources/images/img_2.jpg"
-												alt="Free Website Template for Restaurants by Free-Template.co">
-											<h3>
-												<a href="#">Key Wast Machos</a>
-											</h3>
-											<p>Crisp tortilla and plantain chips covered with lightly
-												spiced ground beef, melted cheese, pickled jalapeÃ±os,
-												guacamole, sour cream and salsa.</p>
-										</div>
-										<div class="price order-2">
-											<strong>$11.99</strong>
-										</div>
-									</div>
-									<!-- .menu-food-item -->
-
-									<div class="d-block d-md-flex menu-food-item">
-										<div class="text order-1 mb-3">
-											<img src="/resources/images/img_3.jpg"
-												alt="Free Website Template for Restaurants by Free-Template.co">
-											<h3>
-												<a href="#">Crispy Onions Rings</a>
-											</h3>
-											<p>A heaping mountain of rings, handmade with Panko
-												breading and shredded coconut flakes.</p>
-										</div>
-										<div class="price order-2">
-											<strong>$11.99</strong>
-										</div>
-									</div>
-									<!-- .menu-food-item -->
-
-									<div class="d-block d-md-flex menu-food-item">
-										<div class="text order-1 mb-3">
-											<img src="/resources/images/img_1.jpg"
-												alt="Free Website Template for Restaurants by Free-Template.co">
-											<h3>
-												<a href="#">Lobster &amp; Shrimp Quesadilla</a>
-											</h3>
-											<p>Lobster and tender shrimp, with onions, sweet peppers,
-												spinach and our three cheese blend. Griddled and served with
-												tomato salsa and sour cream.</p>
-										</div>
-										<div class="price order-2">
-											<strong>$13.99</strong>
-										</div>
-									</div>
-									<!-- .menu-food-item -->
-
-
-								</div>
-								<div class="tab-pane fade" id="pills-02" role="tabpanel"
-									aria-labelledby="pills-02-tab">
-
-									<div class="d-block d-md-flex menu-food-item">
-										<div class="text order-1 mb-3">
-											<img src="/resources/images/img_2.jpg"
-												alt="Free Website Template for Restaurants by Free-Template.co">
-											<h3>
-												<a href="#">Jumbo Lump Crab Stack</a>
-											</h3>
-											<p>Spinach and artichokes in a creamy cheese dip with
-												warm tortilla chips &amp; salsa.</p>
-										</div>
-										<div class="price order-2">
-											<strong>$12.49</strong>
-										</div>
-									</div>
-									<!-- .menu-food-item -->
-
-									<div class="d-block d-md-flex menu-food-item">
-										<div class="text order-1 mb-3">
-											<img src="/resources/images/img_1.jpg"
-												alt="Free Website Template for Restaurants by Free-Template.co">
-											<h3>
-												<a href="#">Jamaican Chicken Wings</a>
-											</h3>
-											<p>Crisp tortilla and plantain chips covered with lightly
-												spiced ground beef, melted cheese, pickled jalapeÃ±os,
-												guacamole, sour cream and salsa.</p>
-										</div>
-										<div class="price order-2">
-											<strong>$15.99</strong>
-										</div>
-									</div>
-									<!-- .menu-food-item -->
-
-									<div class="d-block d-md-flex menu-food-item">
-										<div class="text order-1 mb-3">
-											<img src="/resources/images/img_3.jpg"
-												alt="Free Website Template for Restaurants by Free-Template.co">
-											<h3>
-												<a href="#">Bahamian Seafood Chowder</a>
-											</h3>
-											<p>A heaping mountain of rings, handmade with Panko
-												breading and shredded coconut flakes.</p>
-										</div>
-										<div class="price order-2">
-											<strong>$10.99</strong>
-										</div>
-									</div>
-									<!-- .menu-food-item -->
-
-									<div class="d-block d-md-flex menu-food-item">
-										<div class="text order-1 mb-3">
-											<img src="/resources/images/img_2.jpg"
-												alt="Free Website Template for Restaurants by Free-Template.co">
-											<h3>
-												<a href="#">Grilled Chicken &amp; Tropical Fruit on
-													Mixed Greens</a>
-											</h3>
-											<p>Lobster and tender shrimp, with onions, sweet peppers,
-												spinach and our three cheese blend. Griddled and served with
-												tomato salsa and sour cream.</p>
-										</div>
-										<div class="price order-2">
-											<strong>$12.99</strong>
-										</div>
-									</div>
-									<!-- .menu-food-item -->
-
-								</div>
-								<div class="tab-pane fade" id="pills-03" role="tabpanel"
-									aria-labelledby="pills-03-tab">
-
-									<div class="d-block d-md-flex menu-food-item">
-										<div class="text order-1 mb-3">
-											<img src="/resources/images/img_3.jpg"
-												alt="Free Website Template for Restaurants by Free-Template.co">
-											<h3>
-												<a href="#">Grilled Top Sirlion Steak</a>
-											</h3>
-											<p>Spinach and artichokes in a creamy cheese dip with
-												warm tortilla chips &amp; salsa.</p>
-										</div>
-										<div class="price order-2">
-											<strong>$18.99</strong>
-										</div>
-									</div>
-									<!-- .menu-food-item -->
-
-									<div class="d-block d-md-flex menu-food-item">
-										<div class="text order-1 mb-3">
-											<img src="/resources/images/img_1.jpg"
-												alt="Free Website Template for Restaurants by Free-Template.co">
-											<h3>
-												<a href="#">Steak Oscar</a>
-											</h3>
-											<p>Crisp tortilla and plantain chips covered with lightly
-												spiced ground beef, melted cheese, pickled jalapeÃ±os,
-												guacamole, sour cream and salsa.</p>
-										</div>
-										<div class="price order-2">
-											<strong>$23.99</strong>
-										</div>
-									</div>
-									<!-- .menu-food-item -->
-
-									<div class="d-block d-md-flex menu-food-item">
-										<div class="text order-1 mb-3">
-											<img src="/resources/images/img_2.jpg"
-												alt="Free Website Template for Restaurants by Free-Template.co">
-											<h3>
-												<a href="#">Skirt Steak Churrasco</a>
-											</h3>
-											<p>A heaping mountain of rings, handmade with Panko
-												breading and shredded coconut flakes.</p>
-										</div>
-										<div class="price order-2">
-											<strong>$20.99</strong>
-										</div>
-									</div>
-									<!-- .menu-food-item -->
-
-									<div class="d-block d-md-flex menu-food-item">
-										<div class="text order-1 mb-3">
-											<img src="/resources/images/img_3.jpg"
-												alt="Free Website Template for Restaurants by Free-Template.co">
-											<h3>
-												<a href="#">Grilled Beef Steak</a>
-											</h3>
-											<p>Lobster and tender shrimp, with onions, sweet peppers,
-												spinach and our three cheese blend. Griddled and served with
-												tomato salsa and sour cream.</p>
-										</div>
-										<div class="price order-2">
-											<strong>$20.99</strong>
-										</div>
-									</div>
-									<!-- .menu-food-item -->
-
-								</div>
-							
-							<div class="tab-pane fade show" id="pills-04"
-									role="tabpanel" aria-labelledby="pills-04-tab">
-									<div class="d-block d-md-flex menu-food-item">
-
-										<div class="text order-1 mb-3">
-											<img src="/resources/images/img_1.jpg"
-												alt="Free Website Template for Restaurants by Free-Template.co">
-											<h3>
-												<a href="#">Warm Spinach Dip &amp; Chips</a>
-											</h3>
-											<p>Spinach and artichokes in a creamy cheese dip with
-												warm tortilla chips &amp; salsa.</p>
-										</div>
-										<div class="price order-2">
-											<strong>$10.49</strong>
-										</div>
-									</div>
-									<!-- .menu-food-item -->
-									</div>
 							</div>
 						</div>
 
@@ -276,11 +49,11 @@
 			<div class="d-block d-md-flex menu-food-item menuClone" style ="display: none !important" >
 				<div class="text order-1 mb-3">
 				<img id="menuImg" src="/resources/images/img_3.jpg"	alt="Free Website Template for Restaurants by Free-Template.co">
-						<h3 id="menuTitle"><a href="#">클론  Grilled Top Sirlion Steak</a></h3>
+						<h3 id="menuTitle"><a href="#">Grilled Top Sirlion Steak</a></h3>
 						<p id="menuContent">Spinach and artichokes in a creamy cheese dip with warm tortilla chips &amp; salsa.</p>
 				</div>	
-				<div class="price order-2">
-					<strong id="menuPrice">$18.99</strong>
+				<div class="price order-2"  id="menuPrice">
+					<strong>$18.99</strong>
 				</div>
 			</div>
 		<script>
@@ -288,28 +61,34 @@
 var data = ${jsonMenu};
 for (var key in data) {
 	
-	 /*  	if (data.hasOwnProperty(key)) {
+	   	if (data.hasOwnProperty(key)) {
 	  	//복제카드 만들기 (카드 id : 'item#')
 	  		var cloneElements = $('.menuClone').clone();
-	   	 	cloneElements.removeClass('clone').attr('id', 'item'+ data[key].idx);
+	   	 	cloneElements.removeClass('menuClone').attr('id', 'item'+ data[key].idx);
 	  	  	cloneElements.css('display','block');
+	  	  	
 	  		if(data[key].category == 1){
-			  	cloneElements.appendTo('#pills-drinks');
-	  			
+			  	cloneElements.appendTo('#pills-01');
 	  		}else if(data[key].category == 2){
-			  	cloneElements.appendTo('#pills-drinks');
-	  			
+			  	cloneElements.appendTo('#pills-02');
 	  		}else if(data[key].category == 3){
-			  	cloneElements.appendTo('#pills-drinks');
-	  			
+			  	cloneElements.appendTo('#pills-03');
 	  		}else if(data[key].category == 4){
-			  	cloneElements.appendTo('#pills-drinks');
-	  			
+			  	cloneElements.appendTo('#pills-04');
 	  		}else{
 	  			//category 0은 안붙음. 
 	  		}
-	  	
-	  	} */
-	  	}
+	  		
+	  		//데이터 입력
+	  		cloneElements.find( $("#menuImg")).attr('id', 'menuImg'+ data[key].idx);
+		  	$('#menuImg'+data[key].idx).attr('src',  '/resources/imgUpload/'+data[key].menu_serverImgFile);
+		  	cloneElements.find( $("#menuTitle")).attr('id', 'menuTitle'+ data[key].idx);
+			$('#menuTitle'+data[key].idx).text(data[key].menu_title);
+		  	cloneElements.find( $("#menuContent")).attr('id', 'menuContent'+ data[key].idx);
+		  	$('#menuContent'+data[key].idx).text(data[key].menu_content);
+		  	cloneElements.find( $("#menuPrice")).attr('id', 'menuPrice'+ data[key].idx);
+		  	$('#menuPrice'+data[key].idx).text(data[key].menu_price);
+	  	} 
+	}
 </script>
 			

@@ -14,7 +14,7 @@
 					<li><a href="/menu">Menu</a></li>
 					<li><a href="/reserve">Reservation</a></li>
 					<li><a href="/contact">Contacts</a></li>
-					<li><a href="/adminBoard/scheduler">AdminBoard</a></li> 
+					<li><a href="/adminBoard/main">AdminBoard</a></li> 
           </ul>
       </div>
        <div class="text-right navToggle">
@@ -38,7 +38,7 @@
 					<li><a href="/menu">Menu</a></li>
 					<li><a href="/reserve">Reservation</a></li>
 					<li><a href="/contact">Contacts</a></li>
-					<li><a href="/adminBoard">AdminBoard</a></li> 
+					<li><a href="/adminBoard/main">AdminBoard</a></li> 
           </ul>
         </div>
       </nav>

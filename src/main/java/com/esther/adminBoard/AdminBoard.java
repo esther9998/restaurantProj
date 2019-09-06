@@ -50,13 +50,15 @@ public class AdminBoard {
 				System.out.println("file not found ~~");
 				e1.printStackTrace();
 			}
-			
-		try { AnalyticsReporting service = GaApi.initializeAnalyticsReporting(key);
-				  		GetReportsResponse resp = GaApi.getReport(service); 
-				  		System.out.println(resp);
-				  		map =  GaApi.printResponse(resp); 
-				  }catch (Exception e) {
-					  e.printStackTrace(); } 
+
+			try {
+				AnalyticsReporting service = GaApi.initializeAnalyticsReporting(key);
+				GetReportsResponse resp = GaApi.getReport(service);
+				System.out.println(resp);
+				map = GaApi.printResponse(resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 				  
 			mav.setViewName("/adminBoard/adminBoard");
 			mav.addObject("gadata", map);
@@ -68,13 +70,4 @@ public class AdminBoard {
 	}
 	
 
-	//로그인 페이지
-	@RequestMapping(value="/adminBoard/loginPage")
-	public ModelAndView admin_loginPage(HttpSession session ) throws IOException {
-		ModelAndView mav = new ModelAndView();
-			mav.setViewName("/admin/loginPage");
-			return mav;
-		
-	}
-		
 }
