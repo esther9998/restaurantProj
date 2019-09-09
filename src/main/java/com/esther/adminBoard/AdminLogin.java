@@ -35,7 +35,7 @@ public class AdminLogin {
 	private SqlSession sqlSession;
 	
 	private static final Logger logger = LoggerFactory.getLogger(AdminLogin.class);
-	@RequestMapping(value = "/adminBoard/login")
+	@RequestMapping(value = "/single/login")
 	public ModelAndView adminLogin(HttpSession session, AdminVO vo) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/adminBoard/adminLogin");
