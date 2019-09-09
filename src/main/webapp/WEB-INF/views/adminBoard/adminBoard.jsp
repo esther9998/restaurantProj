@@ -94,13 +94,181 @@
      </div>
      
      
-<p>
-  <div class="g-signin2" data-onsuccess="queryReports"></div>
-</p>
+<!--  ga -->
+<button id="auth-button" hidden>Authorize</button>
+<div class="getViews">조회수 확인</div>
 
-<!-- The API response will be printed here. -->
+<h1>Hello Analytics</h1>
+
 <textarea cols="80" rows="20" id="query-output"></textarea>
 
+<script>
 
-    
- 
+/*https://nubiz.tistory.com/654  */
+    // Replace with your client ID from the developer console. https://console.developers.google.com/apis/credentials
+//797674242275-q3ocnl8vpot5ke4oeog84q9eusfuqr5f.apps.googleusercontent.com
+    var CLIENT_ID = '813555744368-m9rsmjp3ial0lorvo37rqfi3htmsis9i.apps.googleusercontent.com';
+
+    // Replace with your view ID. from https://ga-dev-tools.appspot.com/account-explorer/
+
+    var VIEW_ID = '196870503';
+
+    var DISCOVERY = 'https://analyticsreporting.googleapis.com/$discovery/rest';
+
+    var SCOPES = ['https://www.googleapis.com/auth/analytics.readonly'];
+
+
+
+    function authorize(event) {
+
+      // Handles the authorization flow.
+
+      // `immediate` should be false when invoked from the button click.
+
+      var useImmdiate = event ? false : true;
+
+      var authData = {
+
+        client_id: CLIENT_ID,
+
+        scope: SCOPES,
+
+        immediate: useImmdiate
+
+      };
+
+      gapi.auth.authorize(authData, function(response) {
+
+        if (response.error) {
+
+  	$(".getViews").text("인증필요");
+
+        }
+
+        else {
+
+  	$(".getViews").text("불러오는 중");
+
+          queryReports();
+
+        }
+
+      });
+
+    }
+
+
+
+    function queryReports() {
+
+      // Load the API from the client discovery URL.
+
+      gapi.client.load(DISCOVERY
+
+      ).then(function() {
+
+          // Call the Analytics Reporting API V4 batchGet method.
+
+          gapi.client.analyticsreporting.reports.batchGet( {
+
+            "reportRequests":[
+
+            {
+
+              "viewId":VIEW_ID,
+
+              "dateRanges":[
+
+                {
+
+                  "startDate":"7daysAgo",
+
+                  "endDate":"today"
+
+                }],
+
+              "dimensions": [
+
+                {
+
+                  "name": "ga:pagePath"
+
+                }],
+
+              "dimensionFilterClauses": [
+
+                {
+
+                  "filters": [
+
+                    {
+
+                      "dimensionName": "ga:pagePath",
+
+                      "not": false,
+
+                      "expressions": [
+
+                        "\\"+location.pathname
+
+                      ],
+
+                      "caseSensitive": false,
+
+                    }
+
+                  ]
+
+                }],
+
+              "metrics":[
+
+                {
+
+                  "expression":"ga:hits"
+
+                }],
+
+              "orderBys": [
+
+                {
+
+                  "fieldName": "ga:hits",
+
+                  "sortOrder": "DESCENDING",
+
+                }
+
+              ],
+
+            }]
+
+          } ).then(function(response) {
+
+            var parse = JSON.parse(response.body);
+
+            var views = "지난 1주일간 조회수: "+parse.reports[0].data.totals[0].values[0];
+
+            console.log(views);
+
+  	  $(".getViews").text(views);
+
+          })
+
+          .then(null, function(err) {
+
+              // Log any errors.
+
+              console.log(err);
+
+          });
+
+      });
+
+    }
+
+   $(".getViews").click(function(){authorize(event);});
+
+  </script>
+
+  <script async src="https://apis.google.com/js/client.js"></script>
