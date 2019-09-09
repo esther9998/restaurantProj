@@ -42,7 +42,7 @@
         <div class="md-form mb-5">
           <i class="fa fa-lg fa-envelope  prefix grey-text"></i>
           <label data-error="wrong" data-success="right" for="defaultForm-email">Your id</label>
-          <input type="email" id="admin_id" class="form-control validate">
+          <input type="email" id="admin_id" class="form-control validate" >sfs
         </div>
 
         <div class="md-form mb-4">

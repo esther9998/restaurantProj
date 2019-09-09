@@ -27,8 +27,14 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>loginFilter</filter-name>
-		<url-pattern>/adminBoard/*</url-pattern>
+		<url-pattern>/adminBoard/**</url-pattern>
+		<!-- <url-pattern>/adminBoard/promotion</url-pattern>
+		<url-pattern>/adminBoard/menu</url-pattern>
+		<url-pattern>/adminBoard/scheduler</url-pattern> -->
 	</filter-mapping>
+
+
+  
   
   <context-param>
     <param-name>contextConfigLocation</param-name>
