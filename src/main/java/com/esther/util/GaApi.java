@@ -113,6 +113,7 @@ public class GaApi {
     
     Metric users = new Metric().setExpression("ga:users").setAlias("users");
     Metric newUsers = new Metric().setExpression("ga:newUsers").setAlias("newUsers");
+    Metric pageviews = new Metric().setExpression("ga:pageviews").setAlias("pageviews");
     
 
     Dimension pageTitle = new Dimension().setName("ga:pageTitle");
@@ -136,12 +137,18 @@ public class GaApi {
             .setMetrics(Arrays.asList(newUsers))
             .setDimensions(Arrays.asList(pageTitle));
     
+    ReportRequest request03 = new ReportRequest()
+            .setViewId(VIEW_ID)
+            .setDateRanges(Arrays.asList(dateRange))
+            .setMetrics(Arrays.asList(pageviews))
+    		.setDimensions(Arrays.asList(pageTitle));
     
     
     ArrayList<ReportRequest> requests = new ArrayList<ReportRequest>();
     requests.add(request);
     requests.add(request01);
     requests.add(request02);
+    requests.add(request03);
 
     // Create the GetReportsRequest object.
     GetReportsRequest getReport = new GetReportsRequest()
