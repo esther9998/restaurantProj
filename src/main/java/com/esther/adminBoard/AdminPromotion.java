@@ -94,7 +94,7 @@ public class AdminPromotion {
 		// db저장 (파일명, 서버파일명)
 		PromotionVO vo = new PromotionVO();
 		vo.setStatus(Integer.parseInt((String)params.get("status")));
-		vo.setPriority(Integer.parseInt((String)params.get("priority")));
+		vo.setPriority(Integer.parseInt((String)params.get("addPriority")));
 		vo.setPromo_title((String) params.get("title"));
 		vo.setPromo_price((String) params.get("price"));
 		vo.setPromo_content((String) params.get("content"));

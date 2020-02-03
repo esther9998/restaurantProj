@@ -19,10 +19,4 @@
         <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
     </definition>
     
-<!-- Admin Login -->
-	<definition name="/single/*" extends="single">
-          <put-attribute name="content" value="/WEB-INF/views/adminBoard/{1}.jsp"></put-attribute>
-    </definition>
-    
-    
     </tiles-definitions>

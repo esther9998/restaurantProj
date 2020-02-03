@@ -151,7 +151,28 @@ AOS.init({
 	$('#dropdown04').on('show.bs.dropdown', function () {
 	  console.log('show');
 	});
-
+	var carousel = function() {
+		$('.owl-carousel').owlCarousel({
+			loop: true,
+			margin: 10,
+			nav: true,
+			stagePadding: 5,
+			nav: false,
+			navText: ['<span class="icon-chevron-left">', '<span class="icon-chevron-right">'],
+			responsive:{
+				0:{
+					items: 1
+				},
+				600:{
+					items: 2
+				},
+				1000:{
+					items: 3
+				}
+			}
+		});
+	};
+	carousel();
 	// home slider
 	$('.home-slider').owlCarousel({
     loop:true,

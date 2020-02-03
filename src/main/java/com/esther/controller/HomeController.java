@@ -1,6 +1,8 @@
 package com.esther.controller;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -20,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.esther.model.PromotionVO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 /**
  * Handles requests for the application home page.
@@ -45,8 +49,17 @@ public class HomeController {
 
 		// Promotion 데이터 가져오기
 		List<PromotionVO> list = sqlSession.selectList("adminMapper.selectPromotion");
-		  String jsonPromo = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(list);
-		  mav.addObject("jsonPromo", jsonPromo);
+//		  String jsonPromo = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(list);
+//		  mav.addObject("jsonPromo", jsonPromo);
+//		ArrayList<String> arrayList = new ArrayList<String>();
+//		String[] array = arrayList.toArray();
+
+		for (int i = 0; i < list.size(); i++) {
+				String end = (String) list.get(i).getEnd_date();
+				String subEnd = end.substring(5, 10);
+				list.get(i).setEnd_date(subEnd);
+		}
+		  mav.addObject("promotion", list);
 		  
 		  
 		

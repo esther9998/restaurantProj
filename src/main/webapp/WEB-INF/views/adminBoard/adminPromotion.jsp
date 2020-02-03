@@ -7,17 +7,17 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="/adminBoard/main">Dashboard</a>
+            <a href="/adminBoard/main">관리자 대쉬보드 </a>
           </li>
-          <li class="breadcrumb-item active">Editor</li>
-          <li class="breadcrumb-item active">Promotion</li>
+          <li class="breadcrumb-item active">리스트 편집 </li>
+          <li class="breadcrumb-item active">계절메뉴 &amp;  이벤트 페이지 </li>
         </ol>
         <!-- DataTables Example -->
         <div class="card mb-3">
           <div class="card-header">
             <i class="fas fa-table"></i>
-           Upload Promotion 
-           	<button class="btn-primary float-right" data-toggle="modal" data-target="#addPromotion">Add New Promotion</button>
+          계절메뉴 &amp;  이벤트를  관리합니다.   
+           	<button class="btn-primary float-right" data-toggle="modal" data-target="#addPromotion">이벤트 생성 </button>
            </div>
           <div class="card-body">
             <div class="table-responsive">

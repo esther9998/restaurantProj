@@ -4,17 +4,17 @@
       <header class="site-header">
         <div class="row align-items-center">
           <div class="site-logo-wrap">
-            <a href="/" class="site-logo">EatWell</a>
+            <a href="/" class="site-logo">불맛짬뽕</a>
           </div>
       <div class="col-10 col-md-10 screen-nav">
       	  <ul class="screen-nav-inner">
-           			<li><a href="/">Home</a></li>
-           			<li><a href="/about">About</a></li> 
+           			<li><a href="/">불맛짬뽕</a></li>
+           			<li><a href="/about">브랜드</a></li> 
 					<!-- <li><a href="/gallery">Gallery</a></li>  -->
-					<li><a href="/menu">Menu</a></li>
-					<li><a href="/reserve">Reservation</a></li>
-					<li><a href="/contact">Contacts</a></li>
-					<li><a href="/adminBoard/main">AdminBoard</a></li> 
+					<li><a href="/menu">메뉴 </a></li>
+					<li><a href="/reserve">예약 </a></li>
+					<li><a href="/contact">오시는길 </a></li>
+					<li><a href="/adminBoard/main">관리자페이지(데모)</a></li> 
           </ul>
       </div>
        <div class="text-right navToggle">
@@ -29,16 +29,16 @@
 	<nav class="site-menu" id="ftco-navbar-spy">
         <div class="site-menu-inner" id="ftco-navbar">
         <div class="mobile-logo">
-            <a href="/" class="site-logo" style="color: black  !important">Morock</a>
+            <a href="/" class="site-logo" style="color: black  !important">불맛짬뽕</a>
          </div>
           <ul class="list-unstyled">
-           			<li><a href="/">Home</a></li>
-					<li><a href="/about">About</a></li> 
+           			<li><a href="/">불맛짬뽕</a></li>
+					<li><a href="/about">브랜드 </a></li> 
 					<!-- <li><a href="/gallery">Gallery</a></li> --> 
-					<li><a href="/menu">Menu</a></li>
-					<li><a href="/reserve">Reservation</a></li>
-					<li><a href="/contact">Contacts</a></li>
-					<li><a href="/adminBoard/main">AdminBoard</a></li> 
+					<li><a href="/menu">메뉴</a></li>
+					<li><a href="/reserve">예약  </a></li>
+					<li><a href="/contact">오시는길 </a></li>
+					<li><a href="/adminBoard/main">관리자페이지(데모)</a></li> 
           </ul>
         </div>
       </nav>

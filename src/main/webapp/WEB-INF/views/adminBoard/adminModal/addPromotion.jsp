@@ -24,7 +24,7 @@
                     </div>
                     <div class=" col-md-3">
                     	<label for="" class="label">Priority</label>
-                    	  <input type="text" class="form-control" name="priority" id="addPriority" placeholder="Number">
+                    	  <input type="text" class="form-control" name="addPriority" id="addPriority" placeholder="Number">
                     </div>
                     <div class=" col-md-3">
                     	<label for="" class="label" style="display: block;">Status</label>
@@ -95,10 +95,10 @@ function sendPromotion() {
     //preventDefault 는 기본으로 정의된 이벤트를 작동하지 못하게 하는 메서드이다. submit을 막음
     // 유효성 검사  
      var re = /^[0-9]+$/;
-        if(!re.test($("#priority").val())) {
-               alert("Input ONLY number!!");
-               $("#priority").val("");
-               $("#priority").focus();
+        if(!re.test($("#addPriority").val())) {
+               alert("메뉴 정렬 순서에는 숫자만 입력 해주세요. ");
+               $("#addPriority").val("");
+               $("#addPriority").focus();
                return;
         }
         	if ($("#title").val() ==""||$("#status").val() ==""||$("#priority").val() ==""||$("#price").val() ==""||$("#contents").val() ==""||$("#file").val() =="") {
@@ -112,10 +112,10 @@ function sendPromotion() {
         		 var startDate = pattern.test($("#startDate").val());
         		 var endDate = pattern.test($("#endDate").val());
 	        		if(!startDate) {
-	            		alert("The startDate form is not correct.")
+	            		alert("The startDate  is not correct.")
 					return;
 	        		} else if(!endDate){
-	        			alert("The endDate form is not correct. end")
+	        			alert("The endDate  is not correct. end")
 						return;
 	        		}
               }catch (e){

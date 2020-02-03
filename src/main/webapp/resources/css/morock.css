@@ -1066,7 +1066,7 @@ textarea.form-control {
 		padding: 0px 30px;
 		}
 		.screen-nav ul li a:hover{
-		 color: grey;
+		 color: white;
 		 text-decoration: none;
 		 
 		}
@@ -1283,7 +1283,7 @@ textarea.form-control {
 .cover_1 .img_bg {
   background-repeat: no-repeat;
   background-size: cover !important;
-  background-position: center center;
+  background-position:  100% 40%;
 }
 
 .cover_1 .img_bg, .cover_1 .img_bg > .container > .row {
@@ -1303,26 +1303,31 @@ textarea.form-control {
   margin: 0 auto;
 }
 
-@media (max-width: 991.98px) {
+@media (min-width: 768px) {
   .cover_1 .sub-heading {
     font-size: 20px;
   }
 }
 
 .cover_1 .heading {
-  color: white;
-  font-weight: 300;
-  font-size: 30px;
+  color:  white;
+  font-weight: 600;
+  font-size: 80px;
   line-height: 1.5;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
   .cover_1 .heading {
-    font-size: 70px;
-    font-weight: 900;
+    font-size: 30px;
+    font-weight: 600;
     line-height: 1.2;
     margin-top: 100px;
   }
+  .cover_1 .img_bg {
+  background-repeat: no-repeat;
+  background-size: cover !important;
+  background-position:  50% 100%;
+}
 }
 
 .cover_1 a {
